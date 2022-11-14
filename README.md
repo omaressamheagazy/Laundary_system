@@ -28,7 +28,7 @@ $ docker compose exec app php artisan migrate
 
 
 
-http://localhost:8088
+Now type in the url: http://localhost:8088
 
 
 
