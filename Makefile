@@ -2,7 +2,6 @@ install:
 	@make build
 	@make up
 	docker compose exec app composer install
-	cd src
 	docker compose exec app php artisan key:generate
 	docker compose exec app php artisan storage:link
 	docker compose exec app chmod -R 777 storage bootstrap/cache
@@ -10,8 +9,6 @@ install:
 	@make fresh
 up:
 	docker compose up -d
-	cd src
-	npm run dev
 build:
 	docker compose build
 remake:
