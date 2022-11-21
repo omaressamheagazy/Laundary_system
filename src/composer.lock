@@ -4,8 +4,46 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ccbd816a07b206f971042295b899d1ba",
+    "content-hash": "a3fd9035e6b4b11c8d889ebe9e19318a",
     "packages": [
+        {
+            "name": "boolfalse/clearcaches",
+            "version": "v1.1.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/boolfalse/clearcaches.git",
+                "reference": "bdaacc6b198b9ddafc3a7dfbfcee9ce8bf049918"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/boolfalse/clearcaches/zipball/bdaacc6b198b9ddafc3a7dfbfcee9ce8bf049918",
+                "reference": "bdaacc6b198b9ddafc3a7dfbfcee9ce8bf049918",
+                "shasum": ""
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Boolfalse\\ClearCaches\\ClearCachesServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Boolfalse\\ClearCaches\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Package for recreating Laravel all caches, and for dropping all DB tables",
+            "support": {
+                "issues": "https://github.com/boolfalse/clearcaches/issues",
+                "source": "https://github.com/boolfalse/clearcaches/tree/master"
+            },
+            "time": "2018-10-01T11:52:46+00:00"
+        },
         {
             "name": "brick/math",
             "version": "0.10.2",
@@ -1275,6 +1313,67 @@
                 "source": "https://github.com/laravel/tinker/tree/v2.7.2"
             },
             "time": "2022-03-23T12:38:24+00:00"
+        },
+        {
+            "name": "laravel/ui",
+            "version": "v4.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/ui.git",
+                "reference": "f2f879e9f0947a1ede12b0ff7446ce4e249479cd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/ui/zipball/f2f879e9f0947a1ede12b0ff7446ce4e249479cd",
+                "reference": "f2f879e9f0947a1ede12b0ff7446ce4e249479cd",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/console": "^9.21",
+                "illuminate/filesystem": "^9.21",
+                "illuminate/support": "^9.21",
+                "illuminate/validation": "^9.21",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^7.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.x-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Laravel\\Ui\\UiServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laravel\\Ui\\": "src/",
+                    "Illuminate\\Foundation\\Auth\\": "auth-backend/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylor@laravel.com"
+                }
+            ],
+            "description": "Laravel UI utilities and presets.",
+            "keywords": [
+                "laravel",
+                "ui"
+            ],
+            "support": {
+                "source": "https://github.com/laravel/ui/tree/v4.1.0"
+            },
+            "time": "2022-11-15T14:36:57+00:00"
         },
         {
             "name": "league/commonmark",
