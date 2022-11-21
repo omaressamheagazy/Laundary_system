@@ -10,8 +10,6 @@ install:
 	@make fresh
 up:
 	docker compose up -d
-	cd src
-	npm run dev
 build:
 	docker compose build
 remake:
