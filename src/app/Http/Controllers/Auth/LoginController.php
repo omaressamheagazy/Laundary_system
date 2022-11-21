@@ -50,16 +50,13 @@ class LoginController extends Controller
             'password' => 'required',
         ]);
         if(auth()->attempt(array('email'=>$input['email'],'password'=>$input['password']))) {
-            if(auth()->user()->role == 2 ) {
-                return redirect()->route('admin.home');
-            } elseif(auth()->user()->role == 1) {
+            if(auth()->user()->role == 1 ) {
                 return redirect()->route('driver.home');
             } else {
                 return redirect()->route('home');
             }
         } else
             return redirect()->route('login')->with('error', 'please enter a correct email or password'); 
-        // $this->validate(['email'=>'required|email', 'password'=>'required']);
 
 
     }

@@ -21,5 +21,4 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('admin/home', [App\Http\Controllers\HomeController::class, 'adminHome'])->name('admin.home')->middleware("adminauth");
 Route::get('driver/home', [App\Http\Controllers\HomeController::class, 'driverHome'])->name('driver.home')->middleware("driverauth");
