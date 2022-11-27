@@ -25,7 +25,7 @@ Auth::routes([
     'verify' => true
 ]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware(['auth', 'verified']);
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'userHome'])->name('home')->middleware(['auth', 'verified']);
 Route::get('driver/home', [App\Http\Controllers\HomeController::class, 'driverHome'])->name('driver.home')->middleware("driverauth");
 
 
