@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="{{ asset('style/assets/css/cs-skin-elastic.css') }}">
     <link rel="stylesheet" href="{{ asset('style/assets/scss/style.css') }}">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+    
 </head>
 
 <body>
@@ -47,6 +48,15 @@
                             <li><i class="fa fa-plus"></i><a href="#">New order</a></li>
                             <li><i class="fa fa-spinner"></i><a href="#">Current Order</a></li>
                             <li><i class="fa fa-table"></i><a href="#">Order History</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="menu-item-has-children active dropdown">
+                        <a href="" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false"><i class="menu-icon fa fa-map"></i>Addresses</a>
+                        <ul class="sub-menu children dropdown-menu">
+                            <li><i class="fa fa-map-pin"></i><a href="">My addresses</a></li>
+                            <li><i class="fa fa-plus"></i><a href="{{ route('addAddress') }}"">New address</a></li>
                         </ul>
                     </li>
 
@@ -187,6 +197,7 @@
         <!-- Header-->
         @yield('breadcrumbs')
         @yield('content')
+        @yield('script')
 
 
     </div><!-- /#right-panel -->
@@ -195,6 +206,13 @@
     <script src="{{ asset('style/assets/js/popper.min.js') }}"></script>
     <script src="{{ asset('style/assets/js/plugins.js') }}"></script>
     <script src="{{ asset('style/assets/js/main.js') }}"></script>
+    <!-- map -->
+    <script src="https://maps.googleapis.com/maps/api/js?v=3&sensor=false"></script>
+    {{-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAgWQd7kN0Cv2Gqg_Dhvje1ffL1MHjnUbo"></script> --}}
+    {{-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAgWQd7kN0Cv2Gqg_Dhvje1ffL1MHjnUbo=initMap"
+                        type="text/javascript"></script> --}}
+    <script src="{{ asset('style/assets/js/lib/gmap/gmaps.js') }}"></script>
+    <script src="{{ asset('style/assets/js/lib/gmap/gmap.init.js') }}"></script>
 </body>
 
 </html>

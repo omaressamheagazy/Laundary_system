@@ -26,6 +26,8 @@ Auth::routes([
 ]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'userHome'])->name('home')->middleware(['auth', 'verified']);
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'userHome'])->name('home')->middleware(['auth', 'verified']);
+
 Route::get('driver/home', [App\Http\Controllers\HomeController::class, 'driverHome'])->name('driver.home')->middleware("driverauth");
 
 
@@ -45,4 +47,14 @@ Route::post('/email/verification-notification', function (Request $request) {
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 Route::get('/profile', function () {
     // Only verified users may access this route...
+})->middleware(['auth', 'verified']);
+
+/*
+    User address
+*/
+
+Route::prefix('home/address')->group(function () {
+    Route::get('/add', [App\Http\Controllers\User\AddressController::class, 'index'])->name('addAddress');
+    Route::post('/add', [App\Http\Controllers\User\AddressController::class, 'store'])->name('addAddress');
+    
 })->middleware(['auth', 'verified']);
