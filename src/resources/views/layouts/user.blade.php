@@ -37,7 +37,7 @@
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href=""> <i class="menu-icon fa fa-dashboard"></i>Home </a>
+                        <a href="{{ route('home') }}"> <i class="menu-icon fa fa-dashboard"></i>Home </a>
                     </li>
 
                     <li class="menu-item-has-children active dropdown">
@@ -161,7 +161,7 @@
                         </a>
 
                         <div class="user-menu dropdown-menu">
-                            <a class="nav-link" href="#"><i class="fa fa- user"></i>My Profile</a>
+                            <a class="nav-link" href="{{ route('detail-profile') }}"><i class="fa fa- user"></i>My Profile</a>
 
                             <a class="nav-link" href="#"><i class="fa fa- user"></i>Notifications <span
                                     class="count">13</span></a>

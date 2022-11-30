@@ -46,3 +46,9 @@ Route::post('/email/verification-notification', function (Request $request) {
 Route::get('/profile', function () {
     // Only verified users may access this route...
 })->middleware(['auth', 'verified']);
+
+/*
+    Profile Information
+*/
+Route::get('/profile', [App\Http\Controllers\HomeController::class, 'detailprofile'])->name('detail-profile');
+//Route::put('/profile', [App\Http\Controllers\HomeController::class, 'updateprofile'])->name('update-profile');
