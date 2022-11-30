@@ -49,6 +49,13 @@
                             <li><i class="fa fa-table"></i><a href="#">Order History</a></li>
                         </ul>
                     </li>
+                    <li class="menu-item-has-children active dropdown">
+                        <a href="" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false"><i class="menu-icon fa fa-cart-plus"></i>Checkout</a>
+                        <ul class="sub-menu children dropdown-menu">
+                            <li><i class="fa fa-spinner"></i><a href="{{ route('user-checkout') }}">New Checkout</a></li>
+                        </ul>
+                    </li>
 
                     <!-- <li class="menu-item-has-children active dropdown"> -->
 

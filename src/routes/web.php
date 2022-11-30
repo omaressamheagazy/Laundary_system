@@ -46,3 +46,5 @@ Route::post('/email/verification-notification', function (Request $request) {
 Route::get('/profile', function () {
     // Only verified users may access this route...
 })->middleware(['auth', 'verified']);
+
+Route::get('/checkout', [App\Http\Controllers\HomeController::class, 'userCheckout'])->name('user-checkout');
