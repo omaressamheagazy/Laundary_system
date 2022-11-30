@@ -68,3 +68,8 @@ Route::prefix('home/address')->group(function () {
     
     
 })->middleware(['auth', 'verified']);
+/*
+    Profile Information
+*/
+Route::get('/profile', [App\Http\Controllers\HomeController::class, 'detailprofile'])->name('detail-profile');
+//Route::put('/profile', [App\Http\Controllers\HomeController::class, 'updateprofile'])->name('update-profile');

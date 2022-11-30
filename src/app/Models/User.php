@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\DetailUser;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -22,6 +23,11 @@ class User extends Authenticatable implements MustVerifyEmail
         'email',
         'password',
     ];
+    
+    /*public function detailuser()
+    {
+        return $this->hasOne(DetailUser::class,'user_id','id');
+    }*/
 
     /**
      * The attributes that should be hidden for serialization.
