@@ -54,7 +54,17 @@ Route::get('/profile', function () {
 */
 
 Route::prefix('home/address')->group(function () {
-    Route::get('/add', [App\Http\Controllers\User\AddressController::class, 'index'])->name('addAddress');
+    /*
+        Address operations
+    */
+    
+    Route::get('/', [App\Http\Controllers\User\AddressController::class, 'index'])->name('address');
+    Route::get('/add', [App\Http\Controllers\User\AddressController::class, 'add'])->name('addAddress'); 
     Route::post('/add', [App\Http\Controllers\User\AddressController::class, 'store'])->name('addAddress');
+    Route::post('/delete/{id}', [App\Http\Controllers\User\AddressController::class, 'delete'])->name('deleteAddress')->where('id', '[0-9]+');;
+    Route::get('/update/{id}', [App\Http\Controllers\User\AddressController::class, 'edit'])->name('editAddress')->where('id', '[0-9]+');;
+    Route::post('/update/{id}', [App\Http\Controllers\User\AddressController::class, 'edit'])->name('editAddress')->where('id', '[0-9]+');;
+    
+    
     
 })->middleware(['auth', 'verified']);
