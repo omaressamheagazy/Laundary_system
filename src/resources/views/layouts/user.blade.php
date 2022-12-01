@@ -55,7 +55,7 @@
                         <a href="" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false"><i class="menu-icon fa fa-map"></i>Addresses</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-map-pin"></i><a href="{{route('address')}}">My addresses</a></li>
+                            <li><i class="fa fa-map-pin"></i><a href="{{ route('address') }}">My addresses</a></li>
                             <li><i class="fa fa-plus"></i><a href="{{ route('addAddress') }}"">New address</a></li>
                         </ul>
                     </li>
@@ -171,7 +171,9 @@
                         </a>
 
                         <div class="user-menu dropdown-menu">
-                            <a class="nav-link" href="{{ route('profile') }}"><i class="fa fa- user"></i>My Profile</a>
+                            <a class="nav-link" href="{{ route('profile') }}"><i class="fa fa- user"></i>My
+                                Profile</a>
+
 
                             <a class="nav-link" href="#"><i class="fa fa- user"></i>Notifications <span
                                     class="count">13</span></a>
