@@ -46,8 +46,11 @@
                               <div class="card-body">
                                   <div class="card-title">
                                       <h3 class="text-center">Cash Payment</h3>
+                                      <div class="form-group text-center">
+                                      <hr>
+                                      <li class="list-inline-item"><i class="text-muted fa fa-money fa-2x"></i></li>
+                                    </div>
                                   </div>
-                                  <hr>
                                   <form action="" method="post" novalidate="novalidate">
                                       <div class="form-group text-center">
                                       </div>
