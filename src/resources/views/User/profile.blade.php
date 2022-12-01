@@ -22,17 +22,6 @@
             <div class="col-md-3">
   
               <!-- Profile Image -->
-              <div class="card card-primary card-outline">
-                <div class="card-body box-profile">
-                  <div class="text-center">
-                  <img class="user-avatar rounded-circle" src="{{ asset('style/images/admin.jpg') }}" alt="User Avatar">
-                  </div>
-                  <p class="text-muted text-center">Customer</p>
-                  <input type="file" name="admin_image" id="admin_image" style="opacity: 0;height:1px;display:none">
-                  <a href="javascript:void(0)" class="btn btn-primary btn-block" id="change_picture_btn"><b>Change picture</b></a>
-                </div>
-                <!-- /.card-body -->
-              </div>
               <!-- /.card -->
   
           
@@ -64,18 +53,13 @@
                             <span class="text-danger error-text email_error"></span>
                           </div>
                         </div>
-                        <div class="form-group row">
-                          <label for="inputName2" class="col-sm-2 col-form-label">No. Phone:</label>
-                          <div class="col-sm-10">
-                            <input type="text" class="form-control" id="nophone" placeholder="No. Phone" value="999{{ Auth::user()->nophone }}" name="no.phone" readonly>
-                            <span class="text-danger error-text favoritecolor_error"></span>
-                          </div>
-                        </div>
                       </form>
                     </div>
                     <!-- /.tab-pane -->
                     <div class="tab-pane" id="update_detail">
-                    <form class="form-horizontal" method="POST" action="{{ url('profile') }}" id="updateform">
+                    <form class="form-horizontal" method="POST" action="{{ route('profile') }}" id="updateform">
+                        @csrf
+                        <input type="hidden" name="id" value="{{ Auth::id() }}">
                         <div class="form-group row">
                           <label for="inputName" class="col-sm-2 col-form-label">Name:</label>
                           <div class="col-sm-10">
@@ -91,15 +75,8 @@
                           </div>
                         </div>
                         <div class="form-group row">
-                          <label for="inputName2" class="col-sm-2 col-form-label">No. Phone:</label>
-                          <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputnophone" placeholder="Enter No. Phone" value="999{{ Auth::user()->nophone }}" name="favoritecolor">
-                            <span class="text-danger error-text favoritecolor_error"></span>
-                          </div>
-                        </div>
-                        <div class="form-group row">
                           <div class="offset-sm-2 col-sm-10">
-                            <button type="submit" class="btn btn-danger">Update Detail</button>
+                            <button type="submit" class="btn btn-success">Update Detail</button>
                           </div>
                         </div>
                       </form>

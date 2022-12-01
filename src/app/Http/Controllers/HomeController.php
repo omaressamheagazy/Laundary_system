@@ -18,7 +18,6 @@ class HomeController extends Controller
     {
         $this->middleware('auth');
     }
-
     /**
      * Show the application dashboard.
      *
@@ -34,21 +33,5 @@ class HomeController extends Controller
     public function driverHome() {
         return view("Driver.home");
     }
-    public function detailprofile() {
-        
-        return view("User.profile",[
-            'user'=>auth()->user()
-        ]);
-    }
-    /*public function updatedetail(Request $request) {
-        
-        $user=User::findOrFail(Auth::user()->id);
-        $user->update([
-            'inputname'=>$request->name,
-            'inputemail'=>$request->email
-        ]);
-        session()->flash('success', 'User updated successfully.');
-        return redirect()->back();
-    }*/
 }
 

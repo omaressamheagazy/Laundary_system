@@ -54,8 +54,6 @@ class AddressController extends Controller
             return redirect()->route('address')->with('success', 'address updated successfully!');
         }
         return view('User.Address.editAddress', ['address' => $address]);
-
-
     }
     //
 }

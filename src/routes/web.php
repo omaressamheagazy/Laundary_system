@@ -52,24 +52,20 @@ Route::get('/profile', function () {
 /*
     User address
 */
-
 Route::prefix('home/address')->group(function () {
     /*
         Address operations
     */
-    
     Route::get('/', [App\Http\Controllers\User\AddressController::class, 'index'])->name('address');
     Route::get('/add', [App\Http\Controllers\User\AddressController::class, 'add'])->name('addAddress'); 
     Route::post('/add', [App\Http\Controllers\User\AddressController::class, 'store'])->name('addAddress');
     Route::post('/delete/{id}', [App\Http\Controllers\User\AddressController::class, 'delete'])->name('deleteAddress')->where('id', '[0-9]+');;
     Route::get('/update/{id}', [App\Http\Controllers\User\AddressController::class, 'edit'])->name('editAddress')->where('id', '[0-9]+');;
     Route::post('/update/{id}', [App\Http\Controllers\User\AddressController::class, 'edit'])->name('editAddress')->where('id', '[0-9]+');;
-    
-    
-    
 })->middleware(['auth', 'verified']);
+
 /*
     Profile Information
 */
-Route::get('/profile', [App\Http\Controllers\HomeController::class, 'detailprofile'])->name('detail-profile');
-//Route::put('/profile', [App\Http\Controllers\HomeController::class, 'updateprofile'])->name('update-profile');
+Route::get('home/profile', [App\Http\Controllers\User\ProfileController::class, 'index'])->name('profile')->middleware(['auth', 'verified']);
+Route::post('home/profile', [App\Http\Controllers\User\ProfileController::class, 'edit'])->name('profile')->middleware(['auth', 'verified']);
