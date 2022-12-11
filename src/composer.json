@@ -9,6 +9,8 @@
         "boolfalse/clearcaches": "^1.1",
         "encore/laravel-admin": "^1.8",
         "guzzlehttp/guzzle": "^7.2",
+        "intervention/image": "^2.7",
+        "laravel-admin-ext/latlong": "^2.0",
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",

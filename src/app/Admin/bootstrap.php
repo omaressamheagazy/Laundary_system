@@ -1,4 +1,5 @@
 <?php
+Use Encore\Admin\Admin;
 
 /**
  * Laravel-admin - admin builder based on Laravel.
@@ -19,3 +20,6 @@
  */
 
 Encore\Admin\Form::forget(['map', 'editor']);
+// Admin::js("https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js");
+// Admin::js("'/style/assets/js/map.js");
+// Admin::js("https://maps.googleapis.com/maps/api/js?key={{ env('MAP_API') }}&callback=initAutocomplete&v=weekly&libraries=places&region=MY");
