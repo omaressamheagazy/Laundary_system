@@ -26,9 +26,15 @@ $ docker compose exec app chmod -R 777 storage bootstrap/cache
 $ docker compose exec app php artisan migrate
 ```
 
-
+2. chnage directory and run the following command (please make sure that you have node and npm installed on latest version)
+```bash
+$ cd src
+$ npm install
+$ npm run dev
+```
 
 Now type in the url: http://localhost:8088
+For phpmyadmin: http://localhost:8081
 
 
 
@@ -61,4 +67,5 @@ Now type in the url: http://localhost:8088
 - Base image
   - [mailhog/mailhog](https://hub.docker.com/r/mailhog/mailhog)
 ### Redis
+### Ppmyadmin
 
