@@ -35,7 +35,11 @@ $ npm run dev
 ```
 
 Now type in the url: http://localhost:8088
-For phpmyadmin: http://localhost:8081
+<br>
+### Phpmyadmin
+- URL: http://localhost:8081
+- username: omar
+- password: secret
 
 
 
