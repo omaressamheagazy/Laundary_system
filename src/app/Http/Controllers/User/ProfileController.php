@@ -22,9 +22,9 @@ class ProfileController extends Controller
             if(!isset($user)) return redirect()->route('home');
             if ($request->isMethod('post')) {
                 $user->name = $request->name;
-                $user->email = $request->email;
+                /*$user->email = $request->email;
                 if($user->email != Auth::user()->email) 
-                    $user->email_verified_at = NULL;
+                    $user->email_verified_at = NULL;*/
                 $user->save();
                 return redirect()->route('home')->with('success', 'profile updated successfully!');
             }
