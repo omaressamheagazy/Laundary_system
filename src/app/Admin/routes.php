@@ -15,5 +15,7 @@ Route::group([
     $router->get('/', 'HomeController@index')->name('home');
     $router->resource('laundries', LaundryController::class);
     $router->resource('laundry-types', LaundryTypeController::class);
+    $router->resource('packages', PackageController::class);
+    $router->resource('package-services', PackageServiceController::class);
 
 });
