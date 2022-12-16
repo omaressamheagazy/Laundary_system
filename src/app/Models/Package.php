@@ -8,10 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Package extends Model
 {
     use HasFactory;
-    // public function services()
-    // {
-    //     return $this->belongsToMany(PackageServices::class);
-    // }
     public function getServicesAttribute($value)
     {
         return explode(',', $value);

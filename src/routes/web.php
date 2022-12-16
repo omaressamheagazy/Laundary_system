@@ -69,3 +69,10 @@ Route::prefix('home/address')->group(function () {
 */
 Route::get('home/profile', [App\Http\Controllers\User\ProfileController::class, 'index'])->name('profile')->middleware(['auth', 'verified']);
 Route::post('home/profile', [App\Http\Controllers\User\ProfileController::class, 'edit'])->name('profile')->middleware(['auth', 'verified']);
+
+Route::prefix('home/order')->group(function () {
+    /*
+        Order operations
+    */
+    Route::get('/', [App\Http\Controllers\User\OrderController::class, 'index'])->name('order');
+})->middleware(['auth', 'verified']);

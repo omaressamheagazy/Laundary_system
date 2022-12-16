@@ -32,7 +32,6 @@ class LaundryTypeController extends AdminController
 
         return $grid;
     }
-
     /**
      * Make a show builder.
      *
