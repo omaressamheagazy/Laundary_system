@@ -27,5 +27,15 @@ class OrderController extends Controller
         ];
         return view("User.Order.order",compact("laundries"));
     }
-    //
+    
+    public function choosepackage(Request $request) {
+        $user = User::find($request->id);
+            if(!isset($user)) return redirect()->route('home');
+            if ($request->isMethod('post')) {
+                $user->package_name = $request->package_name;
+                $user->price = $request->price;
+                $user->save();
+            }
+            return view("User.Order.order");
+    }
 }

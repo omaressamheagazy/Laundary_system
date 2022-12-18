@@ -75,4 +75,5 @@ Route::prefix('home/order')->group(function () {
         Order operations
     */
     Route::get('/', [App\Http\Controllers\User\OrderController::class, 'index'])->name('order');
+    Route::post('/', [App\Http\Controllers\User\OrderController::class, 'choosepackage'])->name('order');
 })->middleware(['auth', 'verified']);
