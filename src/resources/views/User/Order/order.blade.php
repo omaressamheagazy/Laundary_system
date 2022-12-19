@@ -46,12 +46,12 @@
                                 <hr>
                                 <div class="text-left p-4">
                                     <h4 class="mb-4">Sub Services comparison</h4>
-                                    <span><i class="fa fa-check text-success">&nbsp;</i>Towels</span><br>
-                                    <span><i class="fa fa-check text-success mt-3">&nbsp;</i>Pillowcases</span><br>
-                                    <span><i class="fa-solid fa-xmark text-danger mt-3">&nbsp;&nbsp;</i>Sheets</span><br>
-                                    <span><i class="fa fa-check text-success mt-3">&nbsp;</i>Blankets</span><br>
-                                    <span><i class="fa-solid fa-xmark text-danger mt-3">&nbsp;&nbsp;</i>Face Cloths</span><br>
-                                    <span><i class="fa fa-check text-success mt-3">&nbsp;</i>Pillowcases</span><br>
+                                    @php
+                                    $services = DB::table('package_services')->whereIn('id', $package['services'])->get();
+                                    @endphp
+                                    @foreach($services as $service)
+                                    <span><i class="fa fa-check text-success">&nbsp;</i>{{ $service->name }}</span><br>
+                                    @endforeach
                                 </div>
                                 <div>
                                     <button class="btn btn-outline-primary">Add to cart</button>
