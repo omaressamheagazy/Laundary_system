@@ -77,7 +77,9 @@ Route::prefix('home/order')->group(function () {
     Route::get('/', [App\Http\Controllers\User\OrderController::class, 'index'])->name('order');
     Route::post('/addToCart', [App\Http\Controllers\User\OrderController::class, 'addToCart'])->name('add-to-cart');
     Route::get('/order-summary', [App\Http\Controllers\User\OrderController::class, 'summary'])->name('order-summary');
+    Route::post('/order-summary/checkout/{price}', [App\Http\Controllers\User\OrderController::class, 'checkout'])->name('checkout');
     Route::post('/order-summary/delete-item/{id}', [App\Http\Controllers\User\OrderController::class, 'deleteItem'])->name('delete-item');
+    Route::post('/order-summary/cash-payment', [App\Http\Controllers\User\OrderController::class, 'cashPayment'])->name('cash-payment');
 
 
 })->middleware(['auth', 'verified']);

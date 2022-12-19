@@ -21,7 +21,11 @@
                         <div class="col align-self-center text-right text-muted">{{ $cartItem::countCartItems()}} items</div>
                     </div>
                 </div>
-                @php $totalPrice = 0 @endphp
+                @php 
+                $totalPrice = 0;
+                $price;
+                $itemName;
+                @endphp
                 
                 @foreach ($items as $item)
                     <div class="row border-top border-bottom">
@@ -34,12 +38,19 @@
                             <div class="col">
                             </div>
                             <div class="col">MYR {{ $item->packages->price }} 
-                                <form action="{{ route('delete-item', [ 'id' => $item['id']] ) }}" style="display: inline" method="POST">
+
+                                <form action="{{ route('delete-item', [ 'id' => $item['id']] ) }}"      style="display: inline" method="POST">
                                     @csrf
+                                    <input type="hidden" name="packageName[]">
+                                    <input type="hidden" name="price[]">
                                     <button type="submit" class="close">&#10005;</button>
                                 </form>
                             </div>
-                            @php $totalPrice += $item->packages->price @endphp
+                            @php
+                                $totalPrice += $item->packages->price; 
+                                $itemName[] = $item->packages->name;
+                                $price[] = $item->packages->price;
+                            @endphp
                         </div>
                     </div>
                 @endforeach
@@ -69,7 +80,16 @@
                     <div class="col">TOTAL PRICE</div>
                     <div class="col text-right">MYR {{ $totalPrice + 3}}</div>
                 </div>
-                <button class="checkButton">CHECKOUT</button>
+                <form action="{{route('checkout', ['price' => $totalPrice]) }}" method="POST" style="display: inline">
+                    @csrf
+                    {{-- @php
+                        $itemName = implode(",", $itemName);
+                        $price = implode(",", $price);
+                    @endphp --}}
+                    {{-- <input type="hidden" name="itemName[]" value="{{ $itemName}}">
+                    <input type="hidden" name="price[]" value="{{ $price}}"> --}}
+                    <button type="submit" class="checkButton">CHECKOUT</button>
+                </form>
             </div>
         </div>
 
