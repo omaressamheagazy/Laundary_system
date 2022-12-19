@@ -76,4 +76,6 @@ Route::prefix('home/order')->group(function () {
     */
     Route::get('/', [App\Http\Controllers\User\OrderController::class, 'index'])->name('order');
     Route::post('/', [App\Http\Controllers\User\OrderController::class, 'choosepackage'])->name('order');
+
+    Route::get('/', [App\Http\Controllers\User\OrderController::class, 'currentorder'])->name('currentorder');
 })->middleware(['auth', 'verified']);

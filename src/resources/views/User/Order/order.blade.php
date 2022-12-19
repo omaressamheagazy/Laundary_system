@@ -36,14 +36,16 @@
                 <h1 align="center" class="mt-4">Choose your Package</h1>
 
                 <div class="row p-5 text-center">
-                    <form class="col-md-4" method="POST" action="{{ route('order') }}" id="order">
+                    <form class="col-md-4" method="POST" action="" id="order">
                     @csrf
                         <input type="hidden" name="id" value="{{ Auth::id() }}">
                         <div class="border border-primary p-4 rounded bg-white zoom">
-                            <h3 value="Clean" name="package_name">Clean</h3>
+                            <h3 >Clean</h3>
+                            <input type="hidden" name="package_name" value="Clean">
                             <p class="my-2">Ideal service for first time</p>
-                            <h1 class="text-primary mt-4" value="10.00" name="price">$10.00</h1>
-
+                            <h1 class="text-primary mt-4">$10.00</h1>
+                            <input type="hidden" name="price" value="10.00">
+                            
                             <hr>
 
                             <div class="text-left p-4">
