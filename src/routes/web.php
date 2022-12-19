@@ -75,6 +75,6 @@ Route::prefix('home/order')->group(function () {
         Order operations
     */
     Route::get('/', [App\Http\Controllers\User\OrderController::class, 'index'])->name('order');
-    Route::get('/checkout', [App\Http\Controllers\User\OrderController::class, 'checkout'])->name('checkout');
+    Route::get('/order-summary', [App\Http\Controllers\User\OrderController::class, 'summary'])->name('order-summary');
     Route::post('/addToCart', [App\Http\Controllers\User\OrderController::class, 'addToCart'])->name('add-to-cart');
 })->middleware(['auth', 'verified']);

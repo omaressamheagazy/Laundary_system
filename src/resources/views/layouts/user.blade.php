@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="{{ asset('style/assets/scss/style.css') }}">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    
+    @yield('front-script')
 
 </head>
 
@@ -116,7 +116,7 @@
                         </div>
 
                         <div class="dropdown for-message">
-                            <a href="{{route('checkout')}}"  class="btn btn-secondary dropdown-toggle"  id="message"
+                            <a href="{{route('order-summary')}}"  class="btn btn-secondary dropdown-toggle"  id="message"
                                     aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-shopping-cart"></i>
                                 @inject('cartItem','App\Http\Controllers\User\OrderController')
@@ -124,45 +124,6 @@
                                     {{ $cartItem::countCartItems()}}
                                 </span>
                             </a>
-                            {{-- <di class="dropdown-menu" aria-labelledby="message">
-                                <p class="red">You have 4 Mails</p>
-                                <a class="dropdown-item media bg-flat-color-1" href="#">
-                                    <span class="photo media-left"><img alt="avatar"
-                                            src="images/avatar/1.jpg"></span>
-                                    <span class="message media-body">
-                                        <span class="name float-left">Jonathan Smith</span>
-                                        <span class="time float-right">Just now</span>
-                                        <p>Hello, this is an example msg</p>
-                                    </span>
-                                </a>
-                                <a class="dropdown-item media bg-flat-color-4" href="#">
-                                    <span class="photo media-left"><img alt="avatar"
-                                            src="images/avatar/2.jpg"></span>
-                                    <span class="message media-body">
-                                        <span class="name float-left">Jack Sanders</span>
-                                        <span class="time float-right">5 minutes ago</span>
-                                        <p>Lorem ipsum dolor sit amet, consectetur</p>
-                                    </span>
-                                </a>
-                                <a class="dropdown-item media bg-flat-color-5" href="#">
-                                    <span class="photo media-left"><img alt="avatar"
-                                            src="images/avatar/3.jpg"></span>
-                                    <span class="message media-body">
-                                        <span class="name float-left">Cheryl Wheeler</span>
-                                        <span class="time float-right">10 minutes ago</span>
-                                        <p>Hello, this is an example msg</p>
-                                    </span>
-                                </a>
-                                <a class="dropdown-item media bg-flat-color-3" href="#">
-                                    <span class="photo media-left"><img alt="avatar"
-                                            src="images/avatar/4.jpg"></span>
-                                    <span class="message media-body">
-                                        <span class="name float-left">Rachel Santos</span>
-                                        <span class="time float-right">15 minutes ago</span>
-                                        <p>Lorem ipsum dolor sit amet, consectetur</p>
-                                    </span>
-                                </a>
-                            </di> --}}
                         </div>
                     </div>
                 </div>

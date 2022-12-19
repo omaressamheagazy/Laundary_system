@@ -29,8 +29,8 @@ class OrderController extends Controller
         return Cart::where('user_id', Auth::id())->count();
     }
 
-    public function checkout() {
-        return view("User.Order.checkout");
+    public function summary() {
+        return view("User.Order.order-summary");
     }
     //
 }
