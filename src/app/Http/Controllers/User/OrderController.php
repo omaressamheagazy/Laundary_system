@@ -48,11 +48,17 @@ class OrderController extends Controller
         return view("User.Order.checkout", ['price' => $price ]);
     }
 
+    public function currentOrder() {
+        $orders = Order::where('user_id', Auth::id())
+        ->select('id','total_price', 'status')
+        ->get();
+    }
     public function cashPayment(Request $request) {
         $order = new Order;
         $order->user_id = Auth::id();
         $order->total_price = $request->price;
-        $cart = cart::all();
+        $cart = cart::where('user_id', Auth::id())
+        ->get();
         $order->save();
         foreach ($cart as $item) {
             $orderDetail = new OrderDetails();
@@ -61,7 +67,7 @@ class OrderController extends Controller
             $orderDetail->price = $item->packages->price;
             $orderDetail->save();
         }
-        DB::table('carts')->delete();
+        DB::table('carts')->where('user_id',Auth::id())->delete();
         echo "success";
     }
     //
