@@ -12,7 +12,7 @@ use function PHPUnit\Framework\isEmpty;
 class OrderController extends Controller
 {
     public function index() {
-        return view("User.Order.order",compact("laundries"));
+        return view("User.Order.order");
     }
 
     public function __construct()
