@@ -30,7 +30,14 @@ class OrderController extends Controller
     }
 
     public function summary() {
-        return view("User.Order.order-summary");
+        $items = Cart::all() ?? [];
+        if(count($items) == 0) return redirect()->route('order');
+        return view("User.Order.order-summary", ['items' => $items]);
+    }
+
+    public function deleteItem($id) {
+        Cart::where('id', $id)->delete();
+        return redirect()->route('order-summary');
     }
     //
 }

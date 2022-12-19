@@ -75,6 +75,9 @@ Route::prefix('home/order')->group(function () {
         Order operations
     */
     Route::get('/', [App\Http\Controllers\User\OrderController::class, 'index'])->name('order');
-    Route::get('/order-summary', [App\Http\Controllers\User\OrderController::class, 'summary'])->name('order-summary');
     Route::post('/addToCart', [App\Http\Controllers\User\OrderController::class, 'addToCart'])->name('add-to-cart');
+    Route::get('/order-summary', [App\Http\Controllers\User\OrderController::class, 'summary'])->name('order-summary');
+    Route::post('/order-summary/delete-item/{id}', [App\Http\Controllers\User\OrderController::class, 'deleteItem'])->name('delete-item');
+
+
 })->middleware(['auth', 'verified']);
