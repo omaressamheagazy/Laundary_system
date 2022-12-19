@@ -5,7 +5,7 @@
     laudrex
 @endsection
 
-@section('breadcrumbs')
+{{-- @section('breadcrumbs')
     <div class="breadcrumbs">
         <div class="col-sm-4">
             <div class="page-header float-left">
@@ -23,7 +23,7 @@
             </div>
         </div>
     </div>
-@endsection
+@endsection --}}
 
 @section('content')
     <div class="content mt-3">
@@ -53,9 +53,17 @@
                                     <span><i class="fa fa-check text-success">&nbsp;</i>{{ $service->name }}</span><br>
                                     @endforeach
                                 </div>
-                                <div>
-                                    <button class="btn btn-outline-primary">Add to cart</button>
-                                </div>
+                                <form action="{{ route('add-to-cart') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="id" value="{{ Auth::id() }}">
+                                    <input type="hidden" name="package_id" value={{ $package['id'] }}>
+                                    <div>
+                                        <button class="btn btn-outline-primary">Add to cart</button>
+                                    </div>
+                                </form>
+                                <br>
+                                <br>
+                                <br>
                             </div>
                         </div>
                     @endforeach

@@ -58,7 +58,7 @@
                             aria-expanded="false"><i class="menu-icon fa fa-map"></i>Addresses</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-map-pin"></i><a href="{{ route('address') }}">My addresses</a></li>
-                            <li><i class="fa fa-plus"></i><a href="{{ route('addAddress') }}"">New address</a></li>
+                            <li><i class="fa fa-plus"></i><a href="{{ route('addAddress') }}">New address</a></li>
                         </ul>
                     </li>
 
@@ -116,12 +116,15 @@
                         </div>
 
                         <div class="dropdown for-message">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="message"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="ti-email"></i>
-                                <span class="count bg-primary">9</span>
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="message">
+                            <a href="{{route('checkout')}}"  class="btn btn-secondary dropdown-toggle"  id="message"
+                                    aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-shopping-cart"></i>
+                                @inject('cartItem','App\Http\Controllers\User\OrderController')
+                                <span class="count bg-primary">
+                                    {{ $cartItem::countCartItems()}}
+                                </span>
+                            </a>
+                            {{-- <di class="dropdown-menu" aria-labelledby="message">
                                 <p class="red">You have 4 Mails</p>
                                 <a class="dropdown-item media bg-flat-color-1" href="#">
                                     <span class="photo media-left"><img alt="avatar"
@@ -159,7 +162,7 @@
                                         <p>Lorem ipsum dolor sit amet, consectetur</p>
                                     </span>
                                 </a>
-                            </div>
+                            </di> --}}
                         </div>
                     </div>
                 </div>
