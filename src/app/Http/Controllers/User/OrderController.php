@@ -52,6 +52,8 @@ class OrderController extends Controller
         $orders = Order::where('user_id', Auth::id())
         ->select('id','total_price', 'status')
         ->get();
+        return view('User.Order.current-order', ['orders' => $orders]);
+
     }
     public function cashPayment(Request $request) {
         $order = new Order;
@@ -68,7 +70,8 @@ class OrderController extends Controller
             $orderDetail->save();
         }
         DB::table('carts')->where('user_id',Auth::id())->delete();
-        echo "success";
+        return redirect()->route('current-order')->with('success', 'You order has placed successfully!');
+        
     }
     //
 }

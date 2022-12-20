@@ -40,20 +40,22 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Price</th>
+                                <th>Price(MYR)</th>
                                 <th>Status</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($addresses as $address)
+                            @foreach ($orders as $order)
                                 <tr>
-                                    <input type="hidden" class="location_id" value="{{ $address['id'] }}">
-                                    <td>{{ $address['address'] }}</td>
-                                    <td>{{ $address['phone'] }}</td>
+                                    <input type="hidden" class="location_id" value="{{ $order['id'] }}">
+                                    <td>{{ $order['id'] }}</td>
+                                    <td>{{ $order['total_price'] }}</td>
+                                    <td>{{ $order['status'] }}</td>
                                     <td>
-                                        <a href="{{ route('editAddress', ['id' => $address['id']] ) }}" class="btn btn-success btn-sm"><i
-                                                class="fa fa-gear"></i>&nbsp;Edit</a>
-                                        <form action="{{ route('deleteAddress', $address['id']) }}" method="POST"
+                                        <a href="#" class="btn btn-success btn-sm"><i
+                                                class="fa fa-gear"></i>&nbsp;View</a>
+                                        {{-- <form action="{{ route('deleteAddress', $address['id']) }}" method="POST"
                                             style="display: inline" enctype="multipart/form-data">
                                             @csrf
                                             <div class="modal fade" id="ModalDelete{{ $address['id'] }}" tabindex="-1"
@@ -79,10 +81,10 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </form>
+                                        </form> --}}
                                         <a href="#" class="btn btn-danger btn-sm" data-toggle="modal"
-                                            data-target='#ModalDelete{{ $address['id'] }}'>Delete</a>
-                                        <a href="#" class="btn btn-danger btn-sm" >Delete</a>
+                                            data-target='#ModalDelete'>Cancel</a>
+                                        {{-- <a href="#" class="btn btn-danger btn-sm" >Delete</a> --}}
                                     </td>
                                 </tr>
                             @endforeach
