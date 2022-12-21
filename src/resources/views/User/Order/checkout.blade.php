@@ -62,7 +62,7 @@
                                                             class="btn btn-lg btn-info btn-block">
                                                             <i class="fa fa-lock fa-lg"></i>&nbsp;
                                                             <span id="payment-button-amount">Pay MYR
-                                                                {{ $price }}</span>
+                                                                {{ $price+=3 }}</span>
                                                             <span id="payment-button-sending"
                                                                 style="display:none;">Sending…</span>
                                                         </button>
