@@ -57,9 +57,9 @@ class CarController extends Controller
         $car->model = $request->model;
         $car->color = $request->color;
         $car->plate_number = $request->plate;
-        $car->vehicle_certificate = $certificateImageName;
-        $car->licence = $licenceImageName;
-        $car->status = 'In review';
+        $car->vehicle_certificate = 'images/' . $certificateImageName;
+        $car->licence = 'images/' . $licenceImageName;
+        $car->status_id = 1;
         $car->save();
         return redirect()->route('cars')->with('success', 'your request has been sent successfully!');
     }
@@ -67,5 +67,10 @@ class CarController extends Controller
     public function delete($id) {
         Car::where('id', $id)->delete();
         return redirect()->route('cars')->with('success', 'car deleted successfully!');
+    }
+
+    public function updateCarUse(Request $request) {
+        Car::where('id', $request->id)->update(array('in_use' => $request->checkbox));
+        return redirect()->back();
     }
 }

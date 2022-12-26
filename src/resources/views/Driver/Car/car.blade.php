@@ -44,9 +44,17 @@
                                 <th>Plate number</th>
                                 <th>Color</th>
                                 <th>Status</th>
+                                <th>In use</th>
+                                <th>Reason</th>
+
+
                             </tr>
                         </thead>
                         <tbody>
+                            @php
+                                use App\Models\Car;
+                                $isOtherCarUsed = Car::isCarUsed();
+                            @endphp
                             @foreach ($cars as $car)
                                 <tr>
                                     <input type="hidden" class="location_id" value="{{ $car['id'] }}">
@@ -54,7 +62,22 @@
                                     <td>{{ $car['model'] }}</td>
                                     <td>{{ $car['plate_number'] }}</td>
                                     <td>{{ $car['color'] }}</td>
-                                    <td>{{ $car['status'] }}</td>
+                                    <td>{{ $car->statuses->name }}</td>
+                                    <td>
+                                        <form action="{{route('updateCarUse')}}" method="POST">
+                                            @csrf
+                                            <div class="form-check">
+                                                <input type="hidden" name="id" value="{{ $car['id'] }}">
+                                                <input type="hidden" name="checkbox" value="0">
+                                                <input class="form-check-input" type="checkbox"  name='checkbox' value="1"
+                                                    id="flexCheckDefault" {{ $car['in_use'] == 1 ? 'checked' : '' }} {{ ($car['status_id'] != 2 || $isOtherCarUsed != $car['in_use']  ) ? 'disabled' : '' }} onchange="this.form.submit()">
+                                                <label class="form-check-label" for="flexCheckDefault">
+                                                </label>
+                                            </div>
+                                        </form>
+
+                                    </td>
+                                    <td>{{ $car['reason'] }}</td>
                                     <td>
 
                                         <form action="{{ route('deleteCar', $car['id']) }}" method="POST"

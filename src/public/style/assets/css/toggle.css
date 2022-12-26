@@ -1,0 +1,27 @@
+input:checked[type="checkbox"]::before {
+    left: 60px;
+  }
+  
+  .toggle {
+    position: relative;
+    display: inline;
+  }
+  
+  label {
+    position: absolute;
+    color: #fff;
+    font-weight: 600;
+    font-size: 20px;
+    pointer-events: none;
+  }
+  
+  .onbtn {
+    bottom: 15px;
+    left: 15px;
+  }
+  
+  .ofbtn {
+    bottom: 15px;
+    right: 14px;
+    color: #34495e;
+  }

@@ -94,5 +94,6 @@ Route::prefix('home/car')->group(function () {
     Route::get('/add', [App\Http\Controllers\Driver\CarController::class, 'add'])->name('addCar');
     Route::post('/add', [App\Http\Controllers\Driver\CarController::class, 'store'])->name('addCar');
     Route::post('/delete/{id}', [App\Http\Controllers\Driver\CarController::class, 'delete'])->name('deleteCar')->where('id', '[0-9]+');
+    Route::post('/updateCarUse', [App\Http\Controllers\Driver\CarController::class, 'updateCarUse'])->name('updateCarUse');
 
 })->middleware(['auth', 'verified']);
