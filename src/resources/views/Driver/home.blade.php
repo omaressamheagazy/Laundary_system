@@ -1,23 +1,34 @@
-@extends('layouts.app')
+@extends('layouts.driver')
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-                        Welcome to Driver Dashboard
-                    {{ __('You are logged in!') }}
+@section('title')
+    laudrex
+@endsection
+
+@section('breadcrumbs')
+    <div class="breadcrumbs">
+        <div class="col-sm-4">
+            <div class="page-header float-left">
+                <div class="page-title">
+                    <h1>Dashboard</h1>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <div class="page-header float-right">
+                <div class="page-title">
+                    <ol class="breadcrumb text-right">
+                    </ol>
                 </div>
             </div>
         </div>
     </div>
-</div>
+@endsection
+
+@section('contents')
+    <div class="content mt-3">
+        <div class="animated fadeIn">
+
+        </div><!-- .animated -->
+    </div><!-- .content -->
 @endsection

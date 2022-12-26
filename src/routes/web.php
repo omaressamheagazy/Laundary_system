@@ -83,7 +83,16 @@ Route::prefix('home/order')->group(function () {
     Route::post('/order-summary/delete-item/{id}', [App\Http\Controllers\User\OrderController::class, 'deleteItem'])->name('delete-item');
     Route::post('/order-summary/cash-payment', [App\Http\Controllers\User\OrderController::class, 'cashPayment'])->name('cash-payment');
     Route::post('/cancel/{id}', [App\Http\Controllers\User\OrderController::class, 'cancel'])->name('cancelOrder')->where('id', '[0-9]+');
+})->middleware(['auth', 'verified']);
 
 
+Route::prefix('home/car')->group(function () {
+    /*
+        Order operations
+    */
+    Route::get('/', [App\Http\Controllers\Driver\CarController::class, 'index'])->name('cars');
+    Route::get('/add', [App\Http\Controllers\Driver\CarController::class, 'add'])->name('addCar');
+    Route::post('/add', [App\Http\Controllers\Driver\CarController::class, 'store'])->name('addCar');
+    Route::post('/delete/{id}', [App\Http\Controllers\Driver\CarController::class, 'delete'])->name('deleteCar')->where('id', '[0-9]+');
 
 })->middleware(['auth', 'verified']);
