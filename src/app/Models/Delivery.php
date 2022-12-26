@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PackageServices extends Model
+class Delivery extends Model
 {
     use HasFactory;
-    public function packages() {
-        return $this->belongsTo(Package::class,'package_id');
+    public function orders() {
+        return $this->belongsTo(Order::class,'delivery_id');
     }
 }

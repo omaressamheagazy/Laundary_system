@@ -53,17 +53,17 @@
                                     <td>{{ $order['total_price'] }}</td>
                                     <td>{{ $order['status'] }}</td>
                                     <td>
-                                        <a href="#" class="btn btn-success btn-sm"><i
+                                        <a href="{{ route('track-order', ['id' => $order['id']]) }}" class="btn btn-success btn-sm"><i
                                                 class="fa fa-gear"></i>&nbsp;View</a>
-                                        {{-- <form action="{{ route('deleteAddress', $address['id']) }}" method="POST"
+                                        <form action="{{ route('cancelOrder', ['id' => $order['id']]) }}" method="POST"
                                             style="display: inline" enctype="multipart/form-data">
                                             @csrf
-                                            <div class="modal fade" id="ModalDelete{{ $address['id'] }}" tabindex="-1"
+                                            <div class="modal fade" id="ModalDelete{{ $order['id'] }}" tabindex="-1"
                                                 role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModalLabel">Delete location
+                                                            <h5 class="modal-title" id="exampleModalLabel">Cancel Order
                                                             </h5>
                                                             <button type="button" class="close" data-dismiss="modal"
                                                                 aria-label="Close">
@@ -71,7 +71,7 @@
                                                             </button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            Are you sure that you want to delete this location?
+                                                            Are you sure that you want to cancel this order?
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary"
@@ -81,9 +81,9 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </form> --}}
-                                        <a href="#" class="btn btn-danger btn-sm" data-toggle="modal"
-                                            data-target='#ModalDelete'>Cancel</a>
+                                        </form>
+                                            <a href="#" class="btn btn-danger btn-sm" data-toggle="modal"
+                                            data-target='#ModalDelete{{ $order['id'] }}'>Cancel</a>
                                         {{-- <a href="#" class="btn btn-danger btn-sm" >Delete</a> --}}
                                     </td>
                                 </tr>

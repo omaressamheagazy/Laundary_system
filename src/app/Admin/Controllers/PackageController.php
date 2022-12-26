@@ -3,7 +3,6 @@
 namespace App\Admin\Controllers;
 
 use App\Models\Package;
-use App\Models\PackageServices;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -17,6 +16,7 @@ class PackageController extends AdminController
      * @var string
      */
     protected $title = 'Package';
+    private $price = 0;
 
     /**
      * Make a grid builder.
@@ -29,7 +29,21 @@ class PackageController extends AdminController
 
         $grid->column('id', __('Id'));
         $grid->column('name', __('Name'));
-        $grid->column('price', __('Price'));
+        // $grid->column('services.name');
+        $grid->column('services', 'Services')->display(function ($services) {
+            $servicesName = [];
+            foreach ($services as $service) {
+                $servicesName[] = "<span class='label label-success'>{$service['name']}</span>";
+                echo $service['price'];
+                $this->price += $service['price'];
+            }
+            return join('&nbsp;', $servicesName);
+        });
+
+        $grid->column('Price')->display(function () {
+            return "<span class='label label-warning'>{$this->price}</span>";
+        });
+
         return $grid;
     }
 
@@ -45,7 +59,6 @@ class PackageController extends AdminController
 
         $show->field('id', __('Id'));
         $show->field('name', __('Name'));
-        $show->field('price', __('Price'));
         $show->field('services', __('Services'));
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
@@ -63,9 +76,6 @@ class PackageController extends AdminController
         $form = new Form(new Package());
 
         $form->text('name', __('Name'));
-        $form->multipleSelect('services')->options(PackageServices::all()->pluck('name', 'id'));
-        
-
 
         return $form;
     }

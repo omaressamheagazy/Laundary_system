@@ -17,29 +17,34 @@
                         <div class="col">
                             <h4><b>Shopping Cart</b></h4>
                         </div>
-                        @inject('cartItem','App\Http\Controllers\User\OrderController')
-                        <div class="col align-self-center text-right text-muted">{{ $cartItem::countCartItems()}} items</div>
+                        @inject('cartItem', 'App\Http\Controllers\User\OrderController')
+                        <div class="col align-self-center text-right text-muted">{{ $cartItem::countCartItems() }} items
+                        </div>
                     </div>
                 </div>
-                @php 
-                $totalPrice = 0;
-                $price;
-                $itemName;
+                @php
+                    $totalPackagesPrice = 0;
                 @endphp
-                
+
                 @foreach ($items as $item)
+                    @php $Packageprice = 0; @endphp
                     <div class="row border-top border-bottom">
                         <div class="row main align-items-center">
-                            <div class="col-2"><img class="img-fluid" src="{{asset('uploads\images\laundry.png')}}"></div>
+                            <div class="col-2"><img class="img-fluid" src="{{ asset('uploads\images\laundry.png') }}">
+                            </div>
                             <div class="col">
                                 <div class="row text-muted">Package</div>
                                 <div class="row">{{ $item->packages->name }}</div>
                             </div>
                             <div class="col">
                             </div>
-                            <div class="col">MYR {{ $item->packages->price }} 
+                            @foreach ($item->packages->services as $service)
+                                @php $Packageprice+= $service->price @endphp
+                            @endforeach
+                            <div class="col">MYR {{ $Packageprice }}
 
-                                <form action="{{ route('delete-item', [ 'id' => $item['id']] ) }}"      style="display: inline" method="POST">
+                                <form action="{{ route('delete-item', ['id' => $item['id']]) }}" style="display: inline"
+                                    method="POST">
                                     @csrf
                                     <input type="hidden" name="packageName[]">
                                     <input type="hidden" name="price[]">
@@ -47,9 +52,7 @@
                                 </form>
                             </div>
                             @php
-                                $totalPrice += $item->packages->price; 
-                                $itemName[] = $item->packages->name;
-                                $price[] = $item->packages->price;
+                                $totalPackagesPrice += $Packageprice;
                             @endphp
                         </div>
                     </div>
@@ -65,29 +68,26 @@
                 </div>
                 <hr>
                 <div class="row">
-                    <div class="col" style="padding-left:0;">ITEMS {{ $cartItem::countCartItems()}}</div>
-                    <div class="col text-right">MYR {{ $totalPrice }} </div>
+                    <div class="col" style="padding-left:0;">ITEMS {{ $cartItem::countCartItems() }}</div>
+                    <div class="col text-right">MYR {{ $totalPackagesPrice }} </div>
                 </div>
-                <form>
-                    <p>SHIPPING</p>
-                    <select>
-                        <option class="text-muted">Standard-Delivery- MYR3.00</option>
-                    </select>
-                    <p>GIVE CODE</p>
-                    <input id="code" placeholder="Enter your code">
-                </form>
+                <form
+                action="{{ route('checkout', ['totalPackagesPrice' => $totalPackagesPrice]) }}"
+                method="POST" style="display: inline">
+                @csrf
+                <p>SHIPPING</p>
+                <select name="deliveryType">
+                    @foreach ($deliveryTypes as $delivery)
+                        <option class="text-muted" value="{{ $delivery['id'] }}"> {{ $delivery['type'] }}
+                            MYR{{ $delivery['price'] }}</option>
+                    @endforeach
+                </select>
+                <p>GIVE CODE</p>
+                <input id="code" placeholder="Enter your code">
                 <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
-                    <div class="col">TOTAL PRICE</div>
-                    <div class="col text-right">MYR {{ $totalPrice + 3}}</div>
+                    {{-- <div class="col">TOTAL PRICE</div>
+                    <div class="col text-right">MYR {{ $totalPackagesPrice }}</div> --}}
                 </div>
-                <form action="{{route('checkout', ['price' => $totalPrice]) }}" method="POST" style="display: inline">
-                    @csrf
-                    {{-- @php
-                        $itemName = implode(",", $itemName);
-                        $price = implode(",", $price);
-                    @endphp --}}
-                    {{-- <input type="hidden" name="itemName[]" value="{{ $itemName}}">
-                    <input type="hidden" name="price[]" value="{{ $price}}"> --}}
                     <button type="submit" class="checkButton">CHECKOUT</button>
                 </form>
             </div>

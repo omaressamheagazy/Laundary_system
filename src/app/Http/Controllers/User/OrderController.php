@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Admin\Controllers\PackageController;
 use App\Models\Package;
 use App\Models\Cart;
+use App\Models\Delivery;
 use App\Models\Order;
 use App\Models\OrderDetails;
 
@@ -36,7 +37,8 @@ class OrderController extends Controller
     public function summary() {
         $items = Cart::all() ?? [];
         if(count($items) == 0) return redirect()->route('order');
-        return view("User.Order.order-summary", ['items' => $items]);
+        $deliveryTypes = Delivery::all();
+        return view("User.Order.order-summary", ['items' => $items, 'deliveryTypes' => $deliveryTypes]);
     }
     
     public function deleteItem($id) {
@@ -44,8 +46,10 @@ class OrderController extends Controller
         return redirect()->route('order-summary');
     }
 
-    public function checkout($price) {
-        return view("User.Order.checkout", ['price' => $price ]);
+    public function checkout($totalPackagesPrice, Request $request) {
+        $deliveryType = Delivery::all()->where('id', $request->deliveryType)->first();
+        $totalPrice = $totalPackagesPrice +  $deliveryType['price'];
+        return view("User.Order.checkout", ['totalPackagesPrice' => $totalPrice, 'deliveryId' => $deliveryType['id']]);
     }
 
     public function currentOrder() {
@@ -56,22 +60,39 @@ class OrderController extends Controller
 
     }
     public function cashPayment(Request $request) {
+        $packagesPrice = 0;
         $order = new Order;
         $order->user_id = Auth::id();
-        $order->total_price = $request->price;
+        $order->total_price = $request->totalPackagesPrice;
+        $order->delivery_id = $request->deliveryId;
         $cart = cart::where('user_id', Auth::id())
         ->get();
         $order->save();
+        $counter = 0;
         foreach ($cart as $item) {
             $orderDetail = new OrderDetails();
             $orderDetail->order_id = $order->id;
             $orderDetail->item = $item->packages->name;
-            $orderDetail->price = $item->packages->price;
+            foreach ($item->packages->services as $service) {
+                $packagesPrice += $service->price;
+            }
+            $orderDetail->price = $packagesPrice;
             $orderDetail->save();
+            $counter++;
         }
         DB::table('carts')->where('user_id',Auth::id())->delete();
         return redirect()->route('current-order')->with('success', 'You order has placed successfully!');
         
-    }
     //
+    }
+    public function tracker(Request $request  ,$id) {
+        $order = Order::all()->where('id', $id)->first();
+        if(!isset($order)) return redirect()->route('current-order');
+        return view('User.Order.track-order', ['order' => $order]);
+    }
+    public function cancel($id) {
+        OrderDetails::where('id', $id)->delete();
+        Order::where('id', $id)->delete();
+        return redirect()->route('current-order')->with('success', 'Order cancelled successfully!');
+    }
 }

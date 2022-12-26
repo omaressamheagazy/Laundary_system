@@ -9,7 +9,10 @@ class Order extends Model
 {
     use HasFactory;
     public function details() {
-        return $this->belongsTo(OrderDetails::class,'order_id');
+        return $this->hasMany(OrderDetails::class,'order_id');
+    }
+    public function deliveries() {
+        return $this->belongsTo(Delivery::class,'delivery_id');
     }
     
 }

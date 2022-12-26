@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+use App\Models\Package;
 use App\Models\PackageServices;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
@@ -28,6 +29,7 @@ class PackageServiceController extends AdminController
 
         $grid->column('id', __('Id'));
         $grid->column('name', __('Name'));
+        $grid->column('packages.name', 'Package');
         $grid->column('price', __('Price'));
 
         return $grid;
@@ -61,6 +63,7 @@ class PackageServiceController extends AdminController
 
         $form->text('name', __('Name'));
         $form->decimal('price', __('Price'));
+        $form->select('package_id','Created For')->options(Package::all()->pluck('name', 'id'));
 
         return $form;
     }

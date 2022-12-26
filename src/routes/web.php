@@ -78,9 +78,12 @@ Route::prefix('home/order')->group(function () {
     Route::post('/addToCart', [App\Http\Controllers\User\OrderController::class, 'addToCart'])->name('add-to-cart');
     Route::get('/current-order', [App\Http\Controllers\User\OrderController::class, 'currentOrder'])->name('current-order');
     Route::get('/order-summary', [App\Http\Controllers\User\OrderController::class, 'summary'])->name('order-summary');
-    Route::post('/order-summary/checkout/{price}', [App\Http\Controllers\User\OrderController::class, 'checkout'])->name('checkout');
+    Route::get('/track/{id}', [App\Http\Controllers\User\OrderController::class, 'tracker'])->name('track-order')->where('id', '[0-9]+');
+    Route::post('/order-summary/checkout/{totalPackagesPrice}', [App\Http\Controllers\User\OrderController::class, 'checkout'])->name('checkout')->middleware('hasAddress');
     Route::post('/order-summary/delete-item/{id}', [App\Http\Controllers\User\OrderController::class, 'deleteItem'])->name('delete-item');
     Route::post('/order-summary/cash-payment', [App\Http\Controllers\User\OrderController::class, 'cashPayment'])->name('cash-payment');
+    Route::post('/cancel/{id}', [App\Http\Controllers\User\OrderController::class, 'cancel'])->name('cancelOrder')->where('id', '[0-9]+');
+
 
 
 })->middleware(['auth', 'verified']);

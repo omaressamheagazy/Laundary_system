@@ -57,12 +57,13 @@
                                                 <div>
                                                     <form action="{{ route('cash-payment') }}" method="POST">
                                                         @csrf
-                                                        <input type="hidden" name="price" value="{{$price }}">
+                                                        <input type="hidden" name="deliveryId" value="{{ $deliveryId }}">
+                                                        <input type="hidden" name="totalPackagesPrice" value="{{$totalPackagesPrice }}">
                                                         <button id="payment-button" type="submit"
                                                             class="btn btn-lg btn-info btn-block">
                                                             <i class="fa fa-lock fa-lg"></i>&nbsp;
                                                             <span id="payment-button-amount">Pay MYR
-                                                                {{ $price+=3 }}</span>
+                                                                {{ $totalPackagesPrice }}</span>
                                                             <span id="payment-button-sending"
                                                                 style="display:none;">Sending…</span>
                                                         </button>
