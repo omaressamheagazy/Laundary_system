@@ -13,6 +13,7 @@ Route::group([
 
     $router->resource('cars', CarController::class);
     $router->resource('users', UserController::class);
+    $router->resource('licenses', LicenseController::class);
     $router->resource('packages', PackageController::class);
     $router->get('/', 'HomeController@index')->name('home');
     $router->resource('laundries', LaundryController::class);

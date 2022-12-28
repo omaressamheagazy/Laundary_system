@@ -45,6 +45,14 @@
 
                     <li class="menu-item-has-children active dropdown">
                         <a href="" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false"><i class="menu-icon fa fa-id-card"></i>Register new license</a>
+                        <ul class="sub-menu children dropdown-menu">
+                            <li><i class="fa fa-plus"></i><a href="{{ route('addLicense') }}">New license</a></li>
+                            <li><i class="fa fa-spinner"></i><a href="{{ route('licenses') }}">My license</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item-has-children active dropdown">
+                        <a href="" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false"><i class="menu-icon fa fa-car"></i>Register new Car</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-plus"></i><a href="{{ route('addCar') }}">New Car</a></li>

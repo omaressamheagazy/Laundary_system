@@ -88,12 +88,25 @@ Route::prefix('home/order')->group(function () {
 
 Route::prefix('home/car')->group(function () {
     /*
-        Order operations
+        car operations
     */
     Route::get('/', [App\Http\Controllers\Driver\CarController::class, 'index'])->name('cars');
     Route::get('/add', [App\Http\Controllers\Driver\CarController::class, 'add'])->name('addCar');
     Route::post('/add', [App\Http\Controllers\Driver\CarController::class, 'store'])->name('addCar');
     Route::post('/delete/{id}', [App\Http\Controllers\Driver\CarController::class, 'delete'])->name('deleteCar')->where('id', '[0-9]+');
     Route::post('/updateCarUse', [App\Http\Controllers\Driver\CarController::class, 'updateCarUse'])->name('updateCarUse');
+
+})->middleware(['auth', 'verified']);
+
+Route::prefix('home/licence')->group(function () {
+    /*
+        car operations
+    */
+    Route::get('/', [App\Http\Controllers\Driver\LicenseController::class, 'index'])->name('licenses');
+    Route::get('/add', [App\Http\Controllers\Driver\LicenseController::class, 'add'])->name('addLicense')->middleware('canAddLicense');
+    Route::post('/add', [App\Http\Controllers\Driver\LicenseController::class, 'store'])->name('addLicense')->middleware('canAddLicense');
+    Route::post('/delete/{id}', [App\Http\Controllers\Driver\LicenseController::class, 'delete'])->name('deleteLicense')->where('id', '[0-9]+');
+
+
 
 })->middleware(['auth', 'verified']);

@@ -72,19 +72,6 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="input-group">
-                                        <div class="input-group-addon">licence image</div>
-                                        <input type="file" id="licence" name="licence"
-                                            class="form-control @error('licence')is-invalid @enderror"">
-                                        <div class="input-group-addon"><i class="fa fa-car"></i></div>
-                                        @error('licence')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="input-group">
                                         <div class="input-group-addon">Image of vehicle certificate</div>
                                         <input type="file" id="certificate" name="certificate"
                                             class="form-control @error('certificate')is-invalid @enderror"">

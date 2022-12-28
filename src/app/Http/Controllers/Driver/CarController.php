@@ -37,18 +37,14 @@ class CarController extends Controller
             'model' => 'required',
             'plate' => 'required|alpha_num|max:10',
             'color' => 'required',
-            'licence' => 'required|mimes:jpeg,png|max:50000',
             'certificate' => 'required|mimes:jpeg,png|max:50000',
 
         ]);
         
-        $licenceImage = $request->file("licence");
-        $licenceImageName = date('YmdHi').$licenceImage->getClientOriginalName();
 
         $certificateImage = $request->file("certificate");
-        $certificateImageName = uniqid(true).$certificateImage->getClientOriginalName();
+        $certificateImageName = date('mdYHis') . uniqid().$certificateImage->getClientOriginalName();
 
-        $licenceImage-> move(public_path('uploads/images'), $licenceImageName);
         $certificateImage-> move(public_path('uploads/images/'), $certificateImageName);
 
         $car = new Car;
@@ -58,7 +54,6 @@ class CarController extends Controller
         $car->color = $request->color;
         $car->plate_number = $request->plate;
         $car->vehicle_certificate = 'images/' . $certificateImageName;
-        $car->licence = 'images/' . $licenceImageName;
         $car->status_id = 1;
         $car->save();
         return redirect()->route('cars')->with('success', 'your request has been sent successfully!');
