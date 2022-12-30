@@ -51,7 +51,7 @@ class LoginController extends Controller
         ]);
         if(auth()->attempt(array('email'=>$input['email'],'password'=>$input['password']))) {
             if(auth()->user()->role == 1 ) {
-                return redirect()->route('driver.home');
+                return redirect()->route('driverHome');
             } else {
                 return redirect()->route('home');
             }

@@ -20,9 +20,8 @@ use Illuminate\Http\Request;
 
 
 // Driver routes
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'driverHome'])->name('driverHome')->middleware(['auth', 'verified', 'driverauth']);
-
-Route::prefix('home/car')->group(function () {
+Route::get('driver/home', [App\Http\Controllers\HomeController::class, 'driverHome'])->name('driverHome')->middleware(['auth', 'verified', 'driverauth']);
+Route::prefix('driver/car')->group(function () {
     /*
         car operations
     */
@@ -34,7 +33,7 @@ Route::prefix('home/car')->group(function () {
 
 })->middleware(['auth', 'verified', 'driverauth']);
 
-Route::prefix('home/licenses')->group(function () {
+Route::prefix('driver/licenses')->group(function () {
     /*
         license operations
     */
@@ -44,7 +43,7 @@ Route::prefix('home/licenses')->group(function () {
     Route::post('/delete/{id}', [App\Http\Controllers\Driver\LicenseController::class, 'delete'])->name('deleteLicense')->where('id', '[0-9]+');
 })->middleware(['auth', 'verified', 'driverauth']);
 
-Route::prefix('home/order')->group(function () {
+Route::prefix('driver/order')->group(function () {
     /*
         request operations
     */
