@@ -92,7 +92,7 @@ class OrderController extends Controller
     }
     public function tracker(Request $request  ,$id) {
         $order = Order::all()->where('id', $id)->first();
-        if(!isset($order)) return redirect()->route('current-order');
+        if(!isset($order)) return redirect()->route('current-order'); // if user didn't has any order
         return view('User.Order.track-order', ['order' => $order]);
     }
     public function cancel($id) {

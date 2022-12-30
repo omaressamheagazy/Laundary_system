@@ -55,8 +55,8 @@
                                     <td>{{ $request->user->email }}</td>
                                     <td>{{ $request['total_price'] }}</td>
                                     <td>
-                                        <a href="{{ route('editAddress', ['id' => $request['id']] ) }}" class="btn btn-success btn-sm"><i
-                                            class="fa fa-gear"></i>&nbsp;View details</a>
+                                        <a href="{{ route('requestDetail', ['id' => $request['id']]) }}"
+                                            class="btn btn-success btn-sm"><i class="fa fa-gear"></i>&nbsp;View details</a>
                                     </td>
                                 </tr>
                             @endforeach

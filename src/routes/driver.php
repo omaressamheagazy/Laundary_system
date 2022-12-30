@@ -48,4 +48,5 @@ Route::prefix('driver/order')->group(function () {
         request operations
     */
     Route::get('/new', [App\Http\Controllers\Driver\OrderController::class, 'newRequest'])->name('newRequest');
+    Route::get('/detail/{id}', [App\Http\Controllers\Driver\OrderController::class, 'requestDetail'])->name('requestDetail')->where('id', '[0-9]+');
 })->middleware(['auth', 'verified', 'driverauth']);
