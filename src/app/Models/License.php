@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
@@ -26,7 +27,22 @@ class License extends Model
     }
 
     public static function hasValidLicense($id) {
-        $validLicense = License::all()->where('user_id', $id)->where('status_id',2)->count();
-        return $validLicense != 0 ? true : false;
+        $validLicense = false;
+        $license = License::all()->where('user_id', $id)->where('status_id',2);
+        if($license->count() != 0) { // means driver has license and it's approved
+            if(Self::hasValidDate($license->first())) 
+                $validLicense = true;
+            else {
+                $license->first()->status_id = 4; // deactivate the license
+                $license->first()->save();
+            }
+        }
+        return $validLicense;
+    }
+    /**
+     * to check if the end date of the license is valid and not expired
+     */
+    public static function hasValidDate($license) {
+        return Carbon::today()->lte($license->end_date);
     }
 }
