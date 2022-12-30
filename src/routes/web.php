@@ -25,10 +25,9 @@ Auth::routes([
     'verify' => true
 ]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'userHome'])->name('home')->middleware(['auth', 'verified']);
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'userHome'])->name('home')->middleware(['auth', 'verified']);
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'userHome'])->name('home')->middleware(['auth', 'verified', 'isNormalUser']);
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'driverHome'])->name('driverHome')->middleware(['auth', 'verified', 'driverauth']);
 
-Route::get('driver/home', [App\Http\Controllers\HomeController::class, 'driverHome'])->name('driver.home')->middleware("driverauth");
 
 
 /*
@@ -38,7 +37,7 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
     $request->fulfill();
  
     return redirect('/home');
-})->middleware(['auth', 'signed'])->name('verification.verify');
+})->middleware(['auth', 'signed',])->name('verification.verify');
 
 Route::post('/email/verification-notification', function (Request $request) {
     $request->user()->sendEmailVerificationNotification();
@@ -62,7 +61,7 @@ Route::prefix('home/address')->group(function () {
     Route::post('/delete/{id}', [App\Http\Controllers\User\AddressController::class, 'delete'])->name('deleteAddress')->where('id', '[0-9]+');;
     Route::get('/update/{id}', [App\Http\Controllers\User\AddressController::class, 'edit'])->name('editAddress')->where('id', '[0-9]+');;
     Route::post('/update/{id}', [App\Http\Controllers\User\AddressController::class, 'edit'])->name('editAddress')->where('id', '[0-9]+');;
-})->middleware(['auth', 'verified']);
+})->middleware(['auth', 'verified', 'isNormalUser']);
 
 /*
     Profile Information
@@ -83,8 +82,10 @@ Route::prefix('home/order')->group(function () {
     Route::post('/order-summary/delete-item/{id}', [App\Http\Controllers\User\OrderController::class, 'deleteItem'])->name('delete-item');
     Route::post('/order-summary/cash-payment', [App\Http\Controllers\User\OrderController::class, 'cashPayment'])->name('cash-payment');
     Route::post('/cancel/{id}', [App\Http\Controllers\User\OrderController::class, 'cancel'])->name('cancelOrder')->where('id', '[0-9]+');
-})->middleware(['auth', 'verified']);
+})->middleware(['auth', 'verified, isNormalUser']);
 
+
+// Driver routes
 
 Route::prefix('home/car')->group(function () {
     /*
@@ -96,17 +97,21 @@ Route::prefix('home/car')->group(function () {
     Route::post('/delete/{id}', [App\Http\Controllers\Driver\CarController::class, 'delete'])->name('deleteCar')->where('id', '[0-9]+');
     Route::post('/updateCarUse', [App\Http\Controllers\Driver\CarController::class, 'updateCarUse'])->name('updateCarUse');
 
-})->middleware(['auth', 'verified']);
+})->middleware(['auth', 'verified', 'driverauth']);
 
-Route::prefix('home/licence')->group(function () {
+Route::prefix('home/licenses')->group(function () {
     /*
-        car operations
+        license operations
     */
     Route::get('/', [App\Http\Controllers\Driver\LicenseController::class, 'index'])->name('licenses');
     Route::get('/add', [App\Http\Controllers\Driver\LicenseController::class, 'add'])->name('addLicense')->middleware('canAddLicense');
     Route::post('/add', [App\Http\Controllers\Driver\LicenseController::class, 'store'])->name('addLicense')->middleware('canAddLicense');
     Route::post('/delete/{id}', [App\Http\Controllers\Driver\LicenseController::class, 'delete'])->name('deleteLicense')->where('id', '[0-9]+');
+})->middleware(['auth', 'verified', 'driverauth']);
 
-
-
-})->middleware(['auth', 'verified']);
+Route::prefix('home/order')->group(function () {
+    /*
+        request operations
+    */
+    Route::get('/new', [App\Http\Controllers\Driver\OrderController::class, 'newRequest'])->name('newRequest');
+})->middleware(['auth', 'verified', 'driverauth']);

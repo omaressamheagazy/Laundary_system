@@ -17,6 +17,11 @@ use Symfony\Component\VarDumper\VarDumper;
 
 class OrderController extends Controller
 {
+        public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('isNormalUser');
+    }
     public function index() {
         $packages = Package::all() ?? [];
         return view("User.Order.order", ['packages' => $packages]);
@@ -54,7 +59,7 @@ class OrderController extends Controller
 
     public function currentOrder() {
         $orders = Order::where('user_id', Auth::id())
-        ->select('id','total_price', 'status')
+        ->select('id','total_price', 'status_id')
         ->get();
         return view('User.Order.current-order', ['orders' => $orders]);
 

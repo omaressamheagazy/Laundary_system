@@ -22,4 +22,9 @@ class Car extends Model
         }
         return $isCarused;
     } 
+
+    public static function hasValidCar($id) {
+        $validCar = Car::all()->where('user_id',$id)->where('status_id', 2)->where('in_use', 1)->count();
+        return  $validCar != 0 ? true : false;
+    }
 }

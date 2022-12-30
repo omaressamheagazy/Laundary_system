@@ -2,12 +2,12 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\License;
+use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class canAddLicense
+class isNormalUser
 {
     /**
      * Handle an incoming request.
@@ -18,9 +18,9 @@ class canAddLicense
      */
     public function handle(Request $request, Closure $next)
     {
-        if(!License::isAllowToAddLicense(Auth::id()))
-            return redirect()->route('licenses')->with('error', "you can't add new license, if your request still in review, or you have valid license");
-
+        if(auth()->user()->role != 0) {
+            return redirect()->back();
+        }
         return $next($request);
     }
 }

@@ -66,5 +66,8 @@ class Kernel extends HttpKernel
         'driverauth' => \App\Http\Middleware\DriverAuthenticated::class,
         'hasAddress' => \App\Http\Middleware\hasAddress::class,
         'canAddLicense' => \App\Http\Middleware\canAddLicense::class,
+        'isNormalUser' => \App\Http\Middleware\isNormalUser::class,
+        'hasValidDocuments' => \App\Http\Middleware\hasValidDocuments::class,
+
     ];
 }

@@ -36,6 +36,9 @@
                     <strong class="card-title">Current Orders</strong>
                 </div>
                 <div class="card-body">
+                                    @php
+                                        use App\Models\OrderStatus;
+                                    @endphp
                     <table id="bootstrap-data-table" class="table table-striped table-bordered">
                         <thead>
                             <tr>
@@ -51,7 +54,7 @@
                                     <input type="hidden" class="location_id" value="{{ $order['id'] }}">
                                     <td>{{ $order['id'] }}</td>
                                     <td>{{ $order['total_price'] }}</td>
-                                    <td>{{ $order['status'] }}</td>
+                                    <td>{{ $order->statuses->name}}</td>
                                     <td>
                                         <a href="{{ route('track-order', ['id' => $order['id']]) }}" class="btn btn-success btn-sm"><i
                                                 class="fa fa-gear"></i>&nbsp;View</a>
