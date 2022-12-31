@@ -77,6 +77,7 @@ class OrderController extends Controller
         foreach ($cart as $item) {
             $orderDetail = new OrderDetails();
             $orderDetail->order_id = $order->id;
+            $orderDetail->package_id = $item->packages->id;
             $orderDetail->item = $item->packages->name;
             foreach ($item->packages->services as $service) {
                 $packagesPrice += $service->price;
