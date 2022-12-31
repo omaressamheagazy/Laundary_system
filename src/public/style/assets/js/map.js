@@ -73,6 +73,8 @@ function initAutocomplete() {
         /* $('#branch-latLng').val("("+markerCurrent.position.lat() +","+markerCurrent.position.lng()+")");*/
         $("#latitude").val(markerCurrent.position.lat());
         $("#longitude").val(markerCurrent.position.lng());
+        var inp = $("#latitude").val(markerCurrent.position.lat());
+        console.log(inp);
         geocoder.geocode({ location: latlng }, function (results, status) {
             if (status === "OK") {
                 if (results[0]) {

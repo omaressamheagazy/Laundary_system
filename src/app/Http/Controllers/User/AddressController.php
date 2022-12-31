@@ -20,7 +20,7 @@ class AddressController extends Controller
     public function index()
     {   
         $address = Address::where('user_id', Auth::id())
-                            ->select('id','phone', 'address')
+                            ->select('id','phone', 'address','default_address')
                             ->get();
         
         return view('User.Address.address', ['addresses' => $address]);
@@ -39,6 +39,12 @@ class AddressController extends Controller
         $address->phone = $request->phone;
         $address->user_id = $request->id;
         $address->address = $request->address;
+        $address->latitude = $request->lat;
+        $address->longitude = $request->long;
+
+        $address->default_address = $request->switchAddress;
+        if($request->switchAddress == 1)
+                Address::deactivateOtherAddresses(Auth::id());
         $address->save();
         return redirect()->route('address')->with('success', 'address created successfully!');
     }
@@ -52,6 +58,9 @@ class AddressController extends Controller
         if ($request->isMethod('post')) {
             $address->phone = $request->phone;
             $address->address = $request->address;
+            $address->default_address = $request->switchAddress;
+            if($request->switchAddress == 1)
+                Address::deactivateOtherAddresses(Auth::id(), $id);
             $address->save();
             return redirect()->route('address')->with('success', 'address updated successfully!');
         }

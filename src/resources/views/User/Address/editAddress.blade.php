@@ -4,7 +4,9 @@
 @section('title')
     laudrex
 @endsection
-
+@section('front-script')
+    <link rel="stylesheet" href="{{ asset('style/assets/css/matrial-switch.css') }}">
+@endsection
 @section('breadcrumbs')
 @endsection
 @section('content')
@@ -47,7 +49,18 @@
                                         <div id="map" style="height: 500px;width: 100%;z-index:99"></div>
                                     </div>
                                 </div>
-
+                                <div class="form-group">
+                                    <!-- List group -->
+                                    <li class="list-group-item" style="border: none; padding:0">
+                                        <label for="someSwitchOptionPrimary">Set as Default address</label>
+                                        <div class="material-switch pull-right">
+                                            <input type="hidden" name="switchAddress" value="0">
+                                            <input id="someSwitchOptionPrimary" name="switchAddress" type="checkbox"
+                                                class="btn-primary" value="1" {{ $address['default_address'] == 1 ? 'checked' : '' }}  />
+                                            <label for="someSwitchOptionPrimary" class="label-primary btn-success"></label>
+                                        </div>
+                                    </li>
+                                </div>
 
                                 <input type="hidden" name="id" value="{{ Auth::id() }}">
                                 <div class="btn-group">

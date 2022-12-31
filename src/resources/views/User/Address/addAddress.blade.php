@@ -4,7 +4,9 @@
 @section('title')
     laudrex
 @endsection
-
+@section('front-script')
+    <link rel="stylesheet" href="{{ asset('style/assets/css/matrial-switch.css') }}">
+@endsection
 @section('breadcrumbs')
 @endsection
 @section('content')
@@ -32,6 +34,9 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="input-group">
+                                        <input type="hidden" id="latitude" name="lat">
+                                        <input type="hidden" id="longitude" name="long">
+
                                         <label for="pac-input"> Your location </label>
                                         <input type="text" style="width:fit-content" id="pac-input" class="form-control"
                                             placeholder="Search" name="address">
@@ -46,6 +51,18 @@
                                     <div class="input-group">
                                         <div id="map" style="height: 500px;width: 100%;z-index:99"></div>
                                     </div>
+                                </div>
+                                <div class="form-group">
+                                    <!-- List group -->
+                                    <li class="list-group-item" style="border: none; padding:0">
+                                        <label for="someSwitchOptionPrimary">Set as Default address</label>
+                                        <div class="material-switch pull-right">
+                                            <input type="hidden" name="switchAddress" value="0">
+                                            <input id="someSwitchOptionPrimary" name="switchAddress" type="checkbox"
+                                                class="btn-primary" value="1" />
+                                            <label for="someSwitchOptionPrimary" class="label-primary btn-success"></label>
+                                        </div>
+                                    </li>
                                 </div>
 
 

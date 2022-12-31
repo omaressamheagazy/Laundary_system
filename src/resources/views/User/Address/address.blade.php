@@ -4,7 +4,9 @@
 @section('title')
     laudrex
 @endsection
-
+@section('front-script')
+    <link rel="stylesheet" href="{{ asset('style/assets/css/matrial-switch.css') }}">
+@endsection
 @section('breadcrumbs')
 @endsection
 @section('content')
@@ -41,6 +43,7 @@
                             <tr>
                                 <th>Name</th>
                                 <th>Phone number</th>
+                                <th>Default Address</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -51,8 +54,20 @@
                                     <td>{{ $address['address'] }}</td>
                                     <td>{{ $address['phone'] }}</td>
                                     <td>
-                                        <a href="{{ route('editAddress', ['id' => $address['id']] ) }}" class="btn btn-success btn-sm"><i
-                                                class="fa fa-gear"></i>&nbsp;Edit</a>
+                                        <li class="list-group-item" style="border: none; padding:0">
+                                            <div class="material-switch pull-right">
+                                                <input type="hidden" name="switchAddress" value="0">
+                                                <input id="someSwitchOptionPrimary" name="switchAddress" type="checkbox"
+                                                    class="btn-primary" value="1"
+                                                    {{ $address['default_address'] == 1 ? 'checked' : '' }} disabled />
+                                                <label for="someSwitchOptionPrimary"
+                                                    class="label-primary btn-success"></label>
+                                            </div>
+                                        </li>
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('editAddress', ['id' => $address['id']]) }}"
+                                            class="btn btn-success btn-sm"><i class="fa fa-gear"></i>&nbsp;Edit</a>
                                         <form action="{{ route('deleteAddress', $address['id']) }}" method="POST"
                                             style="display: inline" enctype="multipart/form-data">
                                             @csrf
