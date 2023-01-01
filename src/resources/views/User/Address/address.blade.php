@@ -103,6 +103,7 @@
                         </tbody>
                     </table>
                 </div>
+                @endphp
             </div>
         </div>
     </div>
@@ -118,7 +119,6 @@
 
 @endsection
 @section('script')
-
     <script src=" {{ asset('style/assets/js/lib/data-table/datatables.min.js') }} "></script>
     <script src=" {{ asset('style/assets/js/lib/data-table/dataTables.bootstrap.min.js') }} "></script>
     <script src=" {{ asset('style/assets/js/lib/data-table/dataTables.buttons.min.js') }} "></script>
