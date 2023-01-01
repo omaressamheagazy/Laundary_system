@@ -28,18 +28,6 @@ class OrderController extends Controller
         return view('Driver.Order.new-request', ['newRequests' => $newRequests]);
     }
     public function requestDetail($id) {
-        $org = [
-            'lat' => 1.5591315,
-            'long' => 103.6385229
-        ];
-
-        $dest = [
-            'lat' => 1.5591315,
-            'long' => 103.6385229
-        ];
-        $dist =  new DistanceCalculator('1.5591315', '103.6385229', '1.492820', '103.707460');
-        echo '<pre>'; print_r($dist->getDuration()); echo '</pre>';
-        exit();
         $order = Order::all()->where('id', $id)->first();
         if(!isset($order)) return redirect()->route('newRequest'); // if user didn't has any order
         return view('Driver.Order.request-detail', ['order' => $order]);
