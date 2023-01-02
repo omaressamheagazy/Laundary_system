@@ -44,6 +44,7 @@ class DistanceCalculator
         $response = '';
         $statusCode = '';
         $routeDetails = [
+            'value' => '',
             'distance' => '',
             'duration' => ''
         ];
@@ -61,6 +62,7 @@ class DistanceCalculator
         $response = json_decode($response->getBody(), true);
         if(Self::isResponseValid($statusCode, $response['rows'][0]['elements'][0]['status'], $response['status'])) {
             $routeDetails = [
+                'value'  => $response['rows'][0]['elements'][0]['distance']['value'],
                 'distance' => $response['rows'][0]['elements'][0]['distance']['text'],
                 'duration' => $response['rows'][0]['elements'][0]['duration']['text']
             ];

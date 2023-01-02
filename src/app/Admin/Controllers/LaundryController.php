@@ -30,6 +30,7 @@ class LaundryController extends AdminController
         $grid = new Grid(new Laundry());
         $grid->id("ID");
         $grid->name("Name");
+        $grid->suitable_for("Suitable For");
         $grid->address("Address");
         $grid->column('image',__('Image'))->image('','100','100');
 
@@ -61,6 +62,7 @@ class LaundryController extends AdminController
     {
         $form = new Form(new Laundry());
         $form->text("name")->rules('required')->required();
+        $form->text("suitable_for");
         $form->latlong('latitude', 'longitude', 'Position')->rules('required')->height(500);
 
         $form->textarea("description")->rows(6);

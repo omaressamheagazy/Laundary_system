@@ -201,8 +201,6 @@
                                                 <div class="styled-select">
                                                     <select name="sort_rating" id="sort_rating">
                                                         <option value="" selected>Sort by Nearest </option>
-                                                        <option value="lower">Lowest ranking</option>
-                                                        <option value="higher">Highest ranking</option>
                                                         <i class="fa-solid fa-angle-down"></i>
                                                     </select>
                                                 </div>
@@ -214,46 +212,47 @@
                                     </div>
 
                                     <!--End tools -->
-
-                                    <div class="strip_list wow fadeIn" data-wow-delay="0.1s">
-                                        <div class="ribbon_1">
-                                            Popular
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-9">
-                                                <div class="desc">
-                                                    <div class="thumb_strip">
-                                                        <a href="detail_page.html"><img src="img/thumb_restaurant.jpg"
-                                                                alt=""></a>
-                                                    </div>
-
-                                                    <h3>Taco Mexican</h3>
-                                                    <div class="type">
-                                                        Mexican / American
-                                                    </div>
-                                                    <div class="location">
-                                                        135 Newtownards Road, Belfast, BT4. <span class="opening">Opens at
-                                                            17:00.</span>
-                                                        Minimum order: $15
-                                                    </div>
-                                                    <ul>
-                                                        <li>Take away<i class="icon_check_alt2 ok"></i></li>
-                                                        <li>Delivery<i class="icon_check_alt2 no"></i></li>
-                                                    </ul>
-                                                </div>
+                                    @foreach ($laundries as $laundry)
+                                        <div class="strip_list wow fadeIn" data-wow-delay="0.1s">
+                                            <div class="ribbon_1">
+                                                Popular
                                             </div>
-                                            <div class="col-md-3">
-                                                <div class="go_to">
-                                                    <div>
-                                                        <a href="detail_page.html" class="btn_1">View Menu</a>
+                                            <div class="row">
+                                                <div class="col-md-9">
+                                                    <div class="desc">
+                                                        <div class="thumb_strip">
+                                                            <a href="detail_page.html"><img src={{ asset('uploads/'.$laundry->image) }}
+                                                                    alt=""></a>
+                                                        </div>
+
+                                                        <h3>{{ $laundry->name }}</h3>
+                                                        <div class="type">
+                                                            {{-- Mexican / American --}}
+                                                        </div>
+                                                        {{-- <div class="location">
+                                                            Inside UTM. <span class="opening">Open</span>
+                                                            Minimum order: $15
+                                                        </div> --}}
+                                                        <ul>
+                                                            <li>{{ $laundry['distance']}}</li>
+                                                            <li>{{ $laundry['duration']}}</li>
+                                                            <li>Suitable for: {{ $laundry->suitable_for }}<i class="icon_check_alt2 ok"></i></li>
+                                                        </ul>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div><!-- End row-->
-                                    </div><!-- End strip_list-->
-                                    <!-- End Content =============================================== -->
+                                                <div class="col-md-3">
+                                                    <div class="go_to">
+                                                        <div>
+                                                            <a href="detail_page.html" class="btn_1">View Direction</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div><!-- End row-->
+                                        </div><!-- End strip_list-->
+                                        <!-- End Content =============================================== -->
+                                    @endforeach
 
-                                    <!-- End Content =============================================== -->
+
                                 </div>
                             </div>
                         </div>
