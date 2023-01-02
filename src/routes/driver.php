@@ -49,4 +49,6 @@ Route::prefix('driver/order')->group(function () {
     */
     Route::get('/new', [App\Http\Controllers\Driver\OrderController::class, 'newRequest'])->name('newRequest');
     Route::get('/detail/{id}', [App\Http\Controllers\Driver\OrderController::class, 'requestDetail'])->name('requestDetail')->where('id', '[0-9]+');
+    Route::get('/laundry/{id}', [App\Http\Controllers\Driver\OrderController::class, 'viewLaundry'])->name('viewLaundry')->where('id', '[0-9]+');
+    
 })->middleware(['auth', 'verified', 'driverauth']);

@@ -39,7 +39,8 @@ class OrderController extends Controller
     }
 
     public function viewLaundry($laundryID) {
-        
+        $laundry = Laundry::all()->where('id', $laundryID)->first();
+        return view('Driver.Order.view-laundry',['laundry' => $laundry]);
     }
     /**
      * Show the application dashboard.

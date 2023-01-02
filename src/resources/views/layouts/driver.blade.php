@@ -176,11 +176,6 @@
     <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
 
     <!-- map -->
-    <script src="https://maps.googleapis.com/maps/api/js?v=3&sensor=false"></script>
-    {{-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAgWQd7kN0Cv2Gqg_Dhvje1ffL1MHjnUbo=initMap"
-                        type="text/javascript"></script> --}}
-    <script src="{{ asset('style/assets/js/lib/gmap/gmaps.js') }}"></script>
-    <script src="{{ asset('style/assets/js/lib/gmap/gmap.init.js') }}"></script>
 
 </body>
 
