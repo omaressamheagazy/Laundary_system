@@ -1,6 +1,5 @@
 @extends('layouts.driver')
 
-
 @section('title')
     laudrex
 @endsection
@@ -262,37 +261,51 @@
                                     @endforeach
                                 </div>
                                 {{-- Laundry Details end here --}}
-
                             </div>
+                            {{-- track  order start here --}}
                             <div role="tabpanel" class="tab-pane" id="four">
                                 <div class="collapse show" id="collapseExample13">
-                                    <div id="tools">
-                                        <div class="row">
-                                            <div class="col-md-3 col-sm-4 col-5">
-                                                <div class="styled-select">
-                                                    <select name="sort_rating" id="sort_rating">
-                                                        <option value="" selected>Sort by Nearest </option>
-                                                        <i class="fa-solid fa-angle-down"></i>
-                                                    </select>
-                                                </div>
+                                    <div class="card">
+                                        <div class="card-header">Update Order Status</div>
+                                        <div class="card-body card-block">
+                                            <div class="row form-group">
+                                                <form action="{{ route('updateOrderStatus') }}" method="POST" style="display: inline-block">
+                                                    <div class="col-9 col-md-9">
+                                                        @csrf
+                                                        <input type="hidden" name="id"
+                                                            value="{{ $order->id }}">
+                                                        <select name="status" id="SelectLm"
+                                                            class="form-control-sm form-control">
+                                                            <option>--Select--</option>
+                                                            @foreach ($orderStatus as $status)
+                                                                <option   {{ $order->status_id == $status->id ? 'selected' : ''  }} value="{{ $status->id }} ">{{ $status->name }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-3 col-md-3" style="padding: 0">
+                                                        <button type="submit"
+                                                            class="btn btn-primary btn-sm">Update</button>
+                                                    </div>
+                                                </form>
                                             </div>
-                                            <div class="col-md-9 col-sm-8 col-7">
-                                                <a href="grid_list.html" class="bt_filters"><i class="icon-th"></i></a>
-                                            </div>
+
                                         </div>
+
                                     </div>
-
-                                    <!--End tools -->
-                                    
-
-
                                 </div>
+
+                                <!--End tools -->
+
+
+
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            {{-- <div class="btn-group btn-group-md float-right">
+        </div>
+        {{-- <div class="btn-group btn-group-md float-right">
                 <button type="button" class="btn btn-secondary mr-2">Back</button>
                 <button type="button" class="btn btn-primary mr-2">Accept</button>
             </div> --}}

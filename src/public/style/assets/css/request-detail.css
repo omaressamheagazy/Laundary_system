@@ -57,7 +57,7 @@ CSS INDEX
   }
 } */
 body {
-  /* font-size: 14px; */
+  font-size: 17px !important;
   line-height: 1.75;
   /* font-family: 'Open Sans', sans-serif; */
   vertical-align: baseline;
@@ -361,7 +361,7 @@ ul {
   background: #ffffff;
   color: #111111;
   text-transform: uppercase;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 700;
   display: inline-block;
   -webkit-transition: all 0.3s ease-out;
@@ -420,7 +420,7 @@ ul {
   padding: 15px 30px;
   background: #1a1515;
   text-transform: uppercase;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 700;
   display: inline-block;
   -webkit-border-radius: 3px;
@@ -451,7 +451,7 @@ ul {
 @media only screen and (max-width: 550px) {
   .fill-btn {
     padding: 8px 16px;
-    font-size: 13px;
+    /* font-size: 13px; */
     font-weight: 600;
   }
 }
@@ -1064,7 +1064,7 @@ i.icon-circle-primary {
   display: inline-block;
   color: #d9d9d9;
   margin-right: 30px;
-  font-size: 14px;
+  font-size: 16px;
 }
 .header-top-bar .header-address-textprimary ul li i {
   font-size: 18px;
@@ -1081,7 +1081,7 @@ i.icon-circle-primary {
   display: inline-block;
   color: #111111;
   margin-right: 30px;
-  font-size: 14px;
+  font-size: 16px;
 }
 .header-top-bar .header-address-primarytext ul li i {
   font-size: 18px;
@@ -1171,7 +1171,7 @@ i.icon-circle-primary {
   color: #1a1515;
 }
 .header-top-bar .header-top-bar-bottom .schedule-info li p {
-  font-size: 14px;
+  font-size: 16px;
   margin-bottom: 0;
 }
 .header-top-bar .header-top-bar-bottom .schedule-info li span {
@@ -2136,7 +2136,7 @@ h3.team-title-light a {
   transition: all 0.5s ease-out;
 }
 .team-layout1 .item-content .item-social li a i {
-  font-size: 14px;
+  font-size: 16px;
 }
 .team-layout1 .item-content .item-social li a:hover {
   color: #ffffff;
@@ -2301,7 +2301,7 @@ h3.team-title-light a {
   transition: all 0.5s ease-out;
 }
 .team-layout2 .item-content .team-social li a i {
-  font-size: 14px;
+  font-size: 16px;
 }
 .team-layout2 .item-content .team-social li a:hover {
   color: #ffffff;
@@ -2429,7 +2429,7 @@ h3.team-title-light a {
 }
 .team-layout3 .item-content .team-social li a i {
   color: #1a1515;
-  font-size: 14px;
+  font-size: 16px;
 }
 .team-layout3 .item-content .team-social li a:hover {
   background: #1a1515;
@@ -2490,7 +2490,7 @@ h3.team-title-light a {
   transition: all 0.5s ease-out;
 }
 .single-team-left .item-social li a i {
-  font-size: 14px;
+  font-size: 16px;
 }
 .single-team-left .item-social li a:hover {
   color: #ffffff;
@@ -3532,7 +3532,7 @@ h3.blog-title a:hover {
   background: #f9f9f9;
   box-shadow: none;
   border: none;
-  font-size: 14px;
+  font-size: 16px;
 }
 .single-blog .leave-comments .form-group input {
   height: 45px;
@@ -3688,11 +3688,11 @@ h3.blog-title a:hover {
     border: 1px solid #dcdcdc;
     box-shadow: none;
     padding: 1rem 1.5rem;
-    font-size: 14px;
+    font-size: 16px;
 }
 .contact-form-area .form-group input {
   height: 45px;
-  font-size: 14px;
+  font-size: 16px;
 }
 .contact-form-area .form-group textarea {
   font-size: 14px;
@@ -3801,10 +3801,10 @@ h3.blog-title a:hover {
 }
 .sidebar-search .stylish-input-group .input-group-addon button span {
   color: #1a1515;
-  font-size: 14px;
+  font-size: 16px;
 }
 .sidebar-search .stylish-input-group input {
-  font-size: 14px;
+  font-size: 16px;
   color: #111111;
 }
 .sidebar-search .stylish-input-group input.form-control::-webkit-input-placeholder,
@@ -3861,7 +3861,7 @@ h3.blog-title a:hover {
   top: 0;
   right: 0;
   z-index: 2;
-  font-size: 14px;
+  font-size: 16px;
   -webkit-transition: all 0.5s ease-out;
   -moz-transition: all 0.5s ease-out;
   -ms-transition: all 0.5s ease-out;
@@ -3896,7 +3896,7 @@ h3.blog-title a:hover {
   margin-bottom: 3px;
   border: 1px solid #d5d5d5;
   background: transparent;
-  font-size: 13px;
+  font-size: 16px;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   -ms-border-radius: 3px;
@@ -4101,7 +4101,7 @@ h3.blog-title a:hover {
 }
 .footer-area-top .footer-social li a i {
   color: #b5b5b5;
-  font-size: 14px;
+  font-size: 16px;
   -webkit-transition: all 0.3s ease-out;
   -moz-transition: all 0.3s ease-out;
   -ms-transition: all 0.3s ease-out;

@@ -44,23 +44,27 @@ class OrderController extends Controller
         return view('Driver.Order.request-detail', ['order' => $order, 'laundries' => $sortedLaundries]);
     }
 
-    public function viewCurrentOrder($id) {
-        $sortedLaundries = Laundry::sortByNearestDistance($id);
-        $order = Order::all()->where('id', $id)->first();
-        if(!isset($order)) return redirect()->route('newRequest'); // if user didn't has any order
-        return view('Driver.Order.track-order', ['order' => $order, 'laundries' => $sortedLaundries]);
-     
-    }
-    public function trackOrder(Request $request) {
+    public function trackOrder(Request $request, $id = '') {
+        // when the driver the current order
         $sortedLaundries = Laundry::sortByNearestDistance($request->id);
-        $order = Order::all()->where('id', $request->id)->first();
-        if(!isset($order)) return redirect()->route('newRequest'); // if user didn't has any order
-        $tracker = new tracker();
-        $tracker->order_id = $request->id;
-        $tracker->driver_id = Auth::id();
-        $tracker->save();
-        Order::changeOrderStatus($request->id, oStatus::DRIVER_ASSIGNED->value);
-        return view('Driver.Order.track-order', ['order' => $order, 'laundries' => $sortedLaundries]);
+        $order = Order::all()->where('id', $request->id == NULL ? $id: $request->id)->first();
+        $currentOrderStatus = $order->status_id;
+        $orderStatus = OrderStatus::filterStatus($currentOrderStatus);
+
+        if($request->isMethod('post')) { // when the driver accept the order
+            $tracker = new tracker();
+            $tracker->order_id = $request->id;
+            $tracker->driver_id = Auth::id();
+            $tracker->save();
+            Order::changeOrderStatus($request->id, oStatus::DRIVER_ASSIGNED->value);
+        }
+        return view('Driver.Order.track-order', ['order' => $order, 'laundries' => $sortedLaundries, 'orderStatus' => $orderStatus]);
+    }
+
+
+    public function updateOrderStatus(Request $request) {
+        Order::changeOrderStatus($request->id, $request->status);
+        return  redirect()->route('track-order-view', ['id' => $request['id']]) ->with('success', 'status has changed successfully');
     }
     public function viewLaundry($laundryID) {
         $laundry = Laundry::all()->where('id', $laundryID)->first();

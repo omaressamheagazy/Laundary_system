@@ -430,7 +430,7 @@ footer .styled-select select {
    border-radius: 0;
    height: 37px;
    margin:0;
-   font-size: 13px;
+   font-size: 16px;
   	font-weight:400;
 	-moz-appearance: window;
     -webkit-appearance: none;
@@ -1796,7 +1796,7 @@ select.form-control.form-white{
   box-shadow:none;
   border:1px solid #ddd;
   box-shadow: none;
-  font-size: 13px;
+  font-size: 16px;
 }
 .form-group {
 	margin-bottom:20px;
