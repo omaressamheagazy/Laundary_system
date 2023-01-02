@@ -34,12 +34,10 @@ class DistanceCalculator
      * @return array return route details, that contains the duration and distance between two location
      */
     public static function getRouteDetails(
-        string $originLat,
-        string $originLng,
+        string $userLocation,
         string $destinationLat,
         string $destinationLng
     ) {
-        $origin = $originLat . ',' . $originLng;
         $destination = $destinationLat . ',' . $destinationLng;
         $response = '';
         $statusCode = '';
@@ -52,7 +50,7 @@ class DistanceCalculator
             Self::__staticConstruct();
         $response = static::$client->get('https://maps.googleapis.com/maps/api/distancematrix/json', [
             'query' => [
-                'origins' => $origin,
+                'origins' => $userLocation,
                 'destinations' => $destination,
                 "units" => 'metric ',
                 'key' => env('MAP_API'),

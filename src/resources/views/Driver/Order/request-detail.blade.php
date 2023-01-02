@@ -69,7 +69,7 @@
                                                             <h6 class="">
                                                                 Address</h6>
                                                             <p class="text-muted">
-                                                                {{ $order->user->addresses->first()->address }}</p>
+                                                                {{ $order->user->addresses->where('default_address',1)->first()->address }}</p>
                                                         </div>
                                                         <div class="col-12 mb-3">
                                                             <h6 class="">Email

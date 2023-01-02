@@ -37,6 +37,10 @@ class OrderController extends Controller
         if(!isset($order)) return redirect()->route('newRequest'); // if user didn't has any order
         return view('Driver.Order.request-detail', ['order' => $order, 'laundries' => $sortedLaundries]);
     }
+
+    public function viewLaundry($laundryID) {
+        
+    }
     /**
      * Show the application dashboard.
      *
