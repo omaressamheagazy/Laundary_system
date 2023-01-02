@@ -7,7 +7,7 @@
 
 @section('front-script')
     <link rel="stylesheet" href="{{ asset('style/assets/css/order.css') }}">
-    <link rel="stylesheet" href="{{ asset('style/assets/css/ser.css') }}">
+    <link rel="stylesheet" href="{{ asset('style/assets/css/request-detail.css') }}">
     <link rel="stylesheet" href="{{ asset('style/assets/css/ion.rangeSlider.css') }}">
     <link rel="stylesheet" href="{{ asset('style/assets/css/ion.rangeSlider.skinFlat.css') }}">
     <link rel="stylesheet" href="{{ asset('style/assets/css/grey.css') }}">

@@ -5,24 +5,51 @@ namespace App\Helpers;
 use Encore\Admin\Actions\Response;
 use GuzzleHttp\Client;
 use Symfony\Component\VarDumper\VarDumper;
+
 /**
- * Helper function is used to calculate the distance between two points using Distance matrix API
- *
- */ 
+ * calculate the distance between two locations using google map api
+ */
 class DistanceCalculator
 {
-    private $response;
-    private int $statusCode;
-    public function __construct(
+    private static $isCreatedBefore = false; // make sure that only one object will be created
+    private static Client $client;
+
+
+    /**
+     * instantiate client object 
+     *
+     * @return void
+     */
+    private static function __staticConstruct() {
+        static::$client = new Client();
+        static::$isCreatedBefore = true;
+    }
+    /**
+     * 
+     *
+     * @param string $originLat
+     * @param string $originLng
+     * @param string $destinationLat
+     * @param string $destinationLng
+     * @return array return route details, that contains the duration and distance between two location
+     */
+    public static function getRouteDetails(
         string $originLat,
         string $originLng,
         string $destinationLat,
         string $destinationLng
     ) {
-        $client = new Client();
         $origin = $originLat . ',' . $originLng;
         $destination = $destinationLat . ',' . $destinationLng;
-        $this->response = $client->get('https://maps.googleapis.com/maps/api/distancematrix/json', [
+        $response = '';
+        $statusCode = '';
+        $routeDetails = [
+            'distance' => '',
+            'duration' => ''
+        ];
+        if(!static::$isCreatedBefore)  
+            Self::__staticConstruct();
+        $response = static::$client->get('https://maps.googleapis.com/maps/api/distancematrix/json', [
             'query' => [
                 'origins' => $origin,
                 'destinations' => $destination,
@@ -30,23 +57,22 @@ class DistanceCalculator
                 'key' => env('MAP_API'),
             ],
         ]);
-        $this->statusCode =  $this->response->getStatusCode();
-        $this->response = json_decode($this->response->getBody(), true);
+        $statusCode =  $response->getStatusCode();
+        $response = json_decode($response->getBody(), true);
+        if(Self::isResponseValid($statusCode, $response['rows'][0]['elements'][0]['status'], $response['status'])) {
+            $routeDetails = [
+                'distance' => $response['rows'][0]['elements'][0]['distance']['text'],
+                'duration' => $response['rows'][0]['elements'][0]['duration']['text']
+            ];
+        }
+        return $routeDetails;
     }
-    public function isResponseValid()
+
+    public static function isResponseValid($requestStatus, $responseStatus, $searchResultStatus)
     {
-        if ($this->statusCode == 200 && $this->response['rows'][0]['elements'][0]['status'] == 'OK' && $this->response['status'] == 'OK')
+        if ($requestStatus == 200 && $responseStatus == 'OK' && $searchResultStatus == 'OK')
             return true;
         return false;
     }
-    public function getDistance()
-    {
-        if($this->isResponseValid())
-            return $this->response['rows'][0]['elements'][0]['distance']['text'];
-    }
-    public function getDuration()
-    {
-        if($this->isResponseValid())
-            return $this->response['rows'][0]['elements'][0]['duration']['text'];
-    }
+
 }

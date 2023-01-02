@@ -9,6 +9,9 @@ use App\Helpers\Location;
 use App\Models\OrderStatus;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Laundry;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
@@ -28,6 +31,23 @@ class OrderController extends Controller
         return view('Driver.Order.new-request', ['newRequests' => $newRequests]);
     }
     public function requestDetail($id) {
+
+        $userAddress = Order::all()->where('id', $id)->first()->user->addresses->where('default_address',1)->first();
+        $userLat = $userAddress->latitude;
+        $userLng = $userAddress->longitude;
+        $laundries =Laundry::all()->sort(function($first, $second) use ($userLat,$userLng) {
+            
+            $firstDist =  DistanceCalculator::getRouteDetails($userLat, $userLng, $first->latitude, $first->longitude);
+            $secondDist =  DistanceCalculator::getRouteDetails($userLat, $userLng, $second->latitude, $second->longitude);
+            if ($firstDist['distance'] == $secondDist['distance']) {
+                return 0;
+            }
+            return ($firstDist['distance'] < $secondDist['distance']) ? -1 : 1;
+        });
+        foreach ($laundries as $laudnry) {
+            echo $laudnry->name . " ";
+        }
+        exit();
         $order = Order::all()->where('id', $id)->first();
         if(!isset($order)) return redirect()->route('newRequest'); // if user didn't has any order
         return view('Driver.Order.request-detail', ['order' => $order]);
