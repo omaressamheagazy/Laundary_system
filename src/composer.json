@@ -31,7 +31,10 @@
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
         },
-        "files": ["app/Helpers/DistanceCalculator.php"]
+        "files": [
+            "app/Helpers/DistanceCalculator.php",
+            "app/Enums/OrderStatus.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {

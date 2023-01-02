@@ -34,6 +34,10 @@
                                 <a class="nav-link" href="#three" role="tab" data-toggle="tab">
                                     <i class="fa-solid fa-shop"></i>Laundry Details</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#four" role="tab" data-toggle="tab">
+                                    <i class="fa-regular fa-pen-to-square"></i>track Order</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -69,7 +73,8 @@
                                                             <h6 class="">
                                                                 Address</h6>
                                                             <p class="text-muted">
-                                                                {{ $order->user->addresses->where('default_address',1)->first()->address }}</p>
+                                                                {{ $order->user->addresses->where('default_address', 1)->first()->address }}
+                                                            </p>
                                                         </div>
                                                         <div class="col-12 mb-3">
                                                             <h6 class="">Email
@@ -121,7 +126,8 @@
                                                             class="col-md-2 text-center d-flex justify-content-center align-items-center">
                                                             <a data-toggle="collapse"
                                                                 href="#collapseExample{{ $detail->id }}"
-                                                                style="color: #3c3939" role="button" aria-expanded="false"
+                                                                style="color: #3c3939" role="button"
+                                                                aria-expanded="false"
                                                                 aria-controls="collapseExample{{ $detail->id }}">
                                                                 Detail <i class="fa-solid fa-angle-down"></i>
                                                             </a>
@@ -221,7 +227,8 @@
                                                 <div class="col-md-9">
                                                     <div class="desc">
                                                         <div class="thumb_strip">
-                                                            <a href="detail_page.html"><img src={{ asset('uploads/'.$laundry->image) }}
+                                                            <a href="detail_page.html"><img
+                                                                    src={{ asset('uploads/' . $laundry->image) }}
                                                                     alt=""></a>
                                                         </div>
 
@@ -234,16 +241,18 @@
                                                             Minimum order: $15
                                                         </div> --}}
                                                         <ul>
-                                                            <li>{{ $laundry['distance']}}</li>
-                                                            <li>{{ $laundry['duration']}}</li>
-                                                            <li>Suitable for: {{ $laundry->suitable_for }}<i class="icon_check_alt2 ok"></i></li>
+                                                            <li>{{ $laundry['distance'] }}</li>
+                                                            <li>{{ $laundry['duration'] }}</li>
+                                                            <li>Suitable for: {{ $laundry->suitable_for }}<i
+                                                                    class="icon_check_alt2 ok"></i></li>
                                                         </ul>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3">
                                                     <div class="go_to">
                                                         <div>
-                                                            <a href="{{ route('viewLaundry',['id' => $laundry['id']]) }}" class="btn_1">View On Map</a>
+                                                            <a href="{{ route('viewLaundry', ['id' => $laundry['id']]) }}"
+                                                                class="btn_1">View On Map</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -251,6 +260,30 @@
                                         </div><!-- End strip_list-->
                                         <!-- End Content =============================================== -->
                                     @endforeach
+                                </div>
+                                {{-- Laundry Details end here --}}
+
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="four">
+                                <div class="collapse show" id="collapseExample13">
+                                    <div id="tools">
+                                        <div class="row">
+                                            <div class="col-md-3 col-sm-4 col-5">
+                                                <div class="styled-select">
+                                                    <select name="sort_rating" id="sort_rating">
+                                                        <option value="" selected>Sort by Nearest </option>
+                                                        <i class="fa-solid fa-angle-down"></i>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-9 col-sm-8 col-7">
+                                                <a href="grid_list.html" class="bt_filters"><i class="icon-th"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!--End tools -->
+                                    
 
 
                                 </div>
@@ -259,14 +292,10 @@
                     </div>
                 </div>
             </div>
-            <div class="btn-group btn-group-md float-right">
+            {{-- <div class="btn-group btn-group-md float-right">
                 <button type="button" class="btn btn-secondary mr-2">Back</button>
-                <form action="{{ route('track-order') }}" style="display: inline-block" method="POST">
-                    @csrf
-                    <input type="hidden" name="id" value="{{ $order->id }}">
-                    <button type="submit" class="btn btn-primary mr-2">Accept</button>
-                </form>
-            </div>
+                <button type="button" class="btn btn-primary mr-2">Accept</button>
+            </div> --}}
         </div>
     </section>
     <!-- Service Area End Here -->

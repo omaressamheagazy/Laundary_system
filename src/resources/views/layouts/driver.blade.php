@@ -64,7 +64,7 @@
                             aria-expanded="false"><i class="menu-icon fa fa-cart-plus"></i>Orders</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-plus"></i><a href="{{ route('newRequest') }}">New request</a></li>
-                            <li><i class="fa fa-spinner"></i><a href="{{ route('current-order') }}">Current request</a></li>
+                            <li><i class="fa fa-spinner"></i><a href="{{ route('currentOrder') }}">Current Orders</a></li>
                             <li><i class="fa fa-table"></i><a href="#">Order History</a></li>
                         </ul>
                     </li>

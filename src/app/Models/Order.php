@@ -20,5 +20,14 @@ class Order extends Model
     public function statuses() {
         return $this->belongsTo(OrderStatus::class,'status_id');
     }
+
+    public function trackers() {
+        return $this->hasOne(tracker::class,'order_id');
+    }
+    public static function changeOrderStatus($order_id, $status_id) {
+        $order = Order::all()->where('id', $order_id)->first();
+        $order->status_id = $status_id;
+        $order->save();
+    }
     
 }

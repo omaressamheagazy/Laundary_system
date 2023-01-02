@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Car;
+use App\Enums\OrderStatus;
 use Illuminate\Redis\RedisServiceProvider;
 
 class CarController extends Controller
@@ -54,7 +55,7 @@ class CarController extends Controller
         $car->color = $request->color;
         $car->plate_number = $request->plate;
         $car->vehicle_certificate = 'images/' . $certificateImageName;
-        $car->status_id = 1;
+        $car->status_id = OrderStatus::SEARCHING_FOR_DRIVER->value;
         $car->save();
         return redirect()->route('cars')->with('success', 'your request has been sent successfully!');
     }

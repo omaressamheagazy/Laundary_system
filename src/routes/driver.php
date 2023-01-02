@@ -48,7 +48,11 @@ Route::prefix('driver/order')->group(function () {
         request operations
     */
     Route::get('/new', [App\Http\Controllers\Driver\OrderController::class, 'newRequest'])->name('newRequest');
+    Route::get('/current', [App\Http\Controllers\Driver\OrderController::class, 'currentOrder'])->name('currentOrder');
     Route::get('/detail/{id}', [App\Http\Controllers\Driver\OrderController::class, 'requestDetail'])->name('requestDetail')->where('id', '[0-9]+');
     Route::get('/laundry/{id}', [App\Http\Controllers\Driver\OrderController::class, 'viewLaundry'])->name('viewLaundry')->where('id', '[0-9]+');
+    Route::post('/track-order', [App\Http\Controllers\Driver\OrderController::class, 'trackOrder'])->name('track-order');
+    Route::get('/track-order/{id}', [App\Http\Controllers\Driver\OrderController::class, 'viewCurrentOrder'])->name('track-order-view')->where('id', '[0-9]+');
+
     
 })->middleware(['auth', 'verified', 'driverauth']);
