@@ -243,7 +243,7 @@
                                                 <div class="col-md-3">
                                                     <div class="go_to">
                                                         <div>
-                                                            <a href="{{ route('viewLaundry',['id' => $laundry['id']]) }}" class="btn_1">View Direction</a>
+                                                            <a href="{{ route('viewLaundry',['id' => $laundry['id']]) }}" class="btn_1">View On Map</a>
                                                         </div>
                                                     </div>
                                                 </div>
