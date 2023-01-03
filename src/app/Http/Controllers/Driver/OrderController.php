@@ -34,20 +34,30 @@ class OrderController extends Controller
         return view('Driver.Order.new-request', ['newRequests' => $newRequests]);
     }
     public function currentOrder() {
-        $currentRequests = Order::all()->where('status_id', '!=' ,oStatus::COMPLETED->value )->where('status_id', '!=' ,oStatus::SEARCHING_FOR_DRIVER->value ) ;
-        return view('Driver.Order.current-order', ['currentRequests' => $currentRequests]);
+        $currentRequests = Order::all()->where('status_id', '!=' ,oStatus::COMPLETED->value )
+                                        ->where('status_id', '!=' ,oStatus::SEARCHING_FOR_DRIVER->value )
+                                        ->where('status_id', '!=' ,oStatus::CANCEL->value );
+        return view('Driver.Order.current-order', ['order' => $currentRequests]);
     }
     public function requestDetail($id) {
-        $sortedLaundries = Laundry::sortByNearestDistance($id);
         $order = Order::all()->where('id', $id)->first();
+        if($order->status_id != oStatus::SEARCHING_FOR_DRIVER->value) 
+            return redirect()->route('newRequest')->with('warning', 'you are not allowed to enter this page');
+        $sortedLaundries = Laundry::sortByNearestDistance($id);
         if(!isset($order)) return redirect()->route('newRequest'); // if user didn't has any order
         return view('Driver.Order.request-detail', ['order' => $order, 'laundries' => $sortedLaundries]);
     }
 
     public function trackOrder(Request $request, $id = '') {
-        // when the driver the current order
-        $sortedLaundries = Laundry::sortByNearestDistance($request->id);
+        
         $order = Order::all()->where('id', $request->id == NULL ? $id: $request->id)->first();
+        if($request->isMethod('get'))  {
+            if(($order->status_id == oStatus::SEARCHING_FOR_DRIVER->value)) return redirect()->route('newRequest');
+            if(($order->status_id == oStatus::CANCEL->value) || ($order->status_id == oStatus::COMPLETED->value) ) 
+                return redirect()->route('history');
+        }
+        // when the driver accept the current order
+        $sortedLaundries = Laundry::sortByNearestDistance($request->id);
         $currentOrderStatus = $order->status_id;
         $orderStatus = OrderStatus::filterStatus($currentOrderStatus);
 
@@ -64,11 +74,21 @@ class OrderController extends Controller
 
     public function updateOrderStatus(Request $request) {
         Order::changeOrderStatus($request->id, $request->status);
-        return  redirect()->route('track-order-view', ['id' => $request['id']]) ->with('success', 'status has changed successfully');
+        if($request->status == oStatus::CANCEL->value  ) {
+            tracker::where('order_id', $request->id)->delete();
+            return redirect()->route('history')->with('success', 'order has cancelled');
+        } else if($request->status == oStatus::COMPLETED->value)
+            return redirect()->route('history');
+        return  redirect()->route('track-order-view', ['id' => $request['id']])->with('success', 'status has changed successfully');
     }
     public function viewLaundry($laundryID) {
         $laundry = Laundry::all()->where('id', $laundryID)->first();
         return view('Driver.Order.view-laundry',['laundry' => $laundry]);
+    }
+    public function history() {
+            $order = Order::all()->where(function($query) {return $query->where('status_id', oStatus::CANCEL->value)->orWhere('status_id', oStatus::COMPLETED->value);});
+        return view('Driver.Order.history', ['order' => $order]);
+        
     }
 
 
