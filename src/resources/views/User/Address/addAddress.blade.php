@@ -32,20 +32,23 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <div class="input-group">
+                                <div class="row form-group">
+                                    <div class="col-12">
                                         <input type="hidden" id="latitude" name="lat">
                                         <input type="hidden" id="longitude" name="long">
-
-                                        <label for="pac-input"> Your location </label>
-                                        <input type="text" style="width:fit-content" id="pac-input" class="form-control"
-                                            placeholder="Search" name="address">
-
-                                        @error('address')
-                                            <span class="text-danger"> {{ $message }}</span>
-                                        @enderror
+                                        <div class="form-group">
+                                            <label for="autocomplete"class=" form-control-label">Location</label>
+                                            <input type="text" id="autocomplete" placeholder="Search" name="address"
+                                                class="form-control  @error('address')is-invalid @enderror">
+                                                @error('address')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
                                     </div>
                                 </div>
+
 
                                 <div class="form-group">
                                     <div class="input-group">
@@ -86,7 +89,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="{{ asset('style/assets/js/map.js') }}"></script>
     <script
-        src="https://maps.googleapis.com/maps/api/js?key={{ env('MAP_API') }}&callback=initAutocomplete&v=weekly&libraries=places&region=MY"
+        src="https://maps.googleapis.com/maps/api/js?key={{ env('MAP_API') }}&callback=initMap&v=weekly&libraries=places&region=MY"
         defer></script>
 
 

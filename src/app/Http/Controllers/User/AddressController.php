@@ -34,7 +34,9 @@ class AddressController extends Controller
         // Validate the request...
         $this->validate($request, [
             'phone' => 'required|numeric|digits:10',
-            'address' => 'required'
+            'address' => 'required',
+            'long' => 'required',
+            'lat' => 'required',
         ]);
         $address = new Address;
         $address->phone = $request->phone;

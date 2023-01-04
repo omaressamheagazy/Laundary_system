@@ -58,6 +58,7 @@ class OrderController extends Controller
         }
         // when the driver accept the current order
         $sortedLaundries = Laundry::sortByNearestDistance($request->id);
+        // $sortedLaundries = Laundry::all();
         $currentOrderStatus = $order->status_id;
         $orderStatus = OrderStatus::filterStatus($currentOrderStatus);
 
