@@ -240,8 +240,6 @@
                                                             Minimum order: $15
                                                         </div> --}}
                                                         <ul>
-                                                            <li>{{ $laundry['distance'] }}</li>
-                                                            <li>{{ $laundry['duration'] }}</li>
                                                             <li>Suitable for: {{ $laundry->suitable_for }}<i
                                                                     class="icon_check_alt2 ok"></i></li>
                                                         </ul>

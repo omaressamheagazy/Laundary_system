@@ -59,7 +59,15 @@ class AddressController extends Controller
         $address = Address::find($id);
         if(!isset($address)) return redirect()->route('address');
         if ($request->isMethod('post')) {
+            $this->validate($request, [
+                'phone' => 'required|numeric|digits:10',
+                'address' => 'required',
+                'long' => 'required',
+                'lat' => 'required',
+            ]);
             $address->phone = $request->phone;
+            $address->latitude = $request->lat;
+            $address->longitude = $request->long;
             $address->address = $request->address;
             $address->default_address = $request->switchAddress;
             if($request->switchAddress == 1)
