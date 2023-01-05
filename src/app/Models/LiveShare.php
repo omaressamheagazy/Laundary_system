@@ -5,12 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Delivery extends Model
+class LiveShare extends Model
 {
     use HasFactory;
-    public function orders() {
-        return $this->belongsTo(Order::class,'delivery_id');
-    }
-
-
+    protected $fillable = ['driver_id', 'id', 'longitude', 'latitude'];
 }

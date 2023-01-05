@@ -58,6 +58,8 @@ Route::prefix('driver/order')->group(function () {
     Route::post('/track-order', [App\Http\Controllers\Driver\OrderController::class, 'trackOrder'])->name('track-order');
     Route::post('/updateOrderStatus', [App\Http\Controllers\Driver\OrderController::class, 'updateOrderStatus'])->name('updateOrderStatus');
     Route::get('/track-order/{id}', [App\Http\Controllers\Driver\OrderController::class, 'trackOrder'])->name('track-order-view')->where('id', '[0-9]+');
+    Route::post('/live-location', [App\Http\Controllers\Driver\OrderController::class, 'activateLiveLocation'])->name('live-location');
+    
 
     
 })->middleware(['auth', 'verified', 'driverauth']);

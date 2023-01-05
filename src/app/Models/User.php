@@ -57,4 +57,8 @@ class User extends Authenticatable implements MustVerifyEmail
     public function trackers() {
         return $this->hasOne(tracker::class,'driver_id');
     }
+    public function liveLocation() {
+        return $this->hasOne(LiveShare::class, 'driver_id');
+    }
+
 }

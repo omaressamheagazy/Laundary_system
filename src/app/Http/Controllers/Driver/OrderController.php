@@ -13,8 +13,12 @@ use App\Http\Controllers\Controller;
 use App\Models\Laundry;
 use App\Models\User;
 use App\Enums\OrderStatus as oStatus;
+use App\Models\LiveLocation;
+use App\Models\LiveShare;
 use App\Models\tracker;
+use Doctrine\DBAL\Driver\IBMDB2\Driver;
 use Illuminate\Support\Facades\Auth;
+
 
 class OrderController extends Controller
 {
@@ -35,7 +39,7 @@ class OrderController extends Controller
         return view('Driver.Order.new-request', ['newRequests' => $newRequests]);
     }
     public function currentOrder()
-    {
+    {   
         $currentRequests = Order::all()->where('status_id', '!=', oStatus::COMPLETED->value)
             ->where('status_id', '!=', oStatus::SEARCHING_FOR_DRIVER->value)
             ->where('status_id', '!=', oStatus::CANCEL->value);
@@ -107,6 +111,14 @@ class OrderController extends Controller
     public function addTracker(Request $request) {
         dd($request->value);
     }
+
+    public function activateLiveLocation(Request $request) {
+        LiveShare::updateOrCreate(
+            ['driver_id' => $request->driver_id],
+            [ 'latitude' => $request->latitude, 'longitude' => $request->longitude ],
+        );
+    }
+
 
     /**
      * Show the application dashboard.

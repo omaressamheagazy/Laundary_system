@@ -5,12 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Delivery extends Model
+class Live_share extends Model
 {
     use HasFactory;
-    public function orders() {
-        return $this->belongsTo(Order::class,'delivery_id');
-    }
-
-
 }

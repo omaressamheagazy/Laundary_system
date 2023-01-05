@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\LiveLocation;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -33,11 +34,13 @@ class HomeController extends Controller
     public function driverHome() {
         return view("Driver.home");
     }
-    public function tryAjax() {
+    public function tryAjax(Request $request) {
         // dd($request->value);
-        echo "wow";
-        dd('hi');
-        // exit();
+        $liveLocation = new LiveLocation();
+        $liveLocation->driver_id = $request->driver_id;
+        $liveLocation->latitude = $request->latitude;
+        $liveLocation->longitude = $request->longitude;
+        $liveLocation->save();
     }
 
 }

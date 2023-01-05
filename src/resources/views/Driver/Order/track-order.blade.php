@@ -3,7 +3,9 @@
 @section('title')
     laudrex
 @endsection
-
+@php
+    use App\Enums\OrderStatus;
+@endphp
 @section('front-script')
     <link rel="stylesheet" href="{{ asset('style/assets/css/order.css') }}">
     <link rel="stylesheet" href="{{ asset('style/assets/css/request-detail.css') }}">
@@ -261,6 +263,10 @@
                                 {{-- Laundry Details end here --}}
                             </div>
                             {{-- track  order start here --}}
+                            <input type="hidden" id="driverID" name="driverID" value="{{ Auth::id() }}">
+                            <input type="hidden" id="pickUpStatus" name="pickUpStatus" value=" {{ OrderStatus::PICK_LAUNDRY->value }}">
+                            <input type="hidden" id="deliverStatus" name="deliverStatus" value=" {{ OrderStatus::DELIVER_LAUNDRY->value }}">
+                            <input type="hidden" id='trackURL' name="trackURL" value="{{ route('live-location') }}">
                             <div role="tabpanel" class="tab-pane" id="four">
                                 <div class="collapse show" id="collapseExample13">
                                     <div class="card">
@@ -272,11 +278,11 @@
                                                         @csrf
                                                         <input type="hidden" name="id"
                                                             value="{{ $order->id }}">
-                                                        <select name="status" id="SelectLm"
+                                                        <select name="status" id="orderStatus"
                                                             class="form-control-sm form-control">
                                                             <option>--Select--</option>
                                                             @foreach ($orderStatus as $status)
-                                                                <option   {{ $order->status_id == $status->id ? 'selected' : ''  }} value="{{ $status->id }} ">{{ $status->name }}
+                                                                <option  {{ $order->status_id == $status->id ? 'selected' : ''  }} value="{{ $status->id }} ">{{ $status->name }}
                                                                 </option>
                                                             @endforeach
                                                         </select>
@@ -292,11 +298,7 @@
 
                                     </div>
                                 </div>
-
                                 <!--End tools -->
-
-
-
                             </div>
                         </div>
                     </div>
@@ -313,6 +315,9 @@
 
 @endsection
 @section('script')
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="{{ asset('style/assets/js/track.js') }}"></script>
     <script src="{{ asset('style/assets/js/ion.rangeSlider.js') }}"></script>
     <script src="{{ asset('style/assets/js/infobox.js') }}"></script>
     <script src="{{ asset('style/assets/js/sr.js') }}"></script>
