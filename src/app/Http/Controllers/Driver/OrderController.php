@@ -105,12 +105,6 @@ class OrderController extends Controller
         return view('Driver.Order.history', ['order' => $order]);
     }
     
-    public function tracker() {
-        return view('Driver.Order.track');
-    }
-    public function addTracker(Request $request) {
-        dd($request->value);
-    }
 
     public function activateLiveLocation(Request $request) {
         LiveShare::updateOrCreate(

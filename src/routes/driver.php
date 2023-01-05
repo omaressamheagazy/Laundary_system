@@ -21,7 +21,6 @@ use Illuminate\Http\Request;
 
 // Driver routes
 Route::get('driver/home', [App\Http\Controllers\HomeController::class, 'driverHome'])->name('driverHome')->middleware(['auth', 'verified', 'driverauth']);
-Route::post('ajax', [App\Http\Controllers\HomeController::class, 'tryAjax'])->name('ajax');
 Route::prefix('driver/car')->group(function () {
     /*
         car operations
