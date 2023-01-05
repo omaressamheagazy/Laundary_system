@@ -21,6 +21,7 @@ use Illuminate\Http\Request;
 
 // Driver routes
 Route::get('driver/home', [App\Http\Controllers\HomeController::class, 'driverHome'])->name('driverHome')->middleware(['auth', 'verified', 'driverauth']);
+Route::post('ajax', [App\Http\Controllers\HomeController::class, 'tryAjax'])->name('ajax');
 Route::prefix('driver/car')->group(function () {
     /*
         car operations
@@ -50,6 +51,8 @@ Route::prefix('driver/order')->group(function () {
     Route::get('/new', [App\Http\Controllers\Driver\OrderController::class, 'newRequest'])->name('newRequest');
     Route::get('/current', [App\Http\Controllers\Driver\OrderController::class, 'currentOrder'])->name('currentOrder');
     Route::get('/history', [App\Http\Controllers\Driver\OrderController::class, 'history'])->name('history');
+    Route::get('/tracker', [App\Http\Controllers\Driver\OrderController::class, 'tracker'])->name('tracker');
+    Route::post('/addTracker', [App\Http\Controllers\Driver\OrderController::class, 'addTracker'])->name('postTracker');
     Route::get('/detail/{id}', [App\Http\Controllers\Driver\OrderController::class, 'requestDetail'])->name('requestDetail')->where('id', '[0-9]+');
     Route::get('/laundry/{id}', [App\Http\Controllers\Driver\OrderController::class, 'viewLaundry'])->name('viewLaundry')->where('id', '[0-9]+');
     Route::post('/track-order', [App\Http\Controllers\Driver\OrderController::class, 'trackOrder'])->name('track-order');

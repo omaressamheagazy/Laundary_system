@@ -33,6 +33,12 @@ class HomeController extends Controller
     public function driverHome() {
         return view("Driver.home");
     }
+    public function tryAjax() {
+        // dd($request->value);
+        echo "wow";
+        dd('hi');
+        // exit();
+    }
 
 }
 
