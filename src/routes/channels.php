@@ -17,6 +17,6 @@ Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
 });
 
-Broadcast::channel('location.{userId}', function ($userId) {
-    return $userId === Order::findOrNew($userId)->user_id;
+Broadcast::channel('location.{$id}', function ($id, $userId) {
+    return true;
 });

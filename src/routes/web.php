@@ -21,7 +21,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/track', [App\Http\Controllers\User\OrderController::class, 'trail'])->name('trackT')->where('id', '[0-9]+');
 Route::get('/test/{id}', [App\Http\Controllers\User\OrderController::class, 'test'])->name('trackT')->where('id', '[0-9]+');
 
 
@@ -76,6 +75,7 @@ Route::prefix('home/order')->group(function () {
     /*
         Order operations
     */
+    Route::get('/track', [App\Http\Controllers\User\OrderController::class, 'trail'])->name('trackT');
     Route::get('/', [App\Http\Controllers\User\OrderController::class, 'index'])->name('order');
     Route::post('/addToCart', [App\Http\Controllers\User\OrderController::class, 'addToCart'])->name('add-to-cart');
     Route::get('/current-order', [App\Http\Controllers\User\OrderController::class, 'currentOrder'])->name('current-order');

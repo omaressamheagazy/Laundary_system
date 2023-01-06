@@ -9,7 +9,7 @@ const successCallback = (position) => {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
         url: '/driver/order/real',
-        data: { lat: position.coords.latitude, long: position.coords.longitude, userId: userId },
+        data: { lat: position.coords.latitude, long: position.coords.longitude, userId: userId, orderId: orderId },
         type: "POST",
         dataType: "json"
     });
