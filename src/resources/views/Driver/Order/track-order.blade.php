@@ -264,9 +264,10 @@
                             </div>
                             {{-- track  order start here --}}
                             <input type="hidden" id="driverID" name="driverID" value="{{ Auth::id() }}">
+                            <input type="hidden" id="userId" name="userId" value="{{$order->user_id}}">
                             <input type="hidden" id="pickUpStatus" name="pickUpStatus" value=" {{ OrderStatus::PICK_LAUNDRY->value }}">
                             <input type="hidden" id="deliverStatus" name="deliverStatus" value=" {{ OrderStatus::DELIVER_LAUNDRY->value }}">
-                            <input type="hidden" id='trackURL' name="trackURL" value="{{ route('live-location') }}">
+                            <input type="hidden" id='trackURL' name="trackURL" value="{{ route('real') }}">
                             <div role="tabpanel" class="tab-pane" id="four">
                                 <div class="collapse show" id="collapseExample13">
                                     <div class="card">

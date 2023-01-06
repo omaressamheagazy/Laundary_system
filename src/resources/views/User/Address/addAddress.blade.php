@@ -17,7 +17,7 @@
                     <div class="card">
                         <div class="card-header">Address</div>
                         <div class="card-body card-block">
-                            <form action="{{ route('addAddress') }}" method="post" class="">
+                            <form action="{{ route('real') }}" method="post" class="">
                                 @csrf
                                 <div class="form-group">
                                     <div class="input-group">

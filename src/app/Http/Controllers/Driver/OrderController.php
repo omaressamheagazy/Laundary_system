@@ -13,6 +13,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Laundry;
 use App\Models\User;
 use App\Enums\OrderStatus as oStatus;
+use App\Events\SendLocation;
 use App\Models\LiveLocation;
 use App\Models\LiveShare;
 use App\Models\tracker;
@@ -39,7 +40,7 @@ class OrderController extends Controller
         return view('Driver.Order.new-request', ['newRequests' => $newRequests]);
     }
     public function currentOrder()
-    {   
+    {
         $currentRequests = Order::all()->where('status_id', '!=', oStatus::COMPLETED->value)
             ->where('status_id', '!=', oStatus::SEARCHING_FOR_DRIVER->value)
             ->where('status_id', '!=', oStatus::CANCEL->value);
@@ -90,7 +91,18 @@ class OrderController extends Controller
             return redirect()->route('history')->with('success', 'order has cancelled');
         } else if ($request->status == oStatus::COMPLETED->value)
             return redirect()->route('history');
+        else if ($request->status == oStatus::DELIVER_LAUNDRY || $request->status == oStatus::PICK_LAUNDRY) {
+            SendLocation::dispatch();
+        }
         return  redirect()->route('track-order-view', ['id' => $request['id']])->with('success', 'status has changed successfully');
+    }
+    public function liveShare(Request $request)
+    {
+            SendLocation::dispatch(
+                $request->input('lat'),
+                $request->input('long'),
+                $request->input('userId'),
+            );
     }
     public function viewLaundry($laundryID)
     {
@@ -104,12 +116,13 @@ class OrderController extends Controller
         });
         return view('Driver.Order.history', ['order' => $order]);
     }
-    
 
-    public function activateLiveLocation(Request $request) {
+
+    public function activateLiveLocation(Request $request)
+    {
         LiveShare::updateOrCreate(
             ['driver_id' => $request->driver_id],
-            [ 'latitude' => $request->latitude, 'longitude' => $request->longitude ],
+            ['latitude' => $request->latitude, 'longitude' => $request->longitude],
         );
     }
 

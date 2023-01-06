@@ -45,7 +45,7 @@ const createMap = ({ lat, lng }) => {
         dataType: "json",
         success: function(response) {
           showMap(response.location);
-            // setInterval(init, 10000); // The interval set to 5 seconds
+            setInterval(init, 10000); // The interval /hbnvbset to 5 seconds
 
         },
         // complete: function() {

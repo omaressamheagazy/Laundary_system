@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\SendLocation;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -20,6 +21,15 @@ use Illuminate\Http\Request;
 
 
 // Driver routes
+Route::post('/map', function (Request $request) {
+    $lat = $request->input('lat');
+    $long = $request->input('long');
+    $location = ['lat' => $lat, 'long' => $long];
+    // event(New SendLocation($location));
+    return response()->json(['status' => 'success', 'data' => $location]);
+    // return view('welcome');
+})->name('real');
+
 Route::get('driver/home', [App\Http\Controllers\HomeController::class, 'driverHome'])->name('driverHome')->middleware(['auth', 'verified', 'driverauth']);
 Route::prefix('driver/car')->group(function () {
     /*
@@ -58,6 +68,7 @@ Route::prefix('driver/order')->group(function () {
     Route::post('/updateOrderStatus', [App\Http\Controllers\Driver\OrderController::class, 'updateOrderStatus'])->name('updateOrderStatus');
     Route::get('/track-order/{id}', [App\Http\Controllers\Driver\OrderController::class, 'trackOrder'])->name('track-order-view')->where('id', '[0-9]+');
     Route::post('/live-location', [App\Http\Controllers\Driver\OrderController::class, 'activateLiveLocation'])->name('live-location');
+    Route::post('/real', [App\Http\Controllers\Driver\OrderController::class, 'liveShare'])->name('real');
     
 
     

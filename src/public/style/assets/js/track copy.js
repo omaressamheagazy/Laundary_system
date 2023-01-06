@@ -1,14 +1,13 @@
 const successCallback = (position) => {
     console.log(position);
-    var driver_id = $('#driverID').val() ;// driver id
-    var userId = $('#userId').val();
+    var driver_id = $('#driverID').val() // driver id
     let url = $('#trackURL').val();
     $.ajax({
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
-        url: '/driver/order/real',
-        data: { lat: position.coords.latitude, long: position.coords.longitude, userId: userId },
+        url: '/driver/order/live-location',
+        data: { latitude: position.coords.latitude, longitude: position.coords.longitude, driver_id: driver_id },
         type: "POST",
         dataType: "json"
     });
