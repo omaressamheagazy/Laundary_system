@@ -38,6 +38,6 @@ class SendLocation implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('location.'.$this->orderId);
+        return new Channel('location.'.$this->orderId);
     }
 }

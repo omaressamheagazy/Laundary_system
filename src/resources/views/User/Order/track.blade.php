@@ -20,7 +20,7 @@
 @section('script')
     @vite(['resources/css/app.css', 'resources/js/app.js','resources/js/bootstrap.js'])
     <script type="module">
-        Echo.private(`location.${"54"}`)
+        Echo.channel(`location.${"54"}`)
         .listen('SendLocation', (e) => {
                 console.log("wow");
             });
