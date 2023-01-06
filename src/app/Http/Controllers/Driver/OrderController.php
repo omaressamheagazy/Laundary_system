@@ -102,6 +102,7 @@ class OrderController extends Controller
                 $request->input('lat'),
                 $request->input('long'),
                 $request->input('userId'),
+                $request->input('orderId'),
             );
     }
     public function viewLaundry($laundryID)

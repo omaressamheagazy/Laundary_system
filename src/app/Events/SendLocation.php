@@ -22,10 +22,12 @@ class SendLocation implements ShouldBroadcast
     public $lat;
     public $long;
     public $userId;
-    public function __construct($lat, $long, $userId)
+    public $orderId;
+    public function __construct($lat, $long, $userId, $orderId)
     {
         $this->long = $long;
         $this->lat = $lat;
+        $this->orderId = $orderId;
         $this->userId = $userId;    
     }
 
@@ -36,6 +38,6 @@ class SendLocation implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('location.'.$this->userId);
+        return new PrivateChannel('location.'.$this->orderId);
     }
 }

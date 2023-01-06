@@ -263,8 +263,11 @@
                                 {{-- Laundry Details end here --}}
                             </div>
                             {{-- track  order start here --}}
+                                {{-- Hiddne inputs to be sumbbited --}}
                             <input type="hidden" id="driverID" name="driverID" value="{{ Auth::id() }}">
                             <input type="hidden" id="userId" name="userId" value="{{$order->user_id}}">
+                            <input type="hidden" id="orderId" name="orderId" value="{{$order->id}}">
+
                             <input type="hidden" id="pickUpStatus" name="pickUpStatus" value=" {{ OrderStatus::PICK_LAUNDRY->value }}">
                             <input type="hidden" id="deliverStatus" name="deliverStatus" value=" {{ OrderStatus::DELIVER_LAUNDRY->value }}">
                             <input type="hidden" id='trackURL' name="trackURL" value="{{ route('real') }}">
