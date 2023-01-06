@@ -21,6 +21,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/track', [App\Http\Controllers\User\OrderController::class, 'trail'])->name('trackT')->where('id', '[0-9]+');
+Route::get('/test/{id}', [App\Http\Controllers\User\OrderController::class, 'test'])->name('trackT')->where('id', '[0-9]+');
+
+
 Auth::routes([
     'verify' => true
 ]);

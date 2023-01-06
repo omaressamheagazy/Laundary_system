@@ -8,6 +8,7 @@ use App\Admin\Controllers\PackageController;
 use App\Models\Package;
 use App\Models\Cart;
 use App\Models\Delivery;
+use App\Models\LiveShare;
 use App\Models\Order;
 use App\Models\OrderDetails;
 
@@ -100,5 +101,14 @@ class OrderController extends Controller
         OrderDetails::where('id', $id)->delete();
         Order::where('id', $id)->delete();
         return redirect()->route('current-order')->with('success', 'Order cancelled successfully!');
+    }
+    public function trail() {
+        return view('User.Order.track');
+    }
+    public function test($id) {
+        $liveLocation = LiveShare::all()->where('driver_id', $id)->first();
+        return response()->json([
+            'location' => $liveLocation
+        ]);
     }
 }

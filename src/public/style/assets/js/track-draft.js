@@ -1,3 +1,4 @@
+var executed = false;
 const createMap = ({ lat, lng }) => {
     return new google.maps.Map(document.getElementById('map'), {
       center: { lat, lng },
@@ -33,36 +34,38 @@ const createMap = ({ lat, lng }) => {
         return null;
     }
   }
-  const trackLocation = ({ onSuccess, onError = () => { } }) => {
-    if ('geolocation' in navigator === false) {
-      return onError(new Error('Geolocation is not supported by your browser.'));
-    }
-  
-    // Use watchPosition instead.
-    return navigator.geolocation.watchPosition(onSuccess, onError);
-  };
   function init() {
-    const initialPosition = { lat: 59.325, lng: 18.069 };
-    const map = createMap(initialPosition);
-    const marker = createMarker({ map, position: initialPosition });
-    const $info = document.getElementById('info');
+    var driver_id = $('#driverID').val() // driver id
+    $.ajax({
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        url: '/test/' + driver_id,
+        type: "get",
+        dataType: "json",
+        success: function(response) {
+          showMap(response.location);
+            // setInterval(init, 10000); // The interval set to 5 seconds
+
+        },
+        // complete: function() {
+        //   // Schedule the next request when the current one's complete
+        // }
+      });
+  }
   
-    trackLocation({
-      onSuccess: ({ coords: { latitude: lat, longitude: lng } }) => {
-        marker.setPosition({ lat, lng });
-        map.panTo({ lat, lng });
-        // Print out the user's location.
-        $info.textContent = `Lat: ${lat} Lng: ${lng}`;
-        // Don't forget to remove any error class name.
-        $info.classList.remove('error');
-        console.log("This is lat", lat);
-        console.log("This is long", lng);
-      },
-      onError: err => {
-        // Print out the error message.
-        $info.textContent = `Error: ${getPositionErrorMessage(err.code) || err.message}`;
-        // Add error class name.
-        $info.classList.add('error');
-      }
-    });
+  function showMap(position) {
+    if(!executed) {
+      executed = true;
+      const initialPosition = { lat: 59.325, lng: 18.069 };
+      map = createMap(initialPosition);
+      marker = createMarker({ map, position: initialPosition });
+    }
+    console.log('hi');
+    // console.log(marker);
+    var pos = {lat: parseFloat(position.latitude), lng: parseFloat(position.longitude) }
+    marker.setPosition(pos);
+    map.panTo(pos);
+    // setInterval(init, 5000); // The interval set to 5 seconds
+
   }
