@@ -22,7 +22,7 @@
 @section('script')
     @vite(['resources/css/app.css', 'resources/js/app.js','resources/js/bootstrap.js'])
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <script  src="{{ asset('style/assets/js/pusher-update-map.js') }}"></script>
+    <script  src="{{ asset('style/assets/js/pusher-update-map2.js') }}"></script>
     <script
     src="https://maps.googleapis.com/maps/api/js?key={{ env('MAP_API') }}&callback=init&v=weekly&libraries=places&region=MY"
     defer></script>

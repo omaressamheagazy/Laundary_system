@@ -54,10 +54,32 @@ const createMap = ({ lat, lng }) => {
     .listen('SendLocation', (e) => {
             let lat = parseFloat( e.lat);
             let lng = parseFloat( e.long);
-            marker.setPosition({ lat, lng });
-            map.panTo({ lat, lng });
+            // marker.setPosition({ lat, lng });
+            // map.panTo({ lat, lng });
+            // console.log(lat,lng);
+            directionsService = new google.maps.DirectionsService();
+            
+            directionsService.route(
+              {
+                      origin: "1.5618663, 103.6554999",
+                      destination: `${lat}, ${lng}`,
+                      travelMode: "DRIVING"
+              },
+              (response, status) => {
+                if (status === "OK") {
+                    new google.maps.DirectionsRenderer({
+                        // suppressMarkers: true,
+                        directions: response,
+                        map: map,
+                      });
+                    console.log('hi');
+                    console.log(response);
+                }
+            }
+          )
         });
   }
+  
   function init() {
     const initialPosition = { lat: 1.5618663, lng: 103.6554999 };
     map = createMap(initialPosition);
