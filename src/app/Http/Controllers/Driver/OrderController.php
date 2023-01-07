@@ -91,7 +91,9 @@ class OrderController extends Controller
         } else if ($request->status == oStatus::COMPLETED->value) {
             Order::changeOrderStatus($request->id, $request->status);
             return redirect()->route('history');
-        }
+        } else 
+            Order::changeOrderStatus($request->id, $request->status);
+
         return  redirect()->route('track-order-view', ['id' => $request['id']])->with('success', 'status has changed successfully');
     }
     public function liveShare(Request $request)

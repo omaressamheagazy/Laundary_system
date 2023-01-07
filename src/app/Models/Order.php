@@ -29,6 +29,9 @@ class Order extends Model
         $order->status_id = $status_id;
         $order->save();
     }
+    public static function isDriverAssigned($order_id) {
+        return tracker::all()->where('order_id',$order_id)->first() == null ? false : true;
+    }
 
     
 }

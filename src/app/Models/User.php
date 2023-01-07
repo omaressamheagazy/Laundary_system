@@ -60,5 +60,9 @@ class User extends Authenticatable implements MustVerifyEmail
     public function liveLocation() {
         return $this->hasOne(LiveShare::class, 'driver_id');
     }
+    public function cars() {
+        return $this->hasMany(Car::class,'user_id');
+
+    }
 
 }

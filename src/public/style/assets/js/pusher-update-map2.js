@@ -20,7 +20,9 @@ function init() {
 }
 //define calcRoute function
 function updateMap() {
-    Echo.channel(`location.${"54"}`).listen("SendLocation", (e) => {
+    let orderID = $('#orderID').val();
+    console.log(orderID);
+    Echo.channel(`location.${orderID}`).listen("SendLocation", (e) => {
         let lat = parseFloat(e.lat);
         let lng = parseFloat(e.long);
         var request = {

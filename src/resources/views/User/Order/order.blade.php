@@ -16,7 +16,7 @@
 
                 <h1 align="center" class="mt-4">Choose your Package</h1>
 
-                <div class="row p-5 text-center">
+                <div  align="center" class="row p-5 text-center">
                     @foreach ($packages as $package)
                         @php $totalPrice = 0 @endphp
                         @foreach ($package->services as $service)

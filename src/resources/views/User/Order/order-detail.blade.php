@@ -20,85 +20,22 @@
                         <ul role="tablist" class="nav">
                             <li class="nav-item">
                                 <a class="nav-link active" href="#one" role="tab" data-toggle="tab">
-                                    <i class="fa-regular fa-user"></i></i>Driver Details</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#two" role="tab" data-toggle="tab">
                                     <i class="fa-regular fa-file-lines"></i>Order Details</a>
                             </li>
 
-                            <li class="nav-item">
-                                <a class="nav-link" href="#three" role="tab" data-toggle="tab">
-                                    <i class="fa-regular fa-pen-to-square"></i>track your Order</a>
-                            </li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-8 col-md-7 col-sm-12 mb-30">
-                    @php
-                        $driver = $order->trackers->first()->driver;
-                    @endphp
                     <div class="service-layout5">
                         <div class="tab-content">
-                            {{-- Driver Details start here --}}
+                
                             <div role="tabpanel" class="tab-pane active" id="one">
-                                <div></div>
-                                <div class="collapse show" id="collapseExample">
-                                    <div class="card mb-3" style="border-radius: .5rem;">
-                                        <div class="row g-0">
-                                            <div class="col-md-4 gradient-custom text-center text-white"
-                                                style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
-                                                <img src="{{ asset('uploads\images\user_Icon.png') }}" alt="Avatar"
-                                                    class="img-fluid my-4" style="width: 80px;" />
-                                                <h5 style="color: black">{{ $order->user->name }}</h5>
-                                            </div>
-                                            <div class="col-md-8">
-                                                <div class="card-body p-4">
-                                                    <h6 class="section-title-dark text-left">Information
-                                                    </h6>
-                                                    <hr class="mt-0 mb-4">
-                                                    <div class="row pt-1">
-                                                        @php
-                                                            $driverCar = $driver->cars->where('in_use', 1)->first();
-                                                        @endphp
-                                                        <div class="col-6 mb-3">
-                                                            <h6 class="">Car
-                                                            </h6>
-                                                            <p class="text-muted">
-                                                                {{ $driverCar->name . ' - ' . $driverCar->model }}</p>
-                                                        </div>
-                                                        <div class="col-6 mb-3">
-                                                            <h6 class="">Plate Number
-                                                            </h6>
-                                                            <p class="text-muted">{{ $driverCar->plate_number }}</p>
-                                                        </div>
-                                                        <div class="col-6 mb-3">
-                                                            <h6 class="">Car color
-                                                            </h6>
-                                                            <p class="text-muted">{{ $driverCar->color }}</p>
-                                                        </div>
-                                                        <div class="col-6 mb-3">
-                                                            <h6 class="">Phone
-                                                            </h6>
-                                                            <p class="text-muted">
-                                                                {{ $order->user->addresses->first()->phone }} </p>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            {{-- Driver Details end here --}}
-
-                            <div role="tabpanel" class="tab-pane" id="two">
                                 {{-- Order Details start here --}}
 
                                 <div class="card" style="border-radius: 10px;">
-                                    <div class="card-header px-4 py-5">
-                                        <h5 class="text-muted mb-0">Driver detail
+                                    <div class="card-header px-4 py-5 ">
+                                        <h5 class="text-muted mb-0">Order detail
                                         </h5>
                                     </div>
                                     <div class="card-body p-4">
@@ -128,7 +65,8 @@
                                                             class="col-md-2 text-center d-flex justify-content-center align-items-center">
                                                             <a data-toggle="collapse"
                                                                 href="#collapseExample{{ $detail->id }}"
-                                                                style="color: #3c3939" role="button" aria-expanded="false"
+                                                                style="color: #3c3939" role="button"
+                                                                aria-expanded="false"
                                                                 aria-controls="collapseExample{{ $detail->id }}">
                                                                 Detail <i class="fa-solid fa-angle-down"></i>
                                                             </a>
@@ -168,7 +106,6 @@
                                                         @endforeach
 
                                                     </div>
-
                                                 </div>
                                             </div>
                                         @endforeach
@@ -199,42 +136,25 @@
                                     </div>
                                 </div>
                             </div>
-                            {{-- Track order start here --}}
-                            <div role="tabpanel" class="tab-pane " id="three">
-                                <div></div>
-                                @php
-                                    $userAddress = $order->user->addresses->first();
-                                @endphp
-                                <div class="collapse show" id="collapseExample">
-                                    <div class="card mb-3" style="border-radius: .5rem;">
-                                        <div class="row g-0">
-                                            <div id="map" class="map"></div>
-                                            <!-- For displaying user's coordinate or error message. -->
-                                            <div id="info" class="info"></div>
-                                            <input type="hidden" name="driverID" id="driverID" value="{{ $driver->id }}">
-                                            <input type="hidden" id="lat" name="lat" value="{{ $userAddress->latitude }}">
-                                            <input type="hidden" id="long" name="long" value=""{{ $userAddress->longitude}}>
-                                            <input type="hidden" id="orderID" name="orderID" value="{{ $order->id}}">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            {{-- Track order end here --}}
+
+                            
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        {{-- <div class="btn-group btn-group-md float-right">
+                <button type="button" class="btn btn-secondary mr-2">Back</button>
+                <button type="button" class="btn btn-primary mr-2">Accept</button>
+            </div> --}}
         </div>
     </section>
+    <!-- Service Area End Here -->
+
 @endsection
 @section('script')
-    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/bootstrap.js'])
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <script src="{{ asset('style/assets/js/pusher-update-map2.js') }}"></script>
-    <script
-        src="https://maps.googleapis.com/maps/api/js?key={{ env('MAP_API') }}&callback=init&v=weekly&libraries=places&region=MY"
-        defer></script>
     <script src="{{ asset('style/assets/js/ion.rangeSlider.js') }}"></script>
     <script src="{{ asset('style/assets/js/infobox.js') }}"></script>
     <script src="{{ asset('style/assets/js/sr.js') }}"></script>

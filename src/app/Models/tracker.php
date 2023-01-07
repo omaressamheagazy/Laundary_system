@@ -9,5 +9,8 @@ class tracker extends Model
 {
     use HasFactory;
     protected $fillable = ['driver_id', 'order_id', 'id'];
+    public function driver() {
+        return $this->belongsTo(User::class,'driver_id');
+    }
 
 }

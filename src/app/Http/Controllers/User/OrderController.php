@@ -92,10 +92,13 @@ class OrderController extends Controller
         
     //
     }
-    public function tracker(Request $request  ,$id) {
+    public function tracker(Request $request  ,$id) { // view order detail, when the order is assigned to a driver
         $order = Order::all()->where('id', $id)->first();
         if(!isset($order)) return redirect()->route('current-order'); // if user didn't has any order
-        return view('User.Order.track-order', ['order' => $order]);
+        if(Order::isDriverAssigned($id))
+            return view('User.Order.track-order', ['order' => $order]);
+        return view('User.Order.order-detail', ['order' => $order]);
+        
     }
     public function cancel($id) {
         OrderDetails::where('id', $id)->delete();
