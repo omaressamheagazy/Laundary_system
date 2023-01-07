@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class tracker extends Model
 {
     use HasFactory;
+    protected $fillable = ['driver_id', 'order_id', 'id'];
+
 }

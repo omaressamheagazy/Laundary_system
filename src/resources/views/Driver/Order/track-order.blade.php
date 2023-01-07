@@ -277,7 +277,7 @@
                                         <div class="card-header">Update Order Status</div>
                                         <div class="card-body card-block">
                                             <div class="row form-group">
-                                                <form action="{{ route('updateOrderStatus') }}" method="POST" style="display: inline-block">
+                                                <form action="{{ route('orderAction') }}" method="POST" style="display: inline-block">
                                                     <div class="col-9 col-md-9">
                                                         @csrf
                                                         <input type="hidden" name="id"

@@ -64,8 +64,8 @@ Route::prefix('driver/order')->group(function () {
     Route::post('/addTracker', [App\Http\Controllers\Driver\OrderController::class, 'addTracker'])->name('postTracker');
     Route::get('/detail/{id}', [App\Http\Controllers\Driver\OrderController::class, 'requestDetail'])->name('requestDetail')->where('id', '[0-9]+');
     Route::get('/laundry/{id}', [App\Http\Controllers\Driver\OrderController::class, 'viewLaundry'])->name('viewLaundry')->where('id', '[0-9]+');
-    Route::post('/track-order', [App\Http\Controllers\Driver\OrderController::class, 'trackOrder'])->name('track-order');
-    Route::post('/updateOrderStatus', [App\Http\Controllers\Driver\OrderController::class, 'updateOrderStatus'])->name('updateOrderStatus');
+    Route::post('/track-order', [App\Http\Controllers\Driver\OrderController::class, 'trackOrder'])->name('track-order-driver');
+    Route::post('/orderAction', [App\Http\Controllers\Driver\OrderController::class, 'orderAction'])->name('orderAction');
     Route::get('/track-order/{id}', [App\Http\Controllers\Driver\OrderController::class, 'trackOrder'])->name('track-order-view')->where('id', '[0-9]+');
     Route::post('/live-location', [App\Http\Controllers\Driver\OrderController::class, 'activateLiveLocation'])->name('live-location');
     Route::post('/real', [App\Http\Controllers\Driver\OrderController::class, 'liveShare'])->name('real');

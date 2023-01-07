@@ -259,7 +259,7 @@
             </div>
             <div class="btn-group btn-group-md float-right">
                 <button type="button" class="btn btn-secondary mr-2">Back</button>
-                <form action="{{ route('track-order') }}" style="display: inline-block" method="POST">
+                <form action="{{ route('track-order-driver') }}" style="display: inline-block" method="POST">
                     @csrf
                     <input type="hidden" name="id" value="{{ $order->id }}">
                     <button type="submit" class="btn btn-primary mr-2">Accept</button>

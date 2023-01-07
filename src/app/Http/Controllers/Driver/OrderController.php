@@ -73,26 +73,24 @@ class OrderController extends Controller
         $orderStatus = OrderStatus::filterStatus($currentOrderStatus);
 
         if ($request->isMethod('post')) { // when the driver accept the order
-            $tracker = new tracker();
-            $tracker->order_id = $request->id;
-            $tracker->driver_id = Auth::id();
-            $tracker->save();
+            tracker::updateOrCreate(
+                ['order_id' => $request->id],
+                ['driver_id' => Auth::id()],
+            );
             Order::changeOrderStatus($request->id, oStatus::DRIVER_ASSIGNED->value);
         }
         return view('Driver.Order.track-order', ['order' => $order, 'laundries' => $sortedLaundries, 'orderStatus' => $orderStatus]);
     }
 
 
-    public function updateOrderStatus(Request $request)
+    public function orderAction(Request $request)
     {
-        Order::changeOrderStatus($request->id, $request->status);
         if ($request->status == oStatus::CANCEL->value) {
             tracker::where('order_id', $request->id)->delete();
-            return redirect()->route('history')->with('success', 'order has cancelled');
-        } else if ($request->status == oStatus::COMPLETED->value)
+            Order::changeOrderStatus($request->id, oStatus::SEARCHING_FOR_DRIVER); // back again the order to its default status
+        } else if ($request->status == oStatus::COMPLETED->value) {
+            Order::changeOrderStatus($request->id, $request->status);
             return redirect()->route('history');
-        else if ($request->status == oStatus::DELIVER_LAUNDRY || $request->status == oStatus::PICK_LAUNDRY) {
-            SendLocation::dispatch();
         }
         return  redirect()->route('track-order-view', ['id' => $request['id']])->with('success', 'status has changed successfully');
     }
@@ -112,9 +110,9 @@ class OrderController extends Controller
     }
     public function history()
     {
-        $order = Order::all()->where(function ($query) {
-            return $query->where('status_id', oStatus::CANCEL->value)->orWhere('status_id', oStatus::COMPLETED->value);
-        });
+        //     return $query->where('status_id', oStatus::CANCEL->value)->orWhere('status_id', oStatus::COMPLETED->value);
+        // });
+        $order = Order::all()->where('status_id', oStatus::COMPLETED->value);
         return view('Driver.Order.history', ['order' => $order]);
     }
 
