@@ -34,8 +34,8 @@ const getPositionErrorMessage = code => {
 }
 
 options = {
-  enableHighAccuracy: false,
-  timeout: 5000,
+  enableHighAccuracy: true,
+  timeout: 10000,
   maximumAge: 0
 };
 
