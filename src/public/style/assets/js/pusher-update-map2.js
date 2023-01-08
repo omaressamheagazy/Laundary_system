@@ -16,11 +16,13 @@ function init() {
 
     //bind the DirectionsRenderer to the map
     directionsDisplay.setMap(map);
+    console.log(document.getElementById('long'));
+    orderID = $('#orderID').val();
+    console.log(orderID);
     updateMap();
 }
 //define calcRoute function
 function updateMap() {
-    let orderID = $('#orderID').val();
     console.log(orderID);
     Echo.channel(`location.${orderID}`).listen("SendLocation", (e) => {
         let lat = parseFloat(e.lat);
@@ -35,6 +37,7 @@ function updateMap() {
         //pass the request to the route method
         directionsService.route(request, function (result, status) {
             if (status == google.maps.DirectionsStatus.OK) {
+                $('#arrival-time').html(result.routes[0].legs[0].duration.text);
                 console.log(result.routes[0].legs[0].duration.text);
                 directionsDisplay.setDirections(result);
             } else {
