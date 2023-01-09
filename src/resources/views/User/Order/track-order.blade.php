@@ -206,7 +206,7 @@
                                     $userAddress = $order->user->addresses->first();
                                 @endphp
                                 <div class="collapse show" id="collapseExample">
-                                    <div class="col-12 col-md-12">
+                                    <div class="col-12 col-md-12 p-4">
                                         <!-- For displaying user's coordinate or error message. -->
                                         {{-- <div id="info" class="info"></div> --}}
                                         {{-- <i class="fas fa-map-marker-alt"></i> --}}
@@ -218,50 +218,52 @@
                                             value="{{ $userAddress->latitude }}">
                                         <input type="hidden" id="long" name="long"
                                             value=""{{ $userAddress->longitude }}>
-                                        <input type="hidden" id="orderID" name="orderID" 
+                                        <input type="hidden" id="orderID" name="orderID"
                                             value="{{ $order->id }}">
                                     </div>
-                                    <div class="col-12 col-md-12 card" >
+                                    <div class="col-12 col-md-12 card">
                                         {{-- <div class="col-md-8 mx-auto"> --}}
-                                            <div class="card-body p-4">
-                                                <div class="row pt-1">
-                                                    @php
-                                                        $driverCar = $driver->cars->where('in_use', 1)->first();
-                                                    @endphp
-                                                    <div class="col-6 mb-3">
-                                                        <h6 class="">
-                                                            <img src="{{ asset('uploads\images\markerA.png') }}"
-                                                                class="" alt="Phone"
-                                                                style="width: 30px;height:30px">
-                                                                <span style="width: fit-content" class="text-muted text-center">Your Address</span>
-                                                        </h6>
-                                                    </div>
-                                                    <div class="col-6 mb-3">
-                                                        <h6 class="">
-                                                            <img src="{{ asset('uploads\images\markerB.png') }}"
-                                                                class="" alt="Phone"
-                                                                style="width: 30px;height:30px">
-                                                                <span style="width: fit-content" class="text-muted text-center">Driver Address</span>
-                                                        </h6>
-                                                    </div>
-                                                    <div class="col-6 mb-3">
-                                                        <h6 class="">
-                                                            Order status:
-                                                             
-                                                            <span id="order-status" name="arrivaleTime" class="text-muted"
-                                                                value="">{{ $order->statuses->first()->name }}</span>
-                                                        </h6>
-                                                    </div>
-                                                    <div class="col-6 mb-3">
-                                                        <h6 class="">
-                                                            Estimated arrival time:
-                                                             
-                                                            <i id="arrival-time" class="text-muted" name="arrivaleTime"
-                                                            value="">Not deteremined</i>
-                                                        </h6>
-                                                    </div>
-                                                    
+                                        <div class="card-body p-4">
+                                            <div class="row pt-1">
+                                                @php
+                                                    $driverCar = $driver->cars->where('in_use', 1)->first();
+                                                @endphp
+                                                <div class="col-6 mb-3">
+                                                    <h6 class="">
+                                                        <img src="{{ asset('uploads\images\markerA.png') }}"
+                                                            class="" alt="Phone"
+                                                            style="width: 30px;height:30px">
+                                                        <span style="width: fit-content"
+                                                            class="text-muted text-center">Your Address</span>
+                                                    </h6>
                                                 </div>
+                                                <div class="col-6 mb-3">
+                                                    <h6 class="">
+                                                        <img src="{{ asset('uploads\images\markerB.png') }}"
+                                                            class="" alt="Phone"
+                                                            style="width: 30px;height:30px">
+                                                        <span style="width: fit-content"
+                                                            class="text-muted text-center">Driver Address</span>
+                                                    </h6>
+                                                </div>
+                                                <div class="col-6 mb-3">
+                                                    <h6 class="">
+                                                        Order status:
+
+                                                        <span id="order-status" name="arrivaleTime" class="text-muted"
+                                                            value="">{{ $order->statuses->first()->name }}</span>
+                                                    </h6>
+                                                </div>
+                                                <div class="col-6 mb-3">
+                                                    <h6 class="">
+                                                        Estimated arrival time:
+
+                                                        <i id="arrival-time" class="text-muted" name="arrivaleTime"
+                                                            value="">Not deteremined</i>
+                                                    </h6>
+                                                </div>
+
+                                            </div>
 
                                             {{-- </div> --}}
                                         </div>

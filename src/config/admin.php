@@ -11,7 +11,7 @@ return [
     | login page.
     |
     */
-    'name' => 'Laravel-admin',
+    'name' => 'Laundrex Admin',
 
     /*
     |--------------------------------------------------------------------------
@@ -22,7 +22,8 @@ return [
     | `img` tag, eg '<img src="http://logo-url" alt="Admin logo">'.
     |
     */
-    'logo' => '<b>Laravel</b> admin',
+    '<img src="{{ asset("uploads\images\logo.png") }}" alt="">',
+    // 'logo' => '<b>Laundrex</b> admin',
 
     /*
     |--------------------------------------------------------------------------
