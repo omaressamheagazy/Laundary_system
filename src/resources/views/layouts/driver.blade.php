@@ -17,8 +17,11 @@
     <link rel="stylesheet" href="{{ asset('style/assets/css/flag-icon.min.css') }}">
     <link rel="stylesheet" href="{{ asset('style/assets/css/cs-skin-elastic.css') }}">
     <link rel="stylesheet" href="{{ asset('style/assets/scss/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('style/assets/css/notification.css') }}">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+        integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     @yield('front-script')
 
 </head>
@@ -65,7 +68,8 @@
                             aria-expanded="false"><i class="menu-icon fa fa-cart-plus"></i>Orders</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-plus"></i><a href="{{ route('newRequest') }}">New request</a></li>
-                            <li><i class="fa fa-spinner"></i><a href="{{ route('currentOrder') }}">Current Orders</a></li>
+                            <li><i class="fa fa-spinner"></i><a href="{{ route('currentOrder') }}">Current Orders</a>
+                            </li>
                             <li><i class="fa fa-table"></i><a href="{{ route('history') }}">Order History</a></li>
                         </ul>
                     </li>
@@ -100,28 +104,72 @@
                             </form>
                         </div>
 
-                        <div class="dropdown for-notification">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="notification"
+                        {{-- <div class="dropdown for-notification"> --}}
+                        {{-- <button class="btn btn-secondary dropdown-toggle" type="button" id="notification"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-bell"></i>
                                 <span class="count bg-danger">5</span>
                             </button>
                             <div class="dropdown-menu" aria-labelledby="notification">
-                                <p class="red">You have 3 Notification</p>
                                 <a class="dropdown-item media bg-flat-color-1" href="#">
                                     <i class="fa fa-check"></i>
                                     <p>Server #1 overloaded.</p>
                                 </a>
                                 <a class="dropdown-item media bg-flat-color-4" href="#">
-                                    <i class="fa fa-info"></i>
                                     <p>Server #2 overloaded.</p>
                                 </a>
                                 <a class="dropdown-item media bg-flat-color-5" href="#">
-                                    <i class="fa fa-warning"></i>
                                     <p>Server #3 overloaded.</p>
                                 </a>
-                            </div>
+                                <a class="dropdown-item media bg-flat-color-5" href="#">
+                                    <p>Server #3 overloaded.</p>
+                                </a>
+                            </div> --}}
+                        {{-- </div> --}}
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" id="dLabel" role="button"
+                                data-toggle="dropdown" data-target="#" href="/page.html">
+                                <i class="fa fa-bell"></i>
+                                <span class="count bg-danger">5</span>
+
+                                {{-- <i class="glyphicon glyphicon-bell"></i> --}}
+                            </button>
+
+                            <ul class="dropdown-menu notifications" role="menu" aria-labelledby="notification">
+
+                                {{-- <div class="notification-heading">
+                                    <h4 class="menu-title">Notifications</h4>
+                                    <h4 class="menu-title pull-right">View all<i
+                                            class="glyphicon glyphicon-circle-arrow-right"></i></h4>
+                                </div> --}}
+                                <li class="divider"></li>
+                                <div class="notifications-wrapper">
+                                    <div class="notification-heading">
+                                        <h4 class="menu-title" style="color:#272c33 !important;">Notifications</h4>
+                                        <h4 class="menu-title pull-right" style="color: #272c33 !important ;">View
+                                            all<i class="glyphicon glyphicon-circle-arrow-right"></i></h4>
+                                    </div>
+                                    <hr class="divider">
+                                    </hr>
+                                    <a class="content" href="#">
+
+                                        <div class="notification-item">
+                                            <h4 class="item-title">Evaluation Deadline 1 · day ago</h4>
+                                            <p class="item-info">Marketing 101, Video Assignment</p>
+                                        </div>
+
+                                    </a>
+
+                                </div>
+                                {{-- <hr class="divider"> --}}
+                                {{-- </hr> --}}
+                                {{-- <div class="notification-footer">
+                                    <h4 class="menu-title">View all<i
+                                            class="glyphicon glyphicon-circle-arrow-right"></i></h4>
+                                </div> --}}
+                            </ul>
                         </div>
+
 
 
                     </div>
@@ -170,11 +218,34 @@
 
     </div><!-- /#right-panel -->
     <!-- Right Panel -->
+
+
     <script src="{{ asset('style/assets/js/vendor/jquery-2.1.4.min.js') }}"></script>
     <script src="{{ asset('style/assets/js/popper.min.js') }}"></script>
     <script src="{{ asset('style/assets/js/plugins.js') }}"></script>
     <script src="{{ asset('style/assets/js/main.js') }}"></script>
-    <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    <script src="//js.pusher.com/3.1/pusher.min.js"></script>
+    <script>
+        // env('PUSHER_APP_KEY')
+        Pusher.logToConsole = true;
+        var pusher = new Pusher("{{ env('PUSHER_APP_KEY') }}", {
+            encrypted: true,
+            cluster: "{{ env('PUSHER_APP_CLUSTER') }}"
+        });
+        var channel = pusher.subscribe('user-notification');
+        channel.bind('App\\Events\\UserNotification', function(data) {
+            console.log(data);
+            $(".notifications-wrapper").append(
+                `<a class="content" href="#"><div class="notification-item"><h4 class="item-title">${data.message}</h4><p class="item-info">View</p></div></a>`
+            );
+            // logToConsole
+            // toastr.info(JSON.stringify(data.message) + ' has joined our website');
+        })
+    </script>
 
     <!-- map -->
 

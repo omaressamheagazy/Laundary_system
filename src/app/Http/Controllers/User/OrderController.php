@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Admin\Controllers\PackageController;
+use App\Events\UserNotification;
 use App\Models\Package;
 use App\Models\Cart;
 use App\Models\Delivery;
@@ -88,6 +89,8 @@ class OrderController extends Controller
             $counter++;
         }
         DB::table('carts')->where('user_id',Auth::id())->delete();
+        
+        event(new UserNotification('new Request has send'));
         return redirect()->route('current-order')->with('success', 'You order has placed successfully!');
         
     //
