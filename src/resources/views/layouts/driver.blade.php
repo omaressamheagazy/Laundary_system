@@ -126,15 +126,19 @@
                                 </a>
                             </div> --}}
                         {{-- </div> --}}
+                        @inject('notification', 'App\Models\Notification')
+                        @php
+                            $notifications = $notification::getNotification();
+                            $notificationCount = $notifications->count();
+                        @endphp
                         <div class="dropdown">
                             <button class="btn btn-secondary dropdown-toggle" id="dLabel" role="button"
                                 data-toggle="dropdown" data-target="#" href="/page.html">
                                 <i class="fa fa-bell"></i>
-                                <span class="count bg-danger">5</span>
+                                <span id="counter" class="count bg-danger">{{ $notificationCount }}</span>
 
                                 {{-- <i class="glyphicon glyphicon-bell"></i> --}}
                             </button>
-
                             <ul class="dropdown-menu notifications" role="menu" aria-labelledby="notification">
 
                                 {{-- <div class="notification-heading">
@@ -151,14 +155,15 @@
                                     </div>
                                     <hr class="divider">
                                     </hr>
-                                    <a class="content" href="#">
 
-                                        <div class="notification-item">
-                                            <h4 class="item-title">Evaluation Deadline 1 · day ago</h4>
-                                            <p class="item-info">Marketing 101, Video Assignment</p>
-                                        </div>
-
-                                    </a>
+                                    @foreach ($notifications as $notification)
+                                        <a class="content" href="#">
+                                            <div class="notification-item">
+                                                <h4 class="item-title">{{ $notification->message }}</h4>
+                                                <p class="item-info">view</p>
+                                            </div>
+                                        </a>
+                                    @endforeach
 
                                 </div>
                                 {{-- <hr class="divider"> --}}
@@ -239,9 +244,32 @@
         var channel = pusher.subscribe('user-notification');
         channel.bind('App\\Events\\UserNotification', function(data) {
             console.log(data);
+            // append the new notificaoitns
             $(".notifications-wrapper").append(
                 `<a class="content" href="#"><div class="notification-item"><h4 class="item-title">${data.message}</h4><p class="item-info">View</p></div></a>`
             );
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            // incrase the coutenr by 1
+            var counter = parseInt( $('#counter').html() );
+            console.log(counter);
+            counter++;
+            $('#counter').html(counter)
+            // store the new notifactions in databse
+            $.ajax({
+
+                url: "/home/notification",
+                data: {
+                    user_id: data.userID,
+                    message: data.message,
+                    route_name: 'storeNotification',
+                },
+                type: "POST",
+                dataType: "json",
+            });
             // logToConsole
             // toastr.info(JSON.stringify(data.message) + ' has joined our website');
         })

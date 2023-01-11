@@ -91,3 +91,6 @@ Route::prefix('home/order')->group(function () {
 // Driver routes
 Route::group([], __DIR__.'/driver.php');
 
+
+// Notification routes
+Route::post('home/notification', [App\Http\Controllers\NotificationController::class, 'store'])->name('storeNotification')->middleware(['auth', 'verified']);
