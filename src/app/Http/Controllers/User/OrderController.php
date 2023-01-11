@@ -41,8 +41,8 @@ class OrderController extends Controller
         return Cart::where('user_id', Auth::id())->count();
     }
 
-    public function summary() {
-        $items = Cart::all() ?? [];
+    public function summary($id) {
+        $items = Cart::all()->where('user_id', $id) ?? [];
         if(count($items) == 0) return redirect()->route('order');
         $deliveryTypes = Delivery::all();
         return view("User.Order.order-summary", ['items' => $items, 'deliveryTypes' => $deliveryTypes]);

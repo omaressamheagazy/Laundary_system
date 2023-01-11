@@ -123,7 +123,7 @@
                         </div>
 
                         <div class="dropdown for-message">
-                            <a href="{{route('order-summary')}}"  class="btn btn-secondary dropdown-toggle"  id="message"
+                            <a href="{{route('order-summary',['id' => Auth::id()] ) }}"  class="btn btn-secondary dropdown-toggle"  id="message"
                                     aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-shopping-cart"></i>
                                 @inject('cartItem','App\Http\Controllers\User\OrderController')
