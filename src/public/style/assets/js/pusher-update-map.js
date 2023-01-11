@@ -54,14 +54,17 @@ const createMap = ({ lat, lng }) => {
     .listen('SendLocation', (e) => {
             let lat = parseFloat( e.lat);
             let lng = parseFloat( e.long);
+            let userLat = parseFloat($('#lat').val());
+            let userLong = parseFloat($('#long').val());
             // marker.setPosition({ lat, lng });
             // map.panTo({ lat, lng });
             // console.log(lat,lng);
             directionsService = new google.maps.DirectionsService();
             
+            // console.log('dsfsdf',$('#lat').val());
             directionsService.route(
               {
-                      origin: "1.5618663, 103.6554999",
+                      origin: `${userLat}, ${userLong}`,
                       destination: `${lat}, ${lng}`,
                       travelMode: "DRIVING"
               },

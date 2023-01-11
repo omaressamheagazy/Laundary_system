@@ -203,13 +203,10 @@
                             <div role="tabpanel" class="tab-pane " id="three">
                                 <div></div>
                                 @php
-                                    $userAddress = $order->user->addresses->first();
+                                    $userAddress = $order->user->addresses->where('default_address',1)->first();
                                 @endphp
                                 <div class="collapse show" id="collapseExample">
                                     <div class="col-12 col-md-12 p-4">
-                                        <!-- For displaying user's coordinate or error message. -->
-                                        {{-- <div id="info" class="info"></div> --}}
-                                        {{-- <i class="fas fa-map-marker-alt"></i> --}}
                                         <div id="map" class="map mb-5" style="height: 500px;z-index:99">
                                         </div>
                                         <input type="hidden" name="driverID" id="driverID"
@@ -217,7 +214,7 @@
                                         <input type="hidden" id="lat" name="lat"
                                             value="{{ $userAddress->latitude }}">
                                         <input type="hidden" id="long" name="long"
-                                            value=""{{ $userAddress->longitude }}>
+                                            value="{{ $userAddress->longitude }}">
                                         <input type="hidden" id="orderID" name="orderID"
                                             value="{{ $order->id }}">
                                     </div>

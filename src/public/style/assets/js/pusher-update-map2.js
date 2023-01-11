@@ -27,8 +27,10 @@ function updateMap() {
     Echo.channel(`location.${orderID}`).listen("SendLocation", (e) => {
         let lat = parseFloat(e.lat);
         let lng = parseFloat(e.long);
+        let userLat = parseFloat($('#lat').val());
+        let userLong = parseFloat($('#long').val());
         var request = {
-            origin: "1.5618663, 103.6554999",
+            origin: `${userLat}, ${userLong}`,
             destination: `${lat}, ${lng}`,
             travelMode: google.maps.TravelMode.DRIVING, //WALKING, BYCYCLING, TRANSIT
             unitSystem: google.maps.UnitSystem.IMPERIAL,
