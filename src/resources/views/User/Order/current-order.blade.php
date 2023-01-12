@@ -45,6 +45,7 @@
                                 <th>ID</th>
                                 <th>Price(MYR)</th>
                                 <th>Status</th>
+                                <th>Payment status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -55,6 +56,7 @@
                                     <td>{{ $order['id'] }}</td>
                                     <td>{{ $order['total_price'] }}</td>
                                     <td>{{ $order->statuses->name}}</td>
+                                    <td>{{ $order->payment_status}}</td>
                                     <td>
                                         <a href="{{ route('track-order', ['id' => $order['id']]) }}" class="btn btn-success btn-sm"><i
                                                 class="fa fa-gear"></i>&nbsp;View</a>

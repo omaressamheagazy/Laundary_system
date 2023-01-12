@@ -65,19 +65,27 @@
                                             <div class="form-group row">
                                                 <label for="inputName" class="col-sm-2 col-form-label">Name:</label>
                                                 <div class="col-sm-10">
-                                                    <input type="text" class="form-control" id="inputname"
+                                                    <input type="text" class="form-control @error('name')is-invalid @enderror" id="inputname"
                                                         placeholder="Enter Name" value="{{ Auth::user()->name }}"
                                                         name="name">
-                                                    <span class="text-danger error-text name_error"></span>
+                                                        @error('name')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label for="inputEmail" class="col-sm-2 col-form-label">Email:</label>
                                                 <div class="col-sm-10">
-                                                    <input type="text" class="form-control" id="inputemail"
+                                                    <input type="text" class="form-control @error('email')is-invalid @enderror" id="inputemail"
                                                         placeholder="Enter Email" value="{{ Auth::user()->email }}"
                                                         name="email">
-                                                    <span class="text-danger error-text email_error"></span>
+                                                        @error('email')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
                                                 </div>
                                             </div>
                                             <div class="form-group row">

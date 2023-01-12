@@ -9,11 +9,15 @@ use App\Models\Package;
 use App\Models\Cart;
 use App\Models\Delivery;
 use App\Models\Order;
+use App\Models\Card;
 use App\Models\OrderDetails;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\VarDumper\VarDumper;
+
+use Session;
+use Stripe;
 
 class OrderController extends Controller
 {
@@ -59,17 +63,22 @@ class OrderController extends Controller
 
     public function currentOrder() {
         $orders = Order::where('user_id', Auth::id())
-        ->select('id','total_price', 'status_id')
+        ->select('id','total_price', 'status_id', 'payment_status')
         ->get();
         return view('User.Order.current-order', ['orders' => $orders]);
 
     }
-    public function cashPayment(Request $request) {
+    public function cashPayment($totalPackagesPrice, Request $request) {
         $packagesPrice = 0;
         $order = new Order;
         $order->user_id = Auth::id();
         $order->total_price = $request->totalPackagesPrice;
         $order->delivery_id = $request->deliveryId;
+        /*$order->cc_name = "none";
+        $order->cc_number = "none";
+        $order->cc_exp = "none";
+        $order->x_card_code = "none";*/
+        $order->payment_status = "Cash On Delivery";
         $cart = cart::where('user_id', Auth::id())
         ->get();
         $order->save();
@@ -90,6 +99,58 @@ class OrderController extends Controller
         return redirect()->route('current-order')->with('success', 'You order has placed successfully!');
         
     //
+    }
+    public function cardPayment($totalPackagesPrice, Request $request) {
+        Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+        Stripe\Charge::create ([
+                "amount" => $totalPackagesPrice * 100,
+                "currency" => "MYR",
+                "source" => $request->stripeToken,
+                "description" => "Thanks for pay"
+        ]);
+        
+        /* Validate the request...
+        $this->validate($request, [
+            'cc_name' => 'required',
+            'cc_number' => 'required',
+            'cc_exp' => 'required',
+            'x_card_code' => 'required|numeric|digits:6',
+        ]);
+        
+        $card_payment = new Card();
+        $card_payment->user_id = Auth::id();
+        $card_payment->cc_name = $request->cc_name;
+        $card_payment->cc_number = $request->cc_number;
+        $card_payment->cc_exp = $request->cc_exp;
+        $card_payment->x_card_code = $request->x_card_code;
+        $card_payment->save();*/
+        
+        $packagesPrice = 0;
+        $order = new Order;
+        $order->user_id = Auth::id();
+        $order->total_price = $request->totalPackagesPrice;
+        $order->delivery_id = $request->deliveryId;
+        $order->payment_status = "Paid" ;
+        $cart = cart::where('user_id', Auth::id())
+        ->get();
+        $order->save();
+        $counter = 0;
+        foreach ($cart as $item) {
+            $orderDetail = new OrderDetails();
+            $orderDetail->order_id = $order->id;
+            $orderDetail->package_id = $item->packages->id;
+            $orderDetail->item = $item->packages->name;
+            foreach ($item->packages->services as $service) {
+                $packagesPrice += $service->price;
+            }
+            $orderDetail->price = $packagesPrice;
+            $orderDetail->save();
+            $counter++;
+        }
+        DB::table('carts')->where('user_id',Auth::id())->delete();
+        return redirect()->route('current-order')->with('success', 'You order has placed successfully!');
+        //Session::flash('success', 'Payment successful!');
+        //return back();
     }
     public function tracker(Request $request  ,$id) {
         $order = Order::all()->where('id', $id)->first();
