@@ -128,7 +128,7 @@
                         {{-- </div> --}}
                         @inject('notification', 'App\Models\Notification')
                         @php
-                            $notifications = $notification::getNotification();
+                            $notifications = $notification::getNotification('user_request');
                             $notificationCount = $notifications->count();
                         @endphp
                         <div class="dropdown">
@@ -268,6 +268,7 @@
                     user_id: data.userID,
                     message: data.message,
                     route_name: `/driver/order/detail/${orderId}`,
+                    category: 'user_request'
                     
                 },
                 type: "POST",

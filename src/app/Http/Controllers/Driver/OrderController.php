@@ -13,6 +13,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Laundry;
 use App\Models\User;
 use App\Enums\OrderStatus as oStatus;
+use App\Events\DriverNotification;
 use App\Events\SendLocation;
 use App\Models\LiveLocation;
 use App\Models\LiveShare;
@@ -85,16 +86,27 @@ class OrderController extends Controller
 
     public function orderAction(Request $request)
     {
+        // dd($request->status);
+        $statusMessage = 'sta';
         if ($request->status == oStatus::CANCEL->value) {
-            tracker::where('order_id', $request->id)->delete();
-            Order::changeOrderStatus($request->id, oStatus::SEARCHING_FOR_DRIVER); // back again the order to its default status
+            $statusMessage = "Your order is cancelled";
+            tracker::where('order_id', $request->orderId)->delete();
+            Order::changeOrderStatus($request->orderId, oStatus::SEARCHING_FOR_DRIVER); // back again the order to its default status
         } else if ($request->status == oStatus::COMPLETED->value) {
-            Order::changeOrderStatus($request->id, $request->status);
+            $statusMessage = "Your order is completed";
+            Order::changeOrderStatus($request->orderId, $request->status);
             return redirect()->route('history');
-        } else 
-            Order::changeOrderStatus($request->id, $request->status);
-
-        return  redirect()->route('track-order-view', ['id' => $request['id']])->with('success', 'status has changed successfully');
+        } else  {
+            Order::changeOrderStatus($request->orderId, $request->status);
+        }
+        if($request->status == oStatus::CANCEL->value) $statusMessage = "Your order is cancelled";
+        elseif($request->status == oStatus::COMPLETED->value) $statusMessage = "Your order is completed";
+        elseif($request->status == oStatus::SEARCHING_FOR_DRIVER->value) $statusMessage = "Your order is placed successfully";
+        elseif($request->status == oStatus::DRIVER_ASSIGNED->value) $statusMessage = "A driver has assigned to your order";
+        elseif($request->status == oStatus::PICK_LAUNDRY->value) $statusMessage = "Driver is coming to pick your laundry, be ready!";
+        elseif($request->status == oStatus::DELIVER_LAUNDRY->value) $statusMessage = "Driver is coming to deliver your laundry, be ready!";
+        event(new DriverNotification($request->userId, $request->orderId,$statusMessage));
+        return  redirect()->route('track-order-view', ['id' => $request['orderId']])->with('success', 'status has changed successfully');
     }
     public function liveShare(Request $request)
     {

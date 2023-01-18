@@ -280,8 +280,9 @@
                                                 <form action="{{ route('orderAction') }}" method="POST" style="display: inline-block">
                                                     <div class="col-9 col-md-9">
                                                         @csrf
-                                                        <input type="hidden" name="id"
+                                                        <input type="hidden" name="orderId"
                                                             value="{{ $order->id }}">
+                                                        <input type="hidden" name="userId" value="{{ $order->user_id }}">
                                                         <select name="status" id="orderStatus"
                                                             class="form-control-sm form-control">
                                                             <option>--Select--</option>

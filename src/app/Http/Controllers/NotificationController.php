@@ -13,6 +13,7 @@ class NotificationController extends Controller
         $notification->user_id = $request->user_id;
         $notification->message = $request->message;
         $notification->route_name = $request->route_name;
+        $notification->category = $request->category;
         $notification->save();
     }
     //

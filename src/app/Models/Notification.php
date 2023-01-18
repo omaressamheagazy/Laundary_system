@@ -9,7 +9,7 @@ class Notification extends Model
 {
     use HasFactory;
 
-    public static function getNotification() {
-        return self::orderBy('created_at', 'DESC')->get();
+    public static function getNotification($category = '') {
+        return self::orderBy('created_at', 'DESC')->where("category",$category)->get();
     }
 }
