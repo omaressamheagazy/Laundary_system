@@ -12,11 +12,11 @@ enum OrderStatus: int {
 
 function getOrderMessage($orderStatus) {
     $statusMessage = "";
-    if($orderStatus == OrderStatus::CANCEL) return "Your order is cancelled";
-    elseif($orderStatus == OrderStatus::COMPLETED) return "Your order is completed";
-    elseif($orderStatus == OrderStatus::SEARCHING_FOR_DRIVER) return "Your order is placed successfully";
-    elseif($orderStatus == OrderStatus::DRIVER_ASSIGNED) return "A driver has assigned to your order";
-    elseif($orderStatus == OrderStatus::PICK_LAUNDRY) return "Driver is coming to picking your laundry, be ready!";
-    elseif($orderStatus == OrderStatus::DELIVER_LAUNDRY) return "Driver is coming to deliver your laundry, be ready!";
+    if($orderStatus == OrderStatus::CANCEL->value) $statusMessage = "Your order is cancelled";
+    elseif($orderStatus == OrderStatus::COMPLETED->value) $statusMessage = "Your order is completed";
+    elseif($orderStatus == OrderStatus::SEARCHING_FOR_DRIVER->value) $statusMessage = "Your order is placed successfully";
+    elseif($orderStatus == OrderStatus::DRIVER_ASSIGNED->value) $statusMessage = "A driver has assigned to your order";
+    elseif($orderStatus == OrderStatus::PICK_LAUNDRY->value) $statusMessage = "Driver is coming to picking your laundry, be ready!";
+    elseif($orderStatus == OrderStatus::DELIVER_LAUNDRY->value) $statusMessage = "Driver is coming to deliver your laundry, be ready!";
     return $statusMessage;
 }
