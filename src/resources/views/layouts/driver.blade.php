@@ -155,9 +155,11 @@
                                     </div>
                                     <hr class="divider">
                                     </hr>
-
+                                    @php
+                                        
+                                    @endphp
                                     @foreach ($notifications as $notification)
-                                        <a class="content" href="#">
+                                        <a class="content" href="{{ $notification->route_name }}">
                                             <div class="notification-item">
                                                 <h4 class="item-title">{{ $notification->message }}</h4>
                                                 <p class="item-info">view</p>
@@ -209,8 +211,7 @@
                         </div>
                     </div>
 
-
-
+                    
                 </div>
             </div>
         </header><!-- /header -->
@@ -219,11 +220,10 @@
         @include('flash-message')
         @yield('content')
         @yield('script')
-
-
+        
+        
     </div><!-- /#right-panel -->
     <!-- Right Panel -->
-
 
     <script src="{{ asset('style/assets/js/vendor/jquery-2.1.4.min.js') }}"></script>
     <script src="{{ asset('style/assets/js/popper.min.js') }}"></script>
@@ -235,7 +235,6 @@
 
     <script src="//js.pusher.com/3.1/pusher.min.js"></script>
     <script>
-        // env('PUSHER_APP_KEY')
         Pusher.logToConsole = true;
         var pusher = new Pusher("{{ env('PUSHER_APP_KEY') }}", {
             encrypted: true,
@@ -245,8 +244,10 @@
         channel.bind('App\\Events\\UserNotification', function(data) {
             console.log(data);
             // append the new notificaoitns
+            let audio = new Audio("{{ asset('style/assets/sound/not2.wav') }}");
+            audio.play();
             $(".notifications-wrapper").append(
-                `<a class="content" href="#"><div class="notification-item"><h4 class="item-title">${data.message}</h4><p class="item-info">View</p></div></a>`
+                `<a class="content" href="/driver/order/detail/${data.orderId}"><div class="notification-item"><h4 class="item-title">${data.message}</h4><p class="item-info">View</p></div></a>`
             );
             $.ajaxSetup({
                 headers: {
@@ -259,19 +260,19 @@
             counter++;
             $('#counter').html(counter)
             // store the new notifactions in databse
-            $.ajax({
+            var orderId = data.orderId;
 
+            $.ajax({
                 url: "/home/notification",
                 data: {
                     user_id: data.userID,
                     message: data.message,
-                    route_name: 'storeNotification',
+                    route_name: `/driver/order/detail/${orderId}`,
+                    
                 },
                 type: "POST",
                 dataType: "json",
             });
-            // logToConsole
-            // toastr.info(JSON.stringify(data.message) + ' has joined our website');
         })
     </script>
 

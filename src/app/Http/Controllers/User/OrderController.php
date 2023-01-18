@@ -90,7 +90,7 @@ class OrderController extends Controller
         }
         DB::table('carts')->where('user_id',Auth::id())->delete();
         
-        event(new UserNotification($order->user_id,'new Request has send'));
+        event(new UserNotification($order->user_id, $order->id ,'new Request has send'));
         return redirect()->route('current-order')->with('success', 'You order has placed successfully!');
         
     //

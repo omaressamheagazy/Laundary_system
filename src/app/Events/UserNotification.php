@@ -22,11 +22,14 @@ class UserNotification implements ShouldBroadcast
     public $username;
     public $message;
     public $userID;
-    public function __construct($userID, $username = '', $message = '')
+    public $orderId;
+    public function __construct($userID, $orderId, $username = '', $message = '')
     {
         $this->userID = $userID;
         $this->username = $username;
+        $this->orderId = $orderId;
         $this->message  = "{$username} {$message}";
+
     }
 
     /**
