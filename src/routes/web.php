@@ -85,6 +85,9 @@ Route::prefix('home/order')->group(function () {
     Route::post('/order-summary/delete-item/{id}', [App\Http\Controllers\User\OrderController::class, 'deleteItem'])->name('delete-item');
     Route::post('/order-summary/cash-payment', [App\Http\Controllers\User\OrderController::class, 'cashPayment'])->name('cash-payment');
     Route::post('/cancel/{id}', [App\Http\Controllers\User\OrderController::class, 'cancel'])->name('cancelOrder')->where('id', '[0-9]+');
+    Route::get('/history', [App\Http\Controllers\User\OrderController::class, 'history'])->name('user-history');
+    Route::get('/history-detail/{id}', [App\Http\Controllers\User\OrderController::class, 'historyDetail'])->name('user-history-detail')->where('id', '[0-9]+');
+
 })->middleware(['auth', 'verified, isNormalUser']);
 
 

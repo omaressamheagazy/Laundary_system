@@ -57,7 +57,7 @@
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-plus"></i><a href="{{ route('order') }}">New order</a></li>
                             <li><i class="fa fa-spinner"></i><a href="{{ route('current-order') }}">Current Order</a></li>
-                            <li><i class="fa fa-table"></i><a href="#">Order History</a></li>
+                            <li><i class="fa fa-table"></i><a href="{{ route('user-history')}}">Order History</a></li>
                         </ul>
                     </li>
 

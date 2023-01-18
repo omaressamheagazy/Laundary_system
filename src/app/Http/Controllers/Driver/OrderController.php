@@ -43,10 +43,15 @@ class OrderController extends Controller
     }
     public function currentOrder()
     {
-        $currentRequests = Order::all()->where('status_id', '!=', oStatus::COMPLETED->value)
-            ->where('status_id', '!=', oStatus::SEARCHING_FOR_DRIVER->value)
-            ->where('status_id', '!=', oStatus::CANCEL->value);
-        return view('Driver.Order.current-order', ['order' => $currentRequests]);
+        $tracker = tracker::all()->where('driver_id', Auth::id());
+        if($tracker->first() != NULL) { // ensure that it has current order
+            
+            $currentRequests = $tracker->first()->orders::all()->where('status_id', '!=', oStatus::COMPLETED->value)
+                ->where('status_id', '!=', oStatus::SEARCHING_FOR_DRIVER->value)
+                ->where('status_id', '!=', oStatus::CANCEL->value);
+            return view('Driver.Order.current-order', ['order' => $currentRequests]);
+        }
+        return redirect()->route('newRequest');
     }
     public function requestDetail($id)
     {
@@ -115,8 +120,6 @@ class OrderController extends Controller
     }
     public function history()
     {
-        //     return $query->where('status_id', oStatus::CANCEL->value)->orWhere('status_id', oStatus::COMPLETED->value);
-        // });
         $order = Order::all()->where('status_id', oStatus::COMPLETED->value);
         return view('Driver.Order.history', ['order' => $order]);
     }

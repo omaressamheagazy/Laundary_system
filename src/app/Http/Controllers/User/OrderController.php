@@ -12,6 +12,8 @@ use App\Models\Delivery;
 use App\Models\LiveShare;
 use App\Models\Order;
 use App\Models\OrderDetails;
+use App\Enums\OrderStatus as oStatus;
+
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -62,6 +64,8 @@ class OrderController extends Controller
     public function currentOrder() {
         $orders = Order::where('user_id', Auth::id())
         ->select('id','total_price', 'status_id')
+        ->where('status_id', '!=', oStatus::COMPLETED->value)
+        ->where('status_id', '!=', oStatus::CANCEL->value)
         ->get();
         return view('User.Order.current-order', ['orders' => $orders]);
 
@@ -103,6 +107,13 @@ class OrderController extends Controller
         return view('User.Order.order-detail', ['order' => $order]);
         
     }
+
+    public function historyDetail($id) {
+        $order = Order::all()->where('id', $id)->first();
+        return view('User.Order.history-detail', ['order' => $order]);
+
+
+    }
     public function cancel($id) {
         OrderDetails::where('id', $id)->delete();
         Order::where('id', $id)->delete();
@@ -116,5 +127,11 @@ class OrderController extends Controller
         return response()->json([
             'location' => $liveLocation
         ]);
+    }
+
+    public function history()
+    {
+        $order = Order::all()->where('user_id',Auth::id())->where('status_id', oStatus::COMPLETED->value);
+        return view('User.Order.history', ['order' => $order]);
     }
 }

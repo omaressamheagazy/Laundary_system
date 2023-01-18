@@ -12,5 +12,8 @@ class tracker extends Model
     public function driver() {
         return $this->belongsTo(User::class,'driver_id');
     }
+    public function orders() {
+        return $this->belongsTo(Order::class,'order_id');
+    }
 
 }
