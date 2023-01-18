@@ -127,8 +127,10 @@
                             </div> --}}
                         {{-- </div> --}}
                         @inject('notification', 'App\Models\Notification')
+                        <input type="hidden" id="driverId" name="driverId" value="{{ Auth::id() }}">
+                        
                         @php
-                            $notifications = $notification::getNotification('user_request');
+                            $notifications = $notification::getNotification(Auth::id(), 'user_request');
                             $notificationCount = $notifications->count();
                         @endphp
                         <div class="dropdown">
@@ -261,11 +263,11 @@
             $('#counter').html(counter)
             // store the new notifactions in databse
             var orderId = data.orderId;
-
+            var driverId = parseInt( $('#driverId').val());
             $.ajax({
                 url: "/home/notification",
                 data: {
-                    user_id: data.userID,
+                    user_id: driverId,
                     message: data.message,
                     route_name: `/driver/order/detail/${orderId}`,
                     category: 'user_request'

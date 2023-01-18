@@ -124,7 +124,7 @@
                         </div> --}}
                         @inject('notification', 'App\Models\Notification')
                         @php
-                            $notifications = $notification::getNotification('order_status');
+                            $notifications = $notification::getNotification(Auth::id() ,'order_status');
                             $notificationCount = $notifications->count();
                         @endphp
                         <div class="dropdown">

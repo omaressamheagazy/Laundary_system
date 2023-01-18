@@ -1,8 +1,6 @@
 /* CSS used here will be applied after bootstrap.css */
 .dropdown {
     display:inline-block !important;
-    margin-left:20px !important;
-    padding:10px !important;
   }
 
 
