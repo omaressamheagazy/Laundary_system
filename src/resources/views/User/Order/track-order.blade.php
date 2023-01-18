@@ -248,7 +248,7 @@
                                                         Order status:
 
                                                         <span id="order-status" name="arrivaleTime" class="text-muted"
-                                                            value="">{{ $order->statuses->first()->name }}</span>
+                                                            value="">{{ $order->statuses->where('id', $order->status_id)->first()->name }}</span>
                                                     </h6>
                                                 </div>
                                                 <div class="col-6 mb-3">
