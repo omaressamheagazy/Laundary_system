@@ -70,6 +70,10 @@
                         </ul>
                     </li>
 
+                    <li>
+                        <a href="{{ route('contact_form') }}"> <i class="menu-icon fa fa-dashboard"></i>Contact Form </a>
+                    </li>
+
                     <!-- <li class="menu-item-has-children active dropdown"> -->
 
                 </ul>

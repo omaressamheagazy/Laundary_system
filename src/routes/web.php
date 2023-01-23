@@ -97,3 +97,8 @@ Route::group([], __DIR__.'/driver.php');
 
 // Notification routes
 Route::post('home/notification', [App\Http\Controllers\NotificationController::class, 'store'])->name('storeNotification')->middleware(['auth', 'verified']);
+
+//Contact routes
+
+Route::get('/contact', [App\Http\Controllers\ContactUsFormController::class, 'createForm'])->name('contact_form');
+Route::post('/contact', [App\Http\Controllers\ContactUsFormController::class, 'ContactUsForm'])->name('contact.store');
