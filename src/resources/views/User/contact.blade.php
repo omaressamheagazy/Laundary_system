@@ -10,7 +10,7 @@
         <div class="col-sm-4">
             <div class="page-header float-left">
                 <div class="page-title">
-                    <h1>User Dashboard</h1>
+                    <h1>Contact Form</h1>
                 </div>
             </div>
         </div>
@@ -24,16 +24,6 @@
         </div>
     </div>
 
-    <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Laravel</title>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
-</head>
-<body>
     <div class="container mt-5">
         <!-- Success message -->
         @if(Session::has('success'))
@@ -45,57 +35,54 @@
     @csrf
     <div class="form-group">
         <label>Name</label>
-        <input type="text" class="form-control {{ $errors->has('name') ? 'error' : '' }}" name="name" id="name">
-        <!-- Error -->
-        @if ($errors->has('name'))
-        <div class="error">
-            {{ $errors->first('name') }}
-        </div>
-        @endif
+        <input type="text" class="form-control @error('name')is-invalid @enderror" name="name" id="name">
+        @error('name')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
     </div>
     <div class="form-group">
         <label>Email</label>
-        <input type="email" class="form-control {{ $errors->has('email') ? 'error' : '' }}" name="email" id="email">
-        @if ($errors->has('email'))
-        <div class="error">
-            {{ $errors->first('email') }}
-        </div>
-        @endif
+        <input type="email" class="form-control @error('email')is-invalid @enderror" name="email" id="email">
+        @error('email')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
     </div>
     <div class="form-group">
         <label>Phone</label>
-        <input type="text" class="form-control {{ $errors->has('phone') ? 'error' : '' }}" name="phone" id="phone">
-        @if ($errors->has('phone'))
-        <div class="error">
-            {{ $errors->first('phone') }}
-        </div>
-        @endif
+        <input type="text" class="form-control @error('phone')is-invalid @enderror" name="phone" id="phone">
+        @error('phone')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
     </div>
     <div class="form-group">
         <label>Subject</label>
-        <input type="text" class="form-control {{ $errors->has('subject') ? 'error' : '' }}" name="subject"
+        <input type="text" class="form-control @error('subject')is-invalid @enderror" name="subject"
             id="subject">
-        @if ($errors->has('subject'))
-        <div class="error">
-            {{ $errors->first('subject') }}
-        </div>
-        @endif
+        @error('subject')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
     </div>
     <div class="form-group">
         <label>Message</label>
-        <textarea class="form-control {{ $errors->has('message') ? 'error' : '' }}" name="message" id="message"
+        <textarea class="form-control @error('message')is-invalid @enderror" name="message" id="message"
             rows="4"></textarea>
-        @if ($errors->has('message'))
-        <div class="error">
-            {{ $errors->first('message') }}
-        </div>
-        @endif
+        @error('message')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
     </div>
     <input type="submit" name="send" value="Submit" class="btn btn-dark btn-block">
-</form>
+    </form>
     </div>
-</body>
-</html>
 @endsection
 
 @section('contents')

@@ -23,5 +23,6 @@ Route::group([
     $router->resource('laundry-types', LaundryTypeController::class);
     $router->resource('request-statuses', RequestStatusController::class);
     $router->resource('package-services', PackageServiceController::class);
+    $router->resource('contact-users', ContactUserController::class);
 
 });
