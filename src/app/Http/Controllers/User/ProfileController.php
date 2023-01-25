@@ -20,6 +20,11 @@ class ProfileController extends Controller
         return view("User.profile");
     }
     public function edit(Request $request) {
+        // Validate the request...
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required'
+        ]);
             $user = User::find($request->id);
             if(!isset($user)) return redirect()->route('home');
             if ($request->isMethod('post')) {

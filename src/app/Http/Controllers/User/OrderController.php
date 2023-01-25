@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\DB;
 use Session;
 use Stripe;
 
+
 class OrderController extends Controller
 {
         public function __construct()
@@ -66,19 +67,23 @@ class OrderController extends Controller
 
     public function currentOrder() {
         $orders = Order::where('user_id', Auth::id())
-        ->select('id','total_price', 'status_id')
+        ->select('id','total_price', 'status_id', 'payment_status')
         ->where('status_id', '!=', oStatus::COMPLETED->value)
         ->where('status_id', '!=', oStatus::CANCEL->value)
         ->get();
         return view('User.Order.current-order', ['orders' => $orders]);
-
     }
-    public function cashPayment(Request $request) {
+    public function cashPayment($totalPackagesPrice, Request $request) {
         $packagesPrice = 0;
         $order = new Order;
         $order->user_id = Auth::id();
         $order->total_price = $request->totalPackagesPrice;
         $order->delivery_id = $request->deliveryId;
+        /*$order->cc_name = "none";
+        $order->cc_number = "none";
+        $order->cc_exp = "none";
+        $order->x_card_code = "none";*/
+        $order->payment_status = "Cash On Delivery";
         $cart = cart::where('user_id', Auth::id())
         ->get();
         $order->save();
@@ -155,6 +160,7 @@ class OrderController extends Controller
         //return back();
     }
     public function tracker(Request $request  ,$id) { // view order detail, when the order is assigned to a driver
+
         $order = Order::all()->where('id', $id)->first();
         if(!isset($order)) return redirect()->route('current-order'); // if user didn't has any order
         if(Order::isDriverAssigned($id))

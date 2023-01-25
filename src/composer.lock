@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a10ceee71f6842d35b3827a05ef2d32e",
+    "content-hash": "2e4d34e05ba11faada47bf394f144d4d",
     "packages": [
         {
             "name": "boolfalse/clearcaches",
@@ -3744,16 +3744,16 @@
         },
         {
             "name": "stripe/stripe-php",
-            "version": "v10.4.0",
+            "version": "v10.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/stripe/stripe-php.git",
-                "reference": "87def896d9a2e2914871408277d67432cb112f71"
+                "reference": "417d66a5b27a5ec53a706a346b05bfe170043d52"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stripe/stripe-php/zipball/87def896d9a2e2914871408277d67432cb112f71",
-                "reference": "87def896d9a2e2914871408277d67432cb112f71",
+                "url": "https://api.github.com/repos/stripe/stripe-php/zipball/417d66a5b27a5ec53a706a346b05bfe170043d52",
+                "reference": "417d66a5b27a5ec53a706a346b05bfe170043d52",
                 "shasum": ""
             },
             "require": {
@@ -3802,6 +3802,7 @@
                 "source": "https://github.com/stripe/stripe-php/tree/v10.4.0"
             },
             "time": "2023-01-19T19:18:38+00:00"
+
         },
         {
             "name": "symfony/console",

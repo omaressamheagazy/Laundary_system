@@ -83,7 +83,8 @@ Route::prefix('home/order')->group(function () {
     Route::get('/track/{id}', [App\Http\Controllers\User\OrderController::class, 'tracker'])->name('track-order')->where('id', '[0-9]+');
     Route::post('/order-summary/checkout/{totalPackagesPrice}', [App\Http\Controllers\User\OrderController::class, 'checkout'])->name('checkout')->middleware('hasAddress');
     Route::post('/order-summary/delete-item/{id}', [App\Http\Controllers\User\OrderController::class, 'deleteItem'])->name('delete-item');
-    Route::post('/order-summary/cash-payment', [App\Http\Controllers\User\OrderController::class, 'cashPayment'])->name('cash-payment');
+    Route::post('/order-summary/cash-payment/{totalPackagesPrice}', [App\Http\Controllers\User\OrderController::class, 'cashPayment'])->name('cash-payment');
+    Route::post('/order-summary/card-payment/{totalPackagesPrice}', [App\Http\Controllers\User\OrderController::class, 'cardPayment'])->name('card-payment');
     Route::post('/cancel/{id}', [App\Http\Controllers\User\OrderController::class, 'cancel'])->name('cancelOrder')->where('id', '[0-9]+');
     Route::get('/history', [App\Http\Controllers\User\OrderController::class, 'history'])->name('user-history');
     Route::get('/history-detail/{id}', [App\Http\Controllers\User\OrderController::class, 'historyDetail'])->name('user-history-detail')->where('id', '[0-9]+');
